@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cai3:Login>
+         <cai3:userId>{0}</cai3:userId>
+         <cai3:pwd>{1}</cai3:pwd>
+      </cai3:Login>
+   </soapenv:Body>
+</soapenv:Envelope>

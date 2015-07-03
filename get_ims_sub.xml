@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+   <soapenv:Header>
+      <cai3:SequenceId>{0}</cai3:SequenceId>
+      <cai3:TransactionId>{1}</cai3:TransactionId>
+      <cai3:SessionId>{2}</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Get>
+          <cai3:MOType>IMSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/</cai3:MOType>
+         <cai3:MOId>
+            <subscriberId>{3}</subscriberId>
+         </cai3:MOId>
+     </cai3:Get>
+   </soapenv:Body>
+</soapenv:Envelope>

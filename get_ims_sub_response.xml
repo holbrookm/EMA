@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <SessionId xmlns="http://schemas.ericsson.com/cai3g1.2/">100a1206100a1206000000001435162131170</SessionId>
+        <TransactionId xmlns="http://schemas.ericsson.com/cai3g1.2/">123456</TransactionId>
+        <SequenceId xmlns="http://schemas.ericsson.com/cai3g1.2/">1068552960597733086</SequenceId>
+    </S:Header>
+    <S:Body>
+        <GetResponse xmlns="http://schemas.ericsson.com/cai3g1.2/">
+            <MOAttributes>
+                <getResponseIMSSubscription xmlns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" subscriberId="+353766875222@ngv.eircom.net">
+                    <subscriberId>+353766875222@ngv.eircom.net</subscriberId>
+                    <subscriberBarringInd>FALSE</subscriberBarringInd>
+                    <chargingProfId>DefaultChargingProfile</chargingProfId>
+                    <privacyIndicator>FALSE</privacyIndicator>
+                    <defaultPrivateId>+353766875222@ngv.eircom.net</defaultPrivateId>
+                    <pubData publicIdValue="sip:+353766875222@ngv.eircom.net">
+                        <publicIdValue>sip:+353766875222@ngv.eircom.net</publicIdValue>
+                        <privateUserId>+353766875222@ngv.eircom.net</privateUserId>
+                        <publicIdState>not_registered</publicIdState>
+                        <publicIdTelValue>tel:+353766875222</publicIdTelValue>
+                        <subscriberServiceProfileId>+353766875222@ngv.eircom.net</subscriberServiceProfileId>
+                        <xcapAllowed>FALSE</xcapAllowed>
+                        <implicitRegSet>1</implicitRegSet>
+                        <isDefault>TRUE</isDefault>
+                        <sessionBarringInd>FALSE</sessionBarringInd>
+                        <maxNumberOfContacts>5</maxNumberOfContacts>
+                        <configuredServiceProfiles configuredServiceProfileId="siptrunk_term_invite_reg_retail">
+                            <configuredServiceProfileId>siptrunk_term_invite_reg_retail</configuredServiceProfileId>
+                        </configuredServiceProfiles>
+                        <configuredServiceProfiles configuredServiceProfileId="siptrunk_orig_invite_reg_retail">
+                            <configuredServiceProfileId>siptrunk_orig_invite_reg_retail</configuredServiceProfileId>
+                        </configuredServiceProfiles>
+                        <maxSessions>100</maxSessions>
+                    </pubData>
+                    <privateUser privateUserId="+353766875222@ngv.eircom.net">
+                        <privateUserId>+353766875222@ngv.eircom.net</privateUserId>
+                        <userState>not_registered</userState>
+                        <userBarringInd>FALSE</userBarringInd>
+                        <roamingAllowed>FALSE</roamingAllowed>
+                        <allowedAuthMechanism>Digest</allowedAuthMechanism>
+                        <sipLocked>FALSE</sipLocked>
+                    </privateUser>
+                </getResponseIMSSubscription>
+            </MOAttributes>
+        </GetResponse>
+    </S:Body>
+</S:Envelope>
+
