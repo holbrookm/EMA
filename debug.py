@@ -1,7 +1,4 @@
 #!/usr/bin/python/
-""" Marc Holbrook
-
-"""
 import time
 
 

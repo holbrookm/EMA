@@ -20,11 +20,11 @@
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
-                        <configuredServiceProfiles configuredServiceProfileId="siptrunk_term_invite_reg_retail">
-                            <configuredServiceProfileId>siptrunk_term_invite_reg_retail</configuredServiceProfileId>
+                        <configuredServiceProfiles configuredServiceProfileId="{9}">
+                            <configuredServiceProfileId>{9}</configuredServiceProfileId>
                         </configuredServiceProfiles>
-                        <configuredServiceProfiles configuredServiceProfileId="siptrunk_orig_invite_reg_retail">
-                            <configuredServiceProfileId>siptrunk_orig_invite_reg_retail</configuredServiceProfileId>
+                        <configuredServiceProfiles configuredServiceProfileId="{10}">
+                            <configuredServiceProfileId>{10}</configuredServiceProfileId>
                         </configuredServiceProfiles>
                     </pubData>
                     <privateUser privateUserId="{8}">

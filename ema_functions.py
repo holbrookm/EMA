@@ -112,7 +112,7 @@ def emaCreateImsSubscriber(sub, session):
     '''
     debug.p('FUNC:: emaCreateImsSubscriber      :   ')
 
-    insert_xml = __readinxml__('./create_ims_subscriber.xml').format(session['sequence_id'], session['transaction_id'],session['session_id'], sub.subscriberId, sub.chargingProfId, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId)
+    insert_xml = __readinxml__('./create_ims_subscriber.xml').format(session['sequence_id'], session['transaction_id'],session['session_id'], sub.subscriberId, sub.chargingProfId, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId)
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
 
     debug.p(insert_xml)

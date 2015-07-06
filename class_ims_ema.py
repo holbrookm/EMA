@@ -10,7 +10,14 @@ import debug
 import requests
 import ema_functions as ema
 
+from abc import ABCMeta, abstractmethod
+
 class IMSSubscriber(object):
+
+    __metaclass__ = ABCMeta
+    origProfileId = 'siptrunk_orig_invite_reg_retail'
+    termProfileId = 'siptrunk_term_invite_reg_retail'
+
 
     def __init__(self, number = '9999999999'):
         """
@@ -25,16 +32,18 @@ class IMSSubscriber(object):
         FALSE = 'FALSE'
         TRUE = 'TRUE'
         sip = 'sip:'
-        origProfileId = 'siptrunk_term_invite_reg_retail'
-        termProfileId = 'siptrunk_term_invite_reg_retail'
+        #origProfileId = 'siptrunk_term_invite_reg_retail'
+        #termProfileId = 'siptrunk_term_invite_reg_retail'
 
         self.subscriberId = plus + number + suffix
         self.subscriberBarringInd = FALSE
         self.chargingProfId = number
         self.privacyIndicator = FALSE
         self.defaultPrivateId = self.subscriberId
-        self.pubData = pubData(number)
+        self.pubData = pubData(number, self.origProfileId, self.termProfileId)
         self.privateUser = privateUser(self.subscriberId)
+        print self.origProfileId
+        print self.termProfileId
         
     def subscriberCreate(self, session):
         """ This function will delete the subscriber with EMA to the HSS and ENUM.
@@ -59,16 +68,22 @@ class IMSSubscriber(object):
         
         status = ema.emaGetImsSubscriber( self, session )
         return status   
-
+    
+    @abstractmethod
+    def subscriberType(self):
+        """ Return a string representing the type of subscriber this is."""
+        pass
        
         
 class pubData(object):
 
-    def __init__(self, number):
+    def __init__(self, number, orig, term):
         """
         : attribute id : string
         : attribute value : string
         """
+        print orig, term
+
 
         FALSE = 'FALSE'
         TRUE = 'TRUE'
@@ -78,8 +93,6 @@ class pubData(object):
         TRUE = 'TRUE'
         sip = 'sip:'
         tel = 'tel:'
-        origProfileId = 'siptrunk_orig_invite_reg_retail'
-        termProfileId = 'siptrunk_term_invite_reg_retail'
         self.subscriberId = plus + number + suffix
         
         self.publicIdValue = sip + self.subscriberId
@@ -92,8 +105,8 @@ class pubData(object):
         self.isDefault = TRUE
         self.sessionBarringInd = FALSE
         self.maxNumberOfContacts = 5
-        self.configuredServiceProfile1= configuredServiceProfile(origProfileId)
-        self.configuredServiceProfile2= configuredServiceProfile(termProfileId)
+        self.configuredServiceProfile1= configuredServiceProfile(orig)
+        self.configuredServiceProfile2= configuredServiceProfile(term)
         self.maxSessions = 100
         self.phoneContext = None
         
@@ -132,4 +145,41 @@ def jdefault(o):
         return o.__dict__
     elif isinstance(o, Attributes):
         return o.__dict__
+
+class nonRegisteredSubscriber(IMSSubscriber):
+    """ This calls should represent a non Registered Subscriber. """
+
+    origProfileId = 'siptrunk_orig_invite_non_reg_retail'
+    termProfileId = 'siptrunk_term_invite_non_reg_retail'
+    
+    def subscriberType(self):
+        return 'Non Registered Subscriber'
+
+class registeredSubscriber(IMSSubscriber):
+    """ This calls should represent a Registered Subscriber. """
+
+    origProfileId = 'siptrunk_orig_invite_reg_retail'
+    termProfileId = 'siptrunk_term_invite_reg_retail'
+
+    def subscriberType(self):
+        return 'Registered Subscriber'
+
+class nonRegisteredRangeSubscriber(IMSSubscriber):
+    """ This calls should represent a non Registered Range Subscriber. """
+
+    origProfileId = 'siptrunk_orig_invite_non_reg_retail'
+    termProfileId = 'siptrunk_term_invite_non_reg_retail'
+
+    def subscriberType(self):
+        return 'Non Registered Range Subscriber'
+
+class registeredRangeSubscriber(IMSSubscriber):
+    """ This calls should represent a Registered Range Subscriber. """
+
+    origProfileId = 'siptrunk_orig_invite_reg_retail'
+    termProfileId = 'siptrunk_term_invite_reg_retail'
+
+    def subscriberType(self):
+        return 'Registered Range Subscriber'
+
 

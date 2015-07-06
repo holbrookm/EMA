@@ -5,7 +5,7 @@ import debug
 session = emaConnect.emaLogin()
 
 
-e1 = ims.IMSSubscriber('353766875262')
+e1 = ims.nonRegisteredSubscriber('353766875262')
 
 
 transaction_id = 24424424424
