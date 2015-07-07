@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %} 'modifyBasic' {% endblock %}
+
+{% block body %}
+
+
+			
+            {% for sub in endpoints %}
+          
+              <span> {{sub | pprint}} </span>
+              <br></br>
+              
+              
+              {% endfor %}
+			<h3>	
+			<p></p>
+			{{termNumber| pprint}}
+			<p></p>
+			{{subscription| pprint}}
+			
+			</h3>
+			 -->
+
+			<div class="row">
+	  			<div class="col-md-8">INFO</div>
+	  			<div class="col-md-4">AVAILABLE ENDPOINTS</div>
+			</div>
+			<br>
+			<br>
+			<div class="row">
+		  			<div class="col-md-6"><h3>The Subscription {{subscription}} currently terminates on {{termNumber[1] | rsplit}}. 
+		  				Please select a new endpoint from the list shown.</h3>
+		  			</div>
+		  			<form class="form-inline" action="../{{subscription}}/applyBasic" method="POST">
+				        <div class="form-group col-sm-2">
+				      <!--     <input class="form-control" type="text" value="" placeholder="Search" name="q"> --> 
+				        </div>
+				        <div class="form-group col-sm-2">
+				          <select class="form-control" name="modsub">
+				            {% for sub in endpoints %}
+							  <option value="{{sub.href}}">{{sub.id}}</option>
+							{%endfor%}
+				          </select>
+				        </div>
+				        <button class="btn btn-primary col-sm-2 pull-right" type="submit">Search</button>
+					</form>
+			</div>
+			    
+        <!-- </bootstrap> -->
+        </div>
+
+
+{% endblock %}

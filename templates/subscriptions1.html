@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %} 'Subscriptions' {% endblock %}
+{% block headers%}
+{% endblock %}
+{% block body %}
+
+
+            <table class="table table-hover table-striped">
+                <thead>
+		            <tr>
+		            	<th>Parent Account</th>
+		                <th>Number</th>
+		                <th>Subscription Number</th>
+		                <th>Terminating Number (Basic only)</th>
+		                <th></th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            {% for row in subscription_list %}
+		                <tr>
+		                	<td><a href="{{row.parent}}">{{row.parent}}</a></td>
+		                    <td>{{ row.additionalInfo.accessNo  }}</td>
+		                    <td><a href="{{ row.href }}">{{ row.id}}</a></td>
+		                    <td>{{row.endpoint | rsplit}}</td>
+		                    <td> 
+		                    	<!-- Space between link and Button -->
+
+								<!-- Single button -->
+                <!-- Single button -->
+                <div class="btn-group">
+                  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                    Action <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ row.href }}/modify">Modify Subscription</a></li>
+                    <li><a href="reports#">Reports on Subscription</a></li>
+                    <li><a href="#">Do Something Else</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+                <!-- End of Single Button -->
+								
+								<!-- End of Single Button -->
+		                    </td>
+		                </tr>
+		            {% endfor %}
+		        </tbody>
+            </table>
+        
+        <!-- </bootstrap> -->
+       
+
+
+        {% for sub in subscription_list %}
+          
+              <span> {{sub | pprint}} </span>
+              <br></br>
+              
+              
+              {% endfor %}
+
+<script language="JavaScript" type="text/javascript" src="/static/js/lib/bootstrap.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/lib/jquery-1.10.2.js"> </script>
+<script language="JavaScript" type="text/javascript" src="/static/js/lib/jquery-ui-1.10.4.custom.min.js"> </script>
+
+
+
+<div id="dialog-message" title="Basic dialog">
+<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+<script  language="JavaScript" type="text/javascript" >
+$(function() {$("#dialog-message").dialog({
+    modal: true,
+    draggable: true,
+    resizable: true,
+    position: ['center', 'bottom'],
+    show: 'blind',
+    hide: 'blind',
+    width: 400,
+    dialogClass: 'ui-dialog-osx',
+    buttons: {
+        "I've read and understand this": function() {
+            $(this).dialog("close");
+        }
+    }
+});
+
+});
+</script>
+
+
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,36 @@
+{% extends 'layout.jinja2.html' %}
+
+{% block title %}Latest News{% endblock %}
+
+{% block css %}
+        {{ link_tag('main') }}
+{% endblock %}
+
+{% block body %}
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Score</th>
+                        <th>Link</th>
+                        <th>Published</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows|sort(attribute="date", reverse=True) %}
+                        <tr style="display: none;">
+                            <td><span class="label label-important">{{ row.score }}</span></td>
+                            <td>{{ tracked_link(row.title, row.link) }}</td>
+                            <td><span class="label">{{ row.date|human_date }}</span></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+{% endblock %}
+
+{% block js %}
+        {{ script_tag('hnfake') }}
+        {{ script_tag('cookies') }}
+        {{ script_tag('animation') }}
+        {{ script_tag('firstuser') }}
+        {{ script_tag('main') }}
+{% endblock %}

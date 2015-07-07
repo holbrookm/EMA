@@ -17,4 +17,6 @@ def p(stringarg):
         pass
 
 def getflag(): return F_DEBUG
+
+def mac(): return TRUE
     

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block title %} 'Dummy Template effort' {% endblock %}
+
+{% block body %}
+
+	<h1> This is a dummy template test </h1>
+    <h4>{{ subscription_list|tojson|safe }}</h4>
+		<ul>
+				<h3>{{ subscription_list | get_id}} </h3>
+
+            	{% for sub in subscription_list %}
+            	<span> Lenght is {{subscription_list | length}} </span>
+            	<span> {{subscription_list.parent | pprint}} </span>
+            	
+            	
+            	{% endfor %}
+        </ul>
+
+ <div class="container">
+            <!-- <bootstrap> -->
+
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <form class="navbar-search pull-right hidden-phone" action="/search">
+                        <small><i class="icon-search"></i> Search</small>
+                        <input name="query" type="text" class="search-query" placeholder="">
+                    </form>
+                </div>
+            </div>
+
+            <table class="table table-hover table-striped">
+                <thead>
+		            <tr>
+		                <th>Number</th>
+		                <th>Subscription Number</th>
+		                <th>Column</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            {% for row in subscription_list %}
+		                <tr>
+		                    <td>{{ row.additionalInfo.accessNo  }}</td>
+		                    <td><a href="{{ row.href }}">{{ row.id}}</a></td>
+		                    <td>just now</td>
+		                </tr>
+		            {% endfor %}
+		        </tbody>
+            </table>
+
+            <div id="first-visit-dialog" class="modal hide fade in">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">×</a>
+                    <h3>Welcome to Rapid News!</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Rapid News connects you with the latest links</h4>
+                    <p>Links are prioritized on this page based on clicks and
+                    submits. Simply click a link or submit a story and you're instantly a part of
+                    the community.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss="modal">Close</a>
+                </div>
+            </div> 
+        
+        <!-- </bootstrap> -->
+        </div>
+
+	<h1> This is a dummy template test </h1>
+	    <ul>
+	    	{% for sub in subscription_list %}
+	    	<span> Lenght is {{subscription_list | length}} </span>
+	    	<span> {{sub | pprint}} </span>
+	    	<span> {{sub.parent | pprint}} </span>
+	    	<li>{{sub.id | pprint}}  </li>
+	    	<!-- The next line provides a link  for the subscription -->
+	    	<h3><li><a href="www.{{ sub.href}}">{{ sub.id }}</a></li> </h3>
+
+	    	
+	    	<li>{{subscription_list.results}}</li>
+	    	{% endfor %}
+	    </ul>
+
+		<h2>NEXT TRY AT LISTING</h2>
+		    <table>
+		        <thead>
+		            <tr>
+		                <th>Number</th>
+		                <th>Subscription Number</th>
+		                <th>Column</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            {% for row in subscription_list %}
+		                <tr>
+		                    <td>{{ row.additionalInfo.accessNo  }}</td>
+		                    <td><a href="{{ row.href }}">{{ row.id}}</a></td>
+		                    <td>just now</td>
+		                </tr>
+		            {% endfor %}
+		        </tbody>
+		    </table>
+
+
+            <dl>
+				{% for key in subscription_list %}
+    				<dt>{{ key|e }}</dt>
+    				<dd>{{ key.href|e }}</dd>
+				{% endfor %}
+			</dl>
+
+			
+            <div id="success-msg">
+                <h2>Thanks!</h2>
+                <p>Your submission has been uploaded and will hopefully receive votes shortly.</p>
+            </div>
+            
+            
+            
+
+
+{% endblock %}

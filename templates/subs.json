@@ -1,0 +1,87 @@
+{
+  "results" : [ {
+    "parent" : "/accounts/A64560420",
+    "id" : "1800131219",
+    "uid" : 3527812829056,
+    "href" : "/accounts/A64560420/subscriptions/1800131219",
+    "additionalInfo" : {
+      "accessNo" : "1800131219"
+    }
+  }, {
+    "parent" : "/accounts/A64560420",
+    "id" : "1800139470",
+    "uid" : 3527812523256,
+    "href" : "/accounts/A64560420/subscriptions/1800139470",
+    "additionalInfo" : {
+      "accessNo" : "1800139470"
+    }
+  }, {
+    "parent" : "/accounts/A64560420",
+    "id" : "S800112198",
+    "uid" : 3522244880626,
+    "href" : "/accounts/A64560420/subscriptions/S800112198",
+    "additionalInfo" : {
+      "accessNo" : "800112198"
+    }
+  }, {
+    "parent" : "/accounts/A64560420",
+    "id" : "S800123265",
+    "uid" : 3522245087863,
+    "href" : "/accounts/A64560420/subscriptions/S800123265",
+    "additionalInfo" : {
+      "accessNo" : "800123265"
+    }
+  }, {
+    "parent" : "/accounts/A64560420",
+    "id" : "S800124069",
+    "uid" : 3522245097786,
+    "href" : "/accounts/A64560420/subscriptions/S800124069",
+    "additionalInfo" : {
+      "accessNo" : "800124069"
+    }
+  }, {
+    "parent" : "/accounts/A64560420",
+    "id" : "S800129130",
+    "uid" : 3522245124040,
+    "href" : "/accounts/A64560420/subscriptions/S800129130",
+    "additionalInfo" : {
+      "accessNo" : "800129130"
+    }
+  }, {
+    "parent" : "/accounts/A64560420",
+    "id" : "S800131219",
+    "uid" : 3527813908231,
+    "href" : "/accounts/A64560420/subscriptions/S800131219",
+    "additionalInfo" : {
+      "accessNo" : "800131219"
+    }
+  }, {
+    "parent" : "/accounts/A64560420",
+    "id" : "S800133245",
+    "uid" : 3522245176423,
+    "href" : "/accounts/A64560420/subscriptions/S800133245",
+    "additionalInfo" : {
+      "accessNo" : "800133245"
+    }
+  }, {
+    "parent" : "/accounts/A64560420",
+    "id" : "S800134196",
+    "uid" : 3522245202457,
+    "href" : "/accounts/A64560420/subscriptions/S800134196",
+    "additionalInfo" : {
+      "accessNo" : "800134196"
+    }
+  }, {
+    "parent" : "/accounts/A64560420",
+    "id" : "S800138012",
+    "uid" : 3522245226750,
+    "href" : "/accounts/A64560420/subscriptions/S800138012",
+    "additionalInfo" : {
+      "accessNo" : "800138012"
+    }
+  } ],
+  "totalSize" : 16,
+  "lastPageHref" : null,
+  "nextPageHref" : "/accounts/A64560420/subscriptions?start=10&items=10&q=&planType=1",
+  "additionalInfoKeys" : [ "accessNo" ]
+}

@@ -1,0 +1,430 @@
+{
+  "attributes" : [ {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "maxDurActive",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "provRiActive",
+    "version" : "1.0"
+  }, {
+    "value" : "IFFI18001",
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "serviceType",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "CCListRef",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "emPlanBRef",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "barPayActive",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "maxDurVal",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "customPlanRef",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "barMobListRef",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "provCdnAct",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "advancedGroup",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "emPlanGroup",
+    "version" : "1.0"
+  }, {
+    "value" : "None",
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "emPlanToUse",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "custControlEndGroup",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "custContPin",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "advancedEndGroup",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "fciSurpActive",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "barMobActive",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "nonDialActive",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "npIntegrationEndGroup",
+    "version" : "1.0"
+  }, {
+    "value" : "plan1",
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "selfcareTemplate",
+    "version" : "1.0"
+  }, {
+    "value" : "/accounts/A64560420/endpoints/018605008",
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "basTransEpRef",
+    "version" : "1.0"
+  }, {
+    "value" : "BasicTranslation",
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "subType",
+    "version" : "1.0"
+  }, {
+    "value" : false,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "ThreeActive",
+    "version" : "1.0"
+  }, {
+    "value" : false,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "FixedActive",
+    "version" : "1.0"
+  }, {
+    "value" : false,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "O2Active",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "TescoCNR",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "custControlGroup",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "findSspActive",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "findSspListRef",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "emPlanARef",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "provRi",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "screenEndGroup",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "emPlansEndGroup",
+    "version" : "1.0"
+  }, {
+    "value" : false,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "custContAct",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "bAnncActive",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "screenGroup",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "bAnnc",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : true,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "provCdn",
+    "version" : "1.0"
+  }, {
+    "value" : "/accounts/global/lookupTables/IFFOpTable",
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "iffLookupRef",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "ThreeCNR",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "PayCNR",
+    "version" : "1.0"
+  }, {
+    "value" : false,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "PayActive",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "VodaCNR",
+    "version" : "1.0"
+  }, {
+    "value" : "CallDis",
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "AdServPlan",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "O2CNR",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "FixedCNR",
+    "version" : "1.0"
+  }, {
+    "value" : false,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "MeteorActive",
+    "version" : "1.0"
+  }, {
+    "value" : false,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "VodaActive",
+    "version" : "1.0"
+  }, {
+    "value" : null,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "MeteorCNR",
+    "version" : "1.0"
+  }, {
+    "value" : false,
+    "inherited" : false,
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "TescoActive",
+    "version" : "1.0"
+  } ],
+  "uid" : 3527812829056,
+  "status" : "Active",
+  "allowTags" : true,
+  "resolveKeys" : [ {
+    "value" : "1800131219",
+    "allowedPermissionActions" : [ "CREATE", "READ", "UPDATE", "DELETE" ],
+    "lastModified" : null,
+    "created" : null,
+    "id" : "accessNo",
+    "version" : "1.0"
+  } ],
+  "scopeAccountRef" : "/accounts/A64560420",
+  "domainRef" : "/applications/NTS_App/domains/NTS_Dom",
+  "owningAccount" : "/accounts/A64560420",
+  "subscriptionTags" : [ ],
+  "lastModified" : "2014-03-27 14:59:41.098638",
+  "created" : "2012-02-09 12:12:53.504909",
+  "id" : "1800131219",
+  "version" : "1.0"
+}

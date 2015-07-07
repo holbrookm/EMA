@@ -1,0 +1,38 @@
+  {% extends 'base.html' %}
+{% block title %} 'Accounts' {% endblock %}
+
+{% block body %}
+
+            
+          
+              <span> {{endpoint | pprint}} </span>
+              <br> {{endpoint.id}}
+              <br>{{endpoint.address}}
+              <br>{{endpoint.endpointRef}}
+              
+              
+
+            <table class="table table-hover table-striped">
+                <thead>
+		            <tr>
+		                <th>Parent Account</th>
+                    <th>Account Number</th>
+                    <th>Number of Subscriptions in account</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            
+		                <tr>
+		                    <td><a href ="{{endpoint.address}}">{{endpoint.address}}</a></td>
+                        <td><a href="{{ endpoint.id }}">{{ endpoint.id}}</a></td>
+                        <td>{{endpoint.endpointRef}}</td>
+		                </tr>
+		        
+		        </tbody>
+            </table>
+        
+        <!-- </bootstrap> -->
+        </div>
+
+
+{% endblock %}

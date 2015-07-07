@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %} 'EndPoints' {% endblock %}
+
+{% block body %}
+
+			
+            {% for sub in endpoints %}
+          
+              <span> {{sub | pprint}} </span>
+              <br></br>
+              
+              
+              {% endfor %}
+			<h3>	
+			{{nextPage | pprint}}
+			<p></p>
+			{{lastPage | pprint}}
+			</h3>
+            <table class="table table-hover table-striped">
+                <thead>
+		            <tr>
+		            	<th>Parent Account</th>
+		                <th>Number</th>
+		                <th>Subscription Number</th>
+		                <th>Terminating Number (Basic only)</th>
+		                <th></th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            {% for row in endpoints %}
+		                <tr>
+		                	<td><a href="{{row.parent}}">{{row.parent}}</a></td>
+		                    <td>{{ row.href }}</td>
+		                    <td><a href="{{ row.href }}">{{ row.id}}</a></td>
+		                    <td>{{row.href | rsplit}}</td>
+		                    <td> 
+		                    	<!-- Space between link and Button -->
+
+								<!-- Single button -->
+								<div class="btn-group">
+								  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+								    Action <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" role="menu">
+								    <li><a href="{{ row.href }}">Modify Subscription</a></li>
+								    <li><a href="reports#">Reports on Subscription</a></li>
+								    <li><a href="#">Do Something Else</a></li>
+								    <li class="divider"></li>
+								    <li><a href="#">Separated link</a></li>
+								  </ul>
+								</div>
+								<!-- End of Single Button -->
+		                    </td>
+		                </tr>
+		            {% endfor %}
+		        </tbody>
+            </table>
+        
+        <!-- </bootstrap> -->
+        </div>
+
+
+{% endblock %}

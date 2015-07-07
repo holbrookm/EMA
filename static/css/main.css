@@ -1,0 +1,7 @@
+body { font: normal normal normal 10px/1.5 Arial, Helvetica, sans-serif; }
+
+.ui-dialog-osx {
+    -moz-border-radius: 0 0 8px 8px;
+    -webkit-border-radius: 0 0 8px 8px;
+    border-radius: 0 0 8px 8px; border-width: 0 8px 8px 8px;
+}

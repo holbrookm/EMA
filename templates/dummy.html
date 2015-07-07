@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %} 'Dummy Template effort' {% endblock %}
+
+{% block body %}
+
+	<h1> This is a dummy template test </h1>
+            <ul>
+            	{% for acs in var_list %}
+            	<span> Lenght is {{var_list | length}} </span>
+            	<span> {{var_list | pprint}} </span>
+            	
+            	<li>{{var_list.results.0.id }}</li>
+            	{% endfor %}
+            </ul>
+			<h2>NEXT TRY AT LISTING</h2>
+            <dl>
+				{% for key, value in var_list.iteritems() %}
+    				<dt>{{ key|e }}</dt>
+    				<dd>{{ value|e }}</dd>
+				{% endfor %}
+			</dl>
+
+            <div id="success-msg">
+                <h2>Thanks!</h2>
+                <p>Your submission has been uploaded and will hopefully receive votes shortly.</p>
+            </div>
+            
+
+
+{% endblock %}
+
+            <div id="first-visit-dialog" class="modal hide fade in">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">×</a>
+                    <h3>Welcome to Rapid News!</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Rapid News connects you with the latest links</h4>
+                    <p>Links are prioritized on this page based on clicks and
+                    submits. Simply click a link or submit a story and you're instantly a part of
+                    the community.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss="modal">Close</a>
+                </div>
+            </div> 
+        
+        <!-- </bootstrap> -->
+        </div>
+
+        <script src="js/lib/jquery.js"></script>
+        <script src="js/lib/bootstrap.js"></script>
+        <script>window.RAPID = {};</script>
+        <script src="js/hnfake.js"></script>
+        <script src="js/cookies.js"></script>
+        <script src="js/animation.js"></script>
+        <script src="js/firstuser.js"></script>
+        <script src="js/main.js"></script>
