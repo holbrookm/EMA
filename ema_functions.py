@@ -39,17 +39,17 @@ def prepareXmlToClass(s):
     d2 = d1['S:Envelope']['S:Body']['GetResponse']['MOAttributes']['getResponseIMSSubscription']
     return d2
 
-def ema_login(username, password):
+def emaLogin(username = 'Marc', password='Marc'):
     ''' This function will login into the EMA platform using the user name and password supplied.'''
-    debug.p(" FUNC: ema_login   : ")
+    debug.p(" FUNC: ema_function.emaLogin(Username, Password)       : ")
     insert_xml = __readinxml__('./login.xml')
     sequence_id = ''
     session_id = ''
     return_code = None
-    insert_xml = insert_xml.format(username, password)
+    insert_xml = insert_xml.format(ema_username, ema_password)
     debug.p(insert_xml)
     headers ={'content-type':'text/xml; charset=utf-8','content-length':'503',  'SOAPAction':'CAI3G#Login'}
-    r= requests.post('http://'+ema_host +':'+ ema_port, data = insert_xml, headers = headers, auth =(username, password))
+    r= requests.post('http://'+ema_host +':'+ ema_port, data = insert_xml, headers = headers, auth =(ema_username, ema_password))
     if r.status_code != 200:
         print (' ERROR: An error has occurred trying to login into the EMA platform.')
         print (r.status_code)
@@ -62,7 +62,8 @@ def ema_login(username, password):
             if node.tag == '{http://schemas.ericsson.com/cai3g1.2/}sessionId' : session_id = node.text
         if sequence_id !='' and session_id !='':
             debug.p  (('Sequence Id 1 :   {0}    ::::: Session Id 1 :   {1}').format (sequence_id, session_id))
-            return_code = (sequence_id, session_id)
+            session = { "sequence_id" : sequence_id, "session_id": session_id, "transaction_id" : "12334455", "ema_host": ema_host, "ema_port": ema_port}
+            return_code = (session)
     return (return_code) # Return login information for future requests
 
 def ema_logout(session_id):
@@ -87,7 +88,7 @@ def emaGetImsSubscriber(sub, session):
     ''' This function will search EMA for a specified IMS subscription and retrieve subscription information.
         This function takes a subscriberId as input and returns the subscription xml.
         The sequenceId, transaction_id and sessionId must alos be supplied.
-        This function returns an XML string of Subscriber Information.
+        This function returns an XML string of Subscriber Information or Error Information.
     '''
     debug.p('Func::: emaGetImsSuscriber      : ')
 

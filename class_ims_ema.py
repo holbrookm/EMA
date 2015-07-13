@@ -64,7 +64,7 @@ class IMSSubscriber(object):
     def subscriberGet(self, session):
         """ This function will search for the subscriber with EMA in the HSS and ENUM.
         """
-        debug.p('FUNC:: Class IMSSubscriber.subscriberCreate(self, session)             ')
+        debug.p('FUNC:: Class IMSSubscriber.subscriberGet(self, session)             ')
         
         status = ema.emaGetImsSubscriber( self, session )
         return status   

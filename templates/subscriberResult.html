@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %} 'EMA Subscriber' {% endblock %}
+
+{% block body %}
+
+ <div class="container">
+            <!-- <bootstrap> -->
+
+            <h3>
+                <div class="col-sm-4">
+                  <p class="text-left"> Subscriber: + {{sub}}</p>    
+                </div>
+                <div class="col-sm-4">
+                    <p class="text-right"><small>Do you wish to Delete this Subscription?</small></p>  
+                </div>
+                <div class="col-sm-4"> 
+		            <form role="form" action="delete" method="POST">
+                	<button type="submit" class="btn btn-warning btn-lg" value = {{cSub}}>Delete</button> 
+                	</form>
+                </div>
+                <p></p>
+                <p></p>
+              </h3>
+            <table class="table table-hover table-striped">
+                <thead>
+		            <tr>
+		                <th>Attribute</th>
+		                <th>Value</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        	<tr><td>Subscriber Id</td><td>{{details['subscriberId']}}</td>
+		        	</tr>
+		        	<tr><td>Subscriber Barring Indicator</td><td>{{details['subscriberBarringInd']}}</td>
+		        	</tr>
+		        	<tr><td>Charging Profile</td><td>{{details['chargingProfId']}}</td>
+		        	</tr>
+		        	<tr><td>Privacy Indicator</td><td>{{details['privacyIndicator']}}</td>
+		        	</tr>
+
+		            {% for k,v in details.pubData.items() %}
+		                <tr>
+		                    <td>{{ k }}</td>
+		                    <td>{{v}}</td>
+		                </tr>
+		            {% endfor %}
+		            {% for k,v in details.privateUser.items() %}
+		                <tr>
+		                    <td>{{ k }}</td>
+		                    <td>{{v}}</td>
+		                </tr>
+		            {% endfor %}
+		        </tbody>
+            </table>
+    
+{% endblock %}
