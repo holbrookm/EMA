@@ -17,14 +17,13 @@
 
         <div>
 
-          {% if sub: %}
            <!-- Display if the Subscriber searched for does not exist -->
 
 
           <h3>
             <div class = "row">
               <div class="col-sm-12">
-                <p class="text-center"> Subscriber: + {{sub}}</p>    
+                <p class="text-center"> Subscriber: +</p>    
               </div>
             </div>
 
@@ -35,7 +34,7 @@
               
             <div class ='row'>
               <div class="col-sm-4">
-                <p class="text-center"> {{mesg}}</p>    
+                <p class="text-center"> </p>    
               </div>
               <div class="col-sm-8"> 
               </div>
@@ -49,7 +48,7 @@
                 <p class="text-left"> </p>    
               </div>
               <div class="col-sm-6">
-                <p class="text-left">Do you wish to Create this Subscriber {{sub}} ?</p>  
+                <p class="text-left">Do you wish to Create a Subscriber ?</p>  
               </div>
               <div class="col-sm-4">
                  <div class="dropdown">
@@ -70,40 +69,7 @@
           <p></p>
 
 
-          {% endif %}
-
-            {% if deletemesg: %}
-             <!-- Display is last action was a successful Delete -->
-
-            <h3>
-                <div class = "row">
-                  <div class="col-sm-12">
-                    <p class="text-center"> {{deletemesg}}</p>    
-                  </div>
-                </div>
-
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            </h3>
-            {% endif %}
-            
-            {% if createmesg: %} 
-             <!-- Display if the last action was a successful Create -->
-            <h3>
-            <div class = "row">
-              <div class="col-sm-12">
-                <p class="text-center"> {{newsub}}{{createmesg}}</p>    
-              </div>
-            </div>
-
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            </h3>
-            {% endif %}
+          
         
         <!-- </bootstrap> -->
         </div>

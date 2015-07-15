@@ -58,9 +58,15 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Subscriber Actions <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/searchRangeR">Search Subscriber</a></li>
-                            <li><a href="/subscriberCreate">Create Subscriber</a></li>
-                            <li><a href="/delete">Delete Subscriber</a></li>
+                            <li><a href="/SearchRangeNR">Search for a Non Registered Range Subscriber</a></li>
+                            <li><a href="/CreateRangeNR">Create a Non Registered Range Subscriber</a></li>
+                            <li><a href="/DeleteRangeNR">Delete a Non Registered Range Subscriber</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"></a></li>
+                            <li class="divider"></li>
+                            <li><a href="/SearchRangeR">Search for a Registered Range Subscriber</a></li>
+                            <li><a href="/CreateRangeR">Create a Registered Range Subscriber</a></li>
+                            <li><a href="/DeleteRangeR">Delete a Registered Range Subscriber</a></li>
                         </ul>
                     </li>
                 </ul>

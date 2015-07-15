@@ -8,7 +8,7 @@
 
 
 import os,requests, debug
-from prettyprint import pp
+#from prettyprint import pp
 from xml.etree import ElementTree as ET
 import xmltodict
 import class_ims_ema as imsSub
@@ -27,6 +27,7 @@ def __readinxml__(f):
 
     XML = open(f,'r')
     _xml = XML.read()
+    debug.p('**Leaving FUNC :::: ema_functions.__readinxml__')
     return (_xml)
 
 
@@ -37,6 +38,7 @@ def prepareXmlToClass(s):
     debug.p("FUNC: prepareXmlToClass     :  ")
     d1 = xmltodict.parse(s)
     d2 = d1['S:Envelope']['S:Body']['GetResponse']['MOAttributes']['getResponseIMSSubscription']
+    debug.p('**Leaving FUNC :::: ema_functions.prepareXmlToClass')
     return d2
 
 def emaLogin(username = 'Marc', password='Marc'):
@@ -51,19 +53,19 @@ def emaLogin(username = 'Marc', password='Marc'):
     headers ={'content-type':'text/xml; charset=utf-8','content-length':'503',  'SOAPAction':'CAI3G#Login'}
     r= requests.post('http://'+ema_host +':'+ ema_port, data = insert_xml, headers = headers, auth =(ema_username, ema_password))
     if r.status_code != 200:
-        print (' ERROR: An error has occurred trying to login into the EMA platform.')
-        print (r.status_code)
-        print (r.text)
+        debug.p (' ERROR: An error has occurred trying to login into the EMA platform.')
+        debug.p (r.status_code)
+        debug.p (r.text)
     else:
         tree= ET.fromstring(r.text)
         for node in tree.getiterator():
-            print node.tag, node.attrib, node.text
             if node.tag == '{http://schemas.ericsson.com/cai3g1.2/}baseSequenceId': sequence_id = node.text
             if node.tag == '{http://schemas.ericsson.com/cai3g1.2/}sessionId' : session_id = node.text
         if sequence_id !='' and session_id !='':
             debug.p  (('Sequence Id 1 :   {0}    ::::: Session Id 1 :   {1}').format (sequence_id, session_id))
             session = { "sequence_id" : sequence_id, "session_id": session_id, "transaction_id" : "12334455", "ema_host": ema_host, "ema_port": ema_port}
             return_code = (session)
+    debug.p('**Leaving FUNC :::: ema_functions.emaLogin')
     return (return_code) # Return login information for future requests
 
 def ema_logout(session_id):
@@ -75,12 +77,13 @@ def ema_logout(session_id):
     headers ={'content-type':'text/xml; charset=utf-8',  'SOAPAction':'CAI3G#Logout'}
     r= requests.post('http://'+ema_host +':'+ ema_port, data = insert_xml, headers = headers, auth =('sogadm', 'sogadm'))
     if r.status_code != 200:
-        print (' ERROR: An error has occurred trying to logout of the EMA platform.')
-        print (r.status_code)
-        print (r.text)
+        debug.p (' ERROR: An error has occurred trying to logout of the EMA platform.')
+        debug.p (r.status_code)
+        debug.p (r.text)
     else:
-        print (' Logout successfull!!!!')
-        print (r.text)
+        debug.p (' Logout successfull!!!!')
+        debug.p (r.text)
+    debug.p('**Leaving FUNC :::: ema_functions.ema_logout')
     return
 
 
@@ -99,11 +102,12 @@ def emaGetImsSubscriber(sub, session):
     r= requests.post('http://'+session['ema_host'] +':'+ session['ema_port'], data = insert_xml, headers = headers)
     if r.status_code != 200:
         print (' ERROR: An error has occurred trying to retrieve the subscription::: {0}    from the EMA platform.').format(sub.subscriberId)
-        print (r.status_code)
-        print (r.text)
+        debug.p (r.status_code)
+        debug.p (r.text)
     else:
-        print (' Subscription found!!!!')
-        print (r.text)
+        debug.p (' Subscription found!!!!')
+        debug.p (r.text)
+    debug.p('**Leaving FUNC :::: ema_functions.emaGetImsSubscriber')
     return (r)
 
 def emaCreateImsSubscriber(sub, session):
@@ -120,12 +124,13 @@ def emaCreateImsSubscriber(sub, session):
 
     r= requests.post('http://'+session['ema_host'] +':'+ session['ema_port'], data = insert_xml, headers = headers)
     if r.status_code != 200:
-        print (' ERROR: An error has occurred trying to create the subscription::: {0}    on the EMA platform.').format(sub.subscriberId)
-        print (r.status_code)
-        print (r.text)
+        debug.p (' ERROR: An error has occurred trying to create the subscription::: {0}    on the EMA platform.').format(sub.subscriberId)
+        debug.p (r.status_code)
+        debug.p (r.text)
     else:
-        print (' Subscription Created !!!!')
-        print (r.text)
+        debug.p (' Subscription Created !!!!')
+        debug.p (r.text)
+    debug.p('**Leaving FUNC :::: ema_functions.emaCreateImsSubscriber')
     return (r)
 
 def emaDeleteImsSubscriber(subscriber,session):
@@ -142,12 +147,13 @@ def emaDeleteImsSubscriber(subscriber,session):
 
     r= requests.post('http://'+session['ema_host'] +':'+ session['ema_port'], data = insert_xml, headers = headers)
     if r.status_code != 200:
-        print (' ERROR: An error has occurred trying to delete the subscription::: {0}    on the EMA platform.').format(subscriber.subscriberId)
-        print (r.status_code)
-        print (r.text)
+        debug.p (' ERROR: An error has occurred trying to delete the subscription::: {0}    on the EMA platform.').format(subscriber.subscriberId)
+        debug.p (r.status_code)
+        debug.p (r.text)
     else:
-        print (' Subscription Deleted !!!!')
-        print (r.text)
+        debug.p (' Subscription Deleted !!!!')
+        debug.p (r.text)
+    debug.p('**Leaving FUNC :::: ema_functions.emaDeleteImsSubscriber')
     return (r)
 
 if __name__ == "__main__":

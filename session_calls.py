@@ -7,29 +7,33 @@
 """
 
 import class_ims_ema as ims
+import debug
 
 
 def checkSessionSubType(session):
     """ This method should return the Subscriber class instance for the current session instructions.
     """
+    debug.p(' FUNC :::: session_calls.checkSessionSubType')
+    debug.p(('Session SubType is ::::' + session['subType']))
     if session['subType'] == 'registeredRangeSubscriber':
 		cSub = ims.registeredRangeSubscriber(session['sub'])
     elif session['subType'] == 'nonRegisteredRangeSubscriber':
         cSub = ims.nonRegisteredRangeSubscriber(session['sub'])
     elif session['subType'] == 'registeredSubscriber':
         cSub = ims.registeredSubscriber(session['sub'])
-    elif session['subType'] == 'nonRegisteredSubscriber':
+    elif session['subType'] == 'not_registered':
         cSub = ims.nonRegisteredSubscriber(session['sub'])
     else:
         pass
+    debug.p('**Leaving FUNC :::: session_calls.checkSessionSubType')
     return cSub
 
 
 def setSessionSubType(subType):
     """ This method should return the Subscriber class instance for the current session instructions.
     """
-
-    types {'1': 'registeredRangeSubscriber', '2': 'nonRegisteredRangeSubscriber', '3': 'registeredSubscriber', '4': 'nonRegisteredSubscriber'}
+    debug.p(' FUNC :::: session_calls.setSessionSubType')
+    types = {'1': 'registeredRangeSubscriber', '2': 'nonRegisteredRangeSubscriber', '3': 'registeredSubscriber', '4': 'nonRegisteredSubscriber'}
     if types[subType] == 'registeredRangeSubscriber':
         cSub = ims.registeredRangeSubscriber(session['sub'])
     elif types[subType] == 'nonRegisteredRangeSubscriber':
@@ -40,6 +44,7 @@ def setSessionSubType(subType):
         cSub = ims.nonRegisteredSubscriber(session['sub'])
     else:
         pass
+    debug.p('**Leaving FUNC :::: session_calls.setSessionSubType')
     return cSub
 
 

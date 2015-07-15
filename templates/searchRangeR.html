@@ -1,110 +1,81 @@
-  {% extends 'base.html' %}
+{% extends 'base.html' %}
 {% block title %} 'Accounts' {% endblock %}
 
-{% block navbar %}
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" >Searching for a Range Subscriber </a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a>                                </a></li>
-                    <li><a>                                </a></li>
-                    <li><a>                                </a></li>
-                    <li><a>                                </a></li>
-                    <li><a>                                </a></li>
-                    <li><a>                                </a></li>
-                    <li><a>                                </a></li>
-                    <li><a>                                </a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Range Subscriber <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="SearchRange">Search for a Range Subscriber</a></li>
-                            <li><a href="CreateRange">Create a Range Subscriber</a></li>
-                            <li><a href="DeleteRange">Delete a Range Subscriber</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                    <li><a>    </a></li>
-                    <li ></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Single Subscriber <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="Search">Search for a Single Subscriber</a></li>
-                            <li><a href="Create">Create a Single Subscriber</a></li>
-                            <li><a href="Delete">Delete a Single Subscriber</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                    <li></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-              </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-
-        <!--  -->
-    <div class="container">
-        <!-- <bootstrap> -->
-
-    </div>
-
-{% endblock %}
 
 {% block body %}
 
-              
-      <div>
-        <div class="page-header">
-           <div class="row">
-              <h3>
-                <div class="col-sm-4">
-                  <p class="text-right">Registered Range Subscriber Search</p>    
-                </div>
-                <div class="col-sm-4">
-                    <p class="text-right"><small>Please enter your number range without wildcards </small></p>  
-                </div>
-                <div class="col-sm-4">  
-                </div>
-              </h3>
-            </div>
-        </div>
-        <li></li>
-        <div class="col-sm-6">
+{% if deletemesg: %}
+<div class="page-header">
+  <div class="row">
+    <h3>
+      <div class="col-sm-4">
+        <p class="text-right">Delete Subscriber </p>    
+      </div>
+      <div class="col-sm-4">
+          <p class="text-right"><small>Please search for your subscriber before Deleting.. </small></p>  
+      </div>
+      <div class="col-sm-4">  
+      </div>
+    </h3>
+  </div>
+</div>
+
+{% elif createmesg%}
+
+<div class="page-header">
+  <div class="row">
+    <h3>
+      <div class="col-sm-4">
+        <p class="text-right">Create Subscriber </p>    
+      </div>
+      <div class="col-sm-4">
+          <p class="text-right"><small>Please search for your subscriber before Creating.. </small></p>  
+      </div>
+      <div class="col-sm-4">  
+      </div>
+    </h3>
+  </div>
+</div>
+{% endif %}
+          
+  <div>
+    <div class="page-header">
+       <div class="row">
           <h3>
-        </div>
-        <div class="col-sm-3">
-          <form class="navbar-form navbar-right" role="form" action="performSearchRangeR" method="POST">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Subscriber", name="sub">
+            <div class="col-sm-4">
+              {% if not deletemesg and not createmesg%}
+              <p class="text-right">Subscriber Search</p>
+              {% endif %}    
             </div>
-            <button type="submit" class="btn btn-default">Search</button>
-          </form>
+            <div class="col-sm-4">
+                <p class="text-right"><small>Please enter your number range without wildcards </small></p>  
+            </div>
+            <div class="col-sm-4">  
+            </div>
+          </h3>
         </div>
-        <div class="col-sm-3">
+    </div>
+    <li></li>
+    <div class="col-sm-6">
+      <h3>
+    </div>
+    <div class="col-sm-3">
+      <form class="navbar-form navbar-right" role="form" action="performSearchRangeR" method="POST">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Subscriber", name="sub">
         </div>
-        </h3>
+        <button type="submit" class="btn btn-default">Search</button>
+      </form>
+    </div>
+    <div class="col-sm-3">
+    </div>
+    </h3>
 
 
 
 
-        <!-- </bootstrap> -->
-        </div>
+    <!-- </bootstrap> -->
+    </div>
 
 
 {% endblock %}

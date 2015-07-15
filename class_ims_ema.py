@@ -32,9 +32,7 @@ class IMSSubscriber(object):
         FALSE = 'FALSE'
         TRUE = 'TRUE'
         sip = 'sip:'
-        #origProfileId = 'siptrunk_term_invite_reg_retail'
-        #termProfileId = 'siptrunk_term_invite_reg_retail'
-
+        
         self.subscriberId = plus + number + suffix
         self.subscriberBarringInd = FALSE
         self.chargingProfId = number
@@ -42,8 +40,6 @@ class IMSSubscriber(object):
         self.defaultPrivateId = self.subscriberId
         self.pubData = pubData(number, self.origProfileId, self.termProfileId)
         self.privateUser = privateUser(self.subscriberId)
-        print self.origProfileId
-        print self.termProfileId
         
     def subscriberCreate(self, session):
         """ This function will delete the subscriber with EMA to the HSS and ENUM.
@@ -51,6 +47,7 @@ class IMSSubscriber(object):
         debug.p('FUNC:: Class IMSSubscriber.subscriberCreate(self, session)             ')
         
         status = ema.emaCreateImsSubscriber( self, session )
+        debug.p('**Leaving FUNC :::: class_ims_ema.subscriberCreate')
         return status
         
     def subscriberDelete(self, session):
@@ -59,6 +56,7 @@ class IMSSubscriber(object):
         debug.p('FUNC:: Class IMSSubscriber.subscriberDelete(self, session)             ')
         
         status = ema.emaDeleteImsSubscriber( self, session)
+        debug.p('**Leaving FUNC :::: class_ims_ema.subscriberDelete')
         return status
     
     def subscriberGet(self, session):
@@ -67,6 +65,7 @@ class IMSSubscriber(object):
         debug.p('FUNC:: Class IMSSubscriber.subscriberGet(self, session)             ')
         
         status = ema.emaGetImsSubscriber( self, session )
+        debug.p('**Leaving FUNC :::: class_ims_ema.subscriberGet')
         return status   
     
     @abstractmethod
@@ -82,8 +81,6 @@ class pubData(object):
         : attribute id : string
         : attribute value : string
         """
-        print orig, term
-
 
         FALSE = 'FALSE'
         TRUE = 'TRUE'

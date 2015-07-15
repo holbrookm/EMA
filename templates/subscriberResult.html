@@ -14,8 +14,9 @@
                     <p class="text-right"><small>Do you wish to Delete this Subscription?</small></p>  
                 </div>
                 <div class="col-sm-4"> 
-		            <form role="form" action="delete" method="POST">
-                	<button type="submit" class="btn btn-warning btn-lg" value = {{cSub}}>Delete</button> 
+		            <form action="delete" method="POST" value = {{sub}} id = "del">
+                        <input type ="hidden" name ="action" value ="submit">
+                        <button  class="btn btn-warning btn-lg" type="submit" id="delete-submit" name ="submit" value = {{sub}} >Delete</button> 
                 	</form>
                 </div>
                 <p></p>
