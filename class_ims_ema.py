@@ -7,10 +7,13 @@
 """
 
 import debug
+import logging_config
 import requests
 import ema_functions as ema
 
 from abc import ABCMeta, abstractmethod
+
+logger = logging_config.logger
 
 class IMSSubscriber(object):
 
@@ -44,28 +47,28 @@ class IMSSubscriber(object):
     def subscriberCreate(self, session):
         """ This function will delete the subscriber with EMA to the HSS and ENUM.
         """
-        debug.p('FUNC:: Class IMSSubscriber.subscriberCreate(self, session)             ')
+        logger.debug('FUNC:: Class IMSSubscriber.subscriberCreate(self, session)             ')
         
         status = ema.emaCreateImsSubscriber( self, session )
-        debug.p('**Leaving FUNC :::: class_ims_ema.subscriberCreate')
+        logger.debug('**Leaving FUNC :::: class_ims_ema.subscriberCreate')
         return status
         
     def subscriberDelete(self, session):
         """ This function will delete the subscriber with EMA to the HSS and ENUM.
         """
-        debug.p('FUNC:: Class IMSSubscriber.subscriberDelete(self, session)             ')
+        logger.debug('FUNC:: Class IMSSubscriber.subscriberDelete(self, session)             ')
         
         status = ema.emaDeleteImsSubscriber( self, session)
-        debug.p('**Leaving FUNC :::: class_ims_ema.subscriberDelete')
+        logger.debug('**Leaving FUNC :::: class_ims_ema.subscriberDelete')
         return status
     
     def subscriberGet(self, session):
         """ This function will search for the subscriber with EMA in the HSS and ENUM.
         """
-        debug.p('FUNC:: Class IMSSubscriber.subscriberGet(self, session)             ')
+        logger.debug('FUNC:: Class IMSSubscriber.subscriberGet(self, session)             ')
         
         status = ema.emaGetImsSubscriber( self, session )
-        debug.p('**Leaving FUNC :::: class_ims_ema.subscriberGet')
+        logger.debug('**Leaving FUNC :::: class_ims_ema.subscriberGet')
         return status   
     
     @abstractmethod
