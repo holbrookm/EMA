@@ -1,11 +1,14 @@
-import sys
-from flask import request,  Flask, render_template, url_for, redirect, flash, session
-import os
+import sys, os
+from flask import request,  Flask, render_template, url_for, redirect, flash, session, g
+from flask.ext.sqlalchemy import SQLAlchemy
+
+import config
+
 #from cie_connect import cie_connect, perform_cie_logon
 import debug, logging_config
 import class_ims_ema as ims
 import ema_functions as ema
-import session_calls 
+import session_calls
 
 
 #create the application
@@ -37,18 +40,18 @@ def index():
 @app.route('/login', methods=['POST', 'GET',])
 def login(error = None):
     logger.debug('FUNC::::::: app.route.login')
-    
+
     if request.method == 'POST':
         logger.debug ('Performing logon')
         session['username'] = request.form['username']
         session['password'] = request.form['password']
-        #return_code = perform_cie_logon(session['username'], session['password']) 
+        #return_code = perform_cie_logon(session['username'], session['password'])
         return_code = 1
         logger.debug(session['username'])
         if return_code == 100:
              error = 'Invalid password'
              flash(u'Invalid password provided', 'error')
-             
+
         else:
             session['logged_in'] = True
             logger.debug(session['username'] + ': Logged In')
@@ -57,10 +60,10 @@ def login(error = None):
             else:
                 session['emaSession'] = ema.emaLogin()
                 session['transaction_id'] = '2222222'
-            return render_template('subscribers.html')
+            return redirect(url_for(('subscribers')))
     logger.debug('** Leaving FUNC::::::: app.route.login')
     return render_template('login.html', error=error)
-    
+
 
 #############################
 #### SEARCH #########
@@ -70,7 +73,7 @@ def login(error = None):
 def searchRangeR():
     logger.debug('FUNC:::::: app.route.searchRangeR')
     logger.debug('** Leaving FUNC:::::: app.route.searchRangeR')
-    return render_template('searchRangeR.html') 
+    return render_template('searchRangeR.html')
 
 @app.route('/performSearchRangeR', methods=['POST', ])
 def performSearchRangeR():
@@ -78,30 +81,37 @@ def performSearchRangeR():
     debug.p(request.method)
     if request.method == 'POST':
         sub = str(request.form['sub'])
+        session['sub'] = sub   # subscriber number in text
         c_sub = ims.registeredRangeSubscriber(sub)
         transaction_id = session['transaction_id']
         result = c_sub.subscriberGet(session['emaSession'])
         logger.debug (result.status_code)
         logger.debug (result.text)
 
-        if result.status_code == 500: #Successful EMA connection but there is an error.        
+        if result.status_code == 500: #Successful EMA connection but there is an error.
             if result.text.find('Invalid Session') != -1:
-                logger.debug(('Invalid Session'))
-                return render_template('/login.html', error = 'Invalid Session')
+                logger.debug(('** Leaving FUNC:::: app.route.performSearchrangeR:  Invalid Session'))
+                return redirect(url_for('login', error='Invalid Session'))
             elif result.text.find('No such object') != -1:
-                return render_template('subscribers.html', mesg ='Your subscriber is not provisioned', sub = sub)
-            else: 
+                logger.debug(('** Leaving FUNC:::: app.route.performSearchrangeR:  Subscriber not provisioned: redirecting to subscribers.html'))
+                session['mesg'] = 'NotProvisioned'
+                return redirect(url_for('subscribers'))
+            else:
                 pass
         if result.status_code == 200:
             subdetails = ema.prepareXmlToClass(result.text)
-            session['sub'] = sub
-            session['subType'] = subdetails['pubData']['publicIdState']
-            return render_template('subscriberResult.html', sub = sub, details = subdetails, cSub = c_sub)
-            #return redirect(url_for 'subscriberResult')
+            session['subType'] = subdetails['pubData']['publicIdState'] # Current Subscriber State in text
+            session['details'] = subdetails  # Current Subscriber SOAP XML structure
+
+            del c_sub # Remove Subscriber Class instance
+
+            logger.debug('**Leaving FUNC:::::: app.route.performSearchRangeR: Status = 200')
+            return redirect(url_for('subscriberResult'))
+            
     else:
         return render_template('/login.html')
         logger.error('Unexpected error occurred in app.route.performSearchRangeR ')
-    logger.debug('** Leaving FUNC::::::: app.route.performSearchRangeR')
+    logger.debug('** Leaving FUNC::::::: app.route.performSearchRangeR: End of Func error')
     return render_template('/login.html')
 
 
@@ -120,7 +130,7 @@ def createNR(sub):
     cSub = ims.nonRegisteredSubscriber(sub)
     result = cSub.subscriberCreate(session['emaSession'])
     logger.debug('** Leaving FUNC::::::: app.route.createNR')
-    return render_template('subscribers.html', createmesg = sub)
+    return redirect('subscribers.html', createmesg = sub)
 
 @app.route('/CreateRangeNR/<sub>')
 def createRangeNR(sub):
@@ -128,17 +138,30 @@ def createRangeNR(sub):
     cSub = ims.nonRegisteredRangeSubscriber(sub)
     result = cSub.subscriberCreate(session['emaSession'])
     logger.debug('** Leaving FUNC::::::: app.route.createRangeNR')
-    return render_template('subscribers.html', createmesg = sub)
+    return redirect('subscribers.html', createmesg = sub)
 
 
 
 @app.route('/CreateR/<sub>')
 def createR(sub):
     logger.debug('FUNC:::::: app.route.createR')
-    cSub = ims.registeredSubscriber(sub)
-    result = cSub.subscriberCreate(session['emaSession'])
+    c_sub = ims.registeredSubscriber(sub)# Create Registered Subscriber Class instance
+    result = c_sub.subscriberCreate(session['emaSession'])
+   
+    if result.status_code == 500: #Successful EMA connection but there is an error.
+        if result.text.find('Invalid Session') != -1:
+            logger.debug(('** Leaving FUNC:::: app.route.performSearchrangeR:  Invalid Session'))
+            return redirect(url_for('login', error='Invalid Session'))
+        else:
+            logger.debug('Unknown Error in createR func')
+            pass
+    if result.status_code == 200:
+        session['mesg'] = 'Created'
+        session['sub'] = sub
+        del c_sub # Remove Subscriber Class instance
+    
     logger.debug('** Leaving FUNC::::::: app.route.createR')
-    return render_template('subscribers.html', createmesg = 'Successful Creation', newsub = sub)
+    return redirect(url_for('subscribers'))
 
 @app.route('/CreateRangeR/<sub>')
 def createRangeR(sub):
@@ -146,16 +169,16 @@ def createRangeR(sub):
     cSub = ims.registeredRangeSubscriber(sub)
     result = cSub.subscriberCreate(session['emaSession'])
     logger.debug('** Leaving FUNC::::::: app.route.createRangeR')
-    return render_template('subscribers.html', createmesg = sub)
+    return redirect('subscribers.html', createmesg = sub)
 
 
 
 @app.route('/create', methods=['POST',])
 def create(subType, sub):
-    # 
-    # 
+    #
+    #
     template = ''
-    logger.debug('FUNC::::::: app.route.create')   
+    logger.debug('FUNC::::::: app.route.create')
     if request.method == 'POST':
         cSub = session_calls.setSessionSubType(subType)
 
@@ -163,30 +186,30 @@ def create(subType, sub):
 
         if result.status_code == 500: #Successful EMA connection but there is an error.
             if result.text.find('Invalid Session'):
-                return render_template ('/login.html', error = 'Invalid Session')
+                return redirect(url_for('login', error='Invalid Session'))
             elif result.text.find('No such object'):
-                template = ('searchRangeR.html')
-            else: 
+                return redirect ('searchRangeR.html')
+            else:
                 pass
         elif result.status_code == 200:
-            render_template('/subscribers.html', mesg = 'Successful Delete')
+            return redirect('/subscribers.html', mesg = 'Successful Delete')
     else:
-        template = ('login.html')
+        return render_template ('login.html')
     logger.debug('** Leaving FUNC::::::: app.route.create')
-    return render_template(template)
+    return render_template(url_for('login'))
 
 
 
 #########################################################
 ##### DELETE
 ####################################################
- 
+
 @app.route('/delete', methods=['POST','GET',])
 def delete():
-    # 
-    # 
+    #
+    #
     template = ''
-    logger.debug('FUNC::::::: app.route.delete')   
+    logger.debug('FUNC::::::: app.route.delete')
     if request.method == 'POST':
         logger.debug(request.form['submit'])
         sub = request.form['submit']
@@ -197,16 +220,17 @@ def delete():
         if result.status_code == 500: #Successful EMA connection but there is an error.
             if result.text.find('Invalid Session'):
                 logger.debug('********Invalid Session')
-                return render_template('/login.html', error = 'Invalid Session : Please login again.')
+                return redirect(url_for('login', error='Invalid Session : Please login again.'))
             elif result.text.find('No such object'):
                 logger.debug('******** No Such object')
-                return render_template('searchRangeR.html')
-            else: 
+                return redirect(url_for('searchRangeR'))
+            else:
                 pass
         elif result.status_code == 200:
             logger.debug('** Leaving FUNC::::::: app.route.delete')
-            return render_template('subscribers.html', deletemesg = 'Successful Delete')
-    else:
+            session['mesg'] = 'Deleted'
+            return redirect(url_for('subscribers'))
+    else: #GET Method
         logger.debug('** Leaving FUNC::::::: app.route.delete')
         return render_template('searchRangeR.html', deletemesg = "True")
     return
@@ -217,17 +241,39 @@ def delete():
 ####################################
 
 
-@app.route('/subscriberResult', methods=['POST',])
+@app.route('/subscriberResult', methods=['POST','GET',])
 def subscriberResult():
-    logger.debug('FUNC:::::: app.route.subscriberResult')    
+    logger.debug('FUNC:::::: app.route.subscriberResult')
+    logger.debug(request.method)
     if request.method == 'POST':
-        for k,v in request.method.items():
-            print k, v
-    return "You asked for sub number %s in account : %s " %((sub_no), (account))
+        logger.debug('** Leaving FUNC:::::: app.route.subscriberResult')
+        return redirect(url_for ('subscriberResult'))
+    else:
+        logger.debug('** Leaving FUNC:::::: app.route.subscriberResult')
+        return render_template('subscriberResult.html', sub = session.get('sub'), details = session.get('details')) # Correct format to use Session Variables
 
 
+@app.route('/subscribers', methods=['POST','GET',])
+def subscribers(mesg = None):
+    logger.debug('FUNC:::::: app.route.subscribers')
+    if session.get('mesg'):        
+        if session.get('mesg') == 'Deleted':
+            logger.debug('** Leaving FUNC:::::: app.route.subscribers     ::  Subscriber Deleted')
+            return render_template('subscribers.html', deletemesg = 'Successful Delete')
+        elif session.get('mesg') == 'NotProvisioned':
+            logger.debug('** Leaving FUNC:::::: app.route.subscribers   ::  Subscriber not Provisioned')
+            return render_template('subscribers.html', sub = session.get('sub'), mesg = 'Your Subscriber is not Provisioned')
+        elif session.get('mesg') == 'Created':
+            logger.debug('** Leaving FUNC:::::: app.route.subscribers    ::  Subscriber created')
+            return render_template('subscribers.html', newsub = session.get('sub'), createmesg = 'Your Subscriber has been Created')
+        else:
+            logger.debug('** Leaving FUNC:::::: app.route.subscribers')
+            return render_template('subscribers.html', mesg = mesg)
+    else:
+        logger.debug('** Leaving FUNC:::::: app.route.subscribers')
+        return render_template('subscribers.html', mesg = mesg)
 
-# Below this point the filters are stored    
+# Below this point the filters are stored
 
 @app.template_filter('rsplit')
 def get_id_filter(data):
@@ -239,5 +285,4 @@ def get_id_filter(data):
 
 
 if __name__ == "__main__":
-    app.run(debug =True, port= 4500)
-
+    app.run(debug =True, host = '0.0.0.0', port= 4500)
