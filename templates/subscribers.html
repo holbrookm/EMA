@@ -28,11 +28,11 @@
               </div>
             </div>
 
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-              
+            </p>
+            </p>
+            </p>
+            </p>
+            
             <div class ='row'>
               <div class="col-sm-4">
                 <p class="text-center"> {{mesg}}</p>    
@@ -40,10 +40,10 @@
               <div class="col-sm-8"> 
               </div>
             </div>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            </p>
+            </p>
+            </p>
+            </p>
             <div class = 'row'>
               <div class="col-sm-2">
                 <p class="text-left"> </p>    
@@ -78,14 +78,12 @@
             <h3>
                 <div class = "row">
                   <div class="col-sm-12">
+                    <p class="text-center"> You have requested Subscriber::: +{{deletesub}} be deleted.</p>  
+                    </p>
                     <p class="text-center"> {{deletemesg}}</p>    
                   </div>
                 </div>
 
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
             </h3>
             {% endif %}
             
@@ -94,17 +92,27 @@
             <h3>
             <div class = "row">
               <div class="col-sm-12">
-                <p class="text-center"> {{newsub}}{{createmesg}}</p>    
+                <p class="text-center"> Subscriber::: +{{newsub}}</p>   
+                <p class="text-center"> {{createmesg}}</p>                   
               </div>
             </div>
-
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
             </h3>
             {% endif %}
         
+        
+            {% if existingsub: %} 
+             <!-- Display if the last action was a successful Create -->
+            <h3>
+            <div class = "row">
+              <div class="col-sm-12">
+                <p class="text-center"> Subscriber::: +{{existingsub}}</p>   
+                <p class="text-center"> {{mesg}}</p>                   
+              </div>
+            </div>
+
+     
+            </h3>
+            {% endif %}
         <!-- </bootstrap> -->
         </div>
 

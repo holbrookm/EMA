@@ -128,7 +128,7 @@ def emaCreateImsSubscriber(sub, session):
 
     r= requests.post('http://'+session['ema_host'] +':'+ session['ema_port'], data = insert_xml, headers = headers)
     if r.status_code != 200:
-        logger.error (' ERROR: An error has occurred trying to create the subscription::: {0}    on the EMA platform.').format(sub.subscriberId)
+        logger.error ((' ERROR: An error has occurred trying to create the subscription::: {0}    on the EMA platform.').format(sub.subscriberId))
         logger.error (r.status_code)
         logger.error (r.text)
     else:
