@@ -1,6 +1,7 @@
 
 {% extends 'base.html' %}
-{% block title %} 'Login Page' {% endblock %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %} 'Auth/ Login Page' {% endblock %}
 {% block navbar %}{% endblock %}
 
 {% block body %}
@@ -16,7 +17,7 @@
   {% endif %}
 {% endwith %}
 
-
+<!--
 	<div class="container">
 
       <form class="form-signin" role="form"  method = "POST" action = '/login' id = "login_form ">
@@ -29,12 +30,17 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 
-    </div> <!-- /container -->
+    </div> 
     <div>
         {% if error: %}
             <h2> {{error}} </h2>
         {% endif %}
     </div>
+-->
+    <div class = "col-md-4">
+        {{wtf.quick_form(form) }}
+    </div>
+    
 <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

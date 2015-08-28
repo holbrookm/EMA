@@ -30,7 +30,7 @@ CONSOLE_LEVEL=DEBUG
 # Format of the log entry
 FORMAT = "%(asctime)s %(levelname)s | %(module)s | %(name)s | %(message)s"
 
-logging.basicConfig(filename='./ema_prov.log',format=FORMAT)
+logging.basicConfig(filename='./debug.log',format=FORMAT)
 logging.addLevelName(15, "INFO1")
 logging.addLevelName(5, "DEBUG1")
 logging.addLevelName(25, "NOTICE")
