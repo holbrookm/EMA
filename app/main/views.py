@@ -76,7 +76,7 @@ def performSearchRangeR():
         if result.status_code == 500: #Successful EMA connection but there is an error.
             if result.text.find('Invalid Session') != -1:
                 logger.debug(('** Leaving FUNC:::: app.route.performSearchrangeR:  Invalid Session'))
-                return redirect(url_for('main.login', error='Invalid Session'))
+                return redirect(url_for('auth.login', error='Invalid Session'))
             elif result.text.find('No such object') != -1:
                 logger.debug(('** Leaving FUNC:::: app.route.performSearchrangeR:  Subscriber not provisioned: redirecting to subscribers.html'))
                 session['mesg'] = 'NotProvisioned'
@@ -121,7 +121,7 @@ def createNR(sub):
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:# -1 means does not exist, therefore if True it exists.
             logger.debug(('** Leaving FUNC:::: app.route.createNR:  Invalid Session'))
-            return redirect(url_for('main.login', error='Invalid Session'))
+            return redirect(url_for('auth.login', error='Invalid Session'))
         elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
             logger.debug(('** Leaving FUNC:::: app.route.createNR:  Subscriber Already Exists'))
             session['mesg'] = 'ExistingSubscriber'
@@ -137,7 +137,7 @@ def createNR(sub):
         return redirect(url_for('main.subscribers'))
     else:
         logger.debug(('** Leaving FUNC::::::: app.route.createNR :::  Unknown Condition ::  {0}').format(result.status_code))
-        return redirect(url_for('main.login', error='Unknown error Condition'))
+        return redirect(url_for('auth.login', error='Unknown error Condition'))
  
 
 @main.route('/CreateRangeNR/<sub>', methods=['POST','GET',])
@@ -149,7 +149,7 @@ def createRangeNR(sub):
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:
             logger.debug(('** Leaving FUNC:::: app.route.createRangeNR:  Invalid Session'))
-            return redirect(url_for('main.login', error='Invalid Session'))
+            return redirect(url_for('auth.login', error='Invalid Session'))
         elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
             logger.debug(('** Leaving FUNC:::: app.route.createRangeNR:  Subscriber Already Exists'))
             session['mesg'] = 'ExistingSubscriber'
@@ -165,7 +165,7 @@ def createRangeNR(sub):
         return redirect(url_for('main.subscribers'))
     else:
         logger.debug(('** Leaving FUNC::::::: app.route.createRangeNR :::  Unknown Condition ::  {0}').format(result.status_code))
-        return redirect(url_for('main.login', error='Unknown error Condition'))
+        return redirect(url_for('auth.login', error='Unknown error Condition'))
  
 
 
@@ -179,7 +179,7 @@ def createR(sub):
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:
             logger.debug(('** Leaving FUNC:::: app.route.createR:  Invalid Session'))
-            return redirect(url_for('main.login', error='Invalid Session'))
+            return redirect(url_for('auth.login', error='Invalid Session'))
         elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
             logger.debug(('** Leaving FUNC:::: app.route.createR:  Subscriber Already Exists'))
             session['mesg'] = 'ExistingSubscriber'
@@ -204,7 +204,7 @@ def createRangeR(sub):
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:
             logger.debug(('** Leaving FUNC:::: app.route.createRangeR:  Invalid Session'))
-            return redirect(url_for('main.login', error='Invalid Session'))
+            return redirect(url_for('auth.login', error='Invalid Session'))
         elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
             logger.debug(('** Leaving FUNC:::: app.route.createRangeR:  Subscriber Already Exists'))
             session['mesg'] = 'ExistingSubscriber'
@@ -220,7 +220,63 @@ def createRangeR(sub):
         return redirect(url_for('main.subscribers'))
     else:
         logger.debug(('** Leaving FUNC::::::: app.route.createRangeR :::  Unknown Condition ::  {0}').format(result.status_code))
-        return redirect(url_for('main.login', error='Unknown error Condition'))
+        return redirect(url_for('auth.login', error='Unknown error Condition'))
+ 
+@main.route('/CreatePilot/<sub>' , methods=['POST','GET',])
+@login_required
+def createPilot(sub):
+    logger.debug(('FUNC:::::: app.route.createPilot           {0}').format(request.method))
+    c_sub = ims.pilotSubscriber(sub)
+    result = c_sub.subscriberCreate(session['emaSession'])
+    if result.status_code == 500: #Successful EMA connection but there is an error.
+        if result.text.find('Invalid Session') != -1:
+            logger.debug(('** Leaving FUNC:::: app.route.createPilot:  Invalid Session'))
+            return redirect(url_for('auth.login', error='Invalid Session'))
+        elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
+            logger.debug(('** Leaving FUNC:::: app.route.createPilot:  Subscriber Already Exists'))
+            session['mesg'] = 'ExistingSubscriber'
+            return redirect(url_for('main.subscribers'))
+        else:
+            logger.debug('Unknown Error in createPilot func')
+            pass
+    elif result.status_code == 200:
+        session['mesg'] = 'Created'
+        session['sub'] = sub
+        del c_sub # Remove Subscriber Class instance
+        logger.debug('** Leaving FUNC::::::: app.route.createPilot')
+        return redirect(url_for('main.subscribers'))
+    else:
+        logger.debug(('** Leaving FUNC::::::: app.route.createPilot :::  Unknown Condition ::  {0}').format(result.status_code))
+        return redirect(url_for('auth.login', error='Unknown error Condition'))
+ 
+
+ 
+@main.route('/CreateHostedOffice/<sub>' , methods=['POST','GET',])
+@login_required
+def createHostedOffice(sub):
+    logger.debug(('FUNC:::::: app.route.createHostedOffice           {0}').format(request.method))
+    c_sub = ims.hostedOfficeSubscriber(sub)
+    result = c_sub.subscriberCreate(session['emaSession'])
+    if result.status_code == 500: #Successful EMA connection but there is an error.
+        if result.text.find('Invalid Session') != -1:
+            logger.debug(('** Leaving FUNC:::: app.route.createHostedOffice:  Invalid Session'))
+            return redirect(url_for('auth.login', error='Invalid Session'))
+        elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
+            logger.debug(('** Leaving FUNC:::: app.route.createHostedOffice:  Subscriber Already Exists'))
+            session['mesg'] = 'ExistingSubscriber'
+            return redirect(url_for('main.subscribers'))
+        else:
+            logger.debug('Unknown Error in createHostedOffice func')
+            pass
+    elif result.status_code == 200:
+        session['mesg'] = 'Created'
+        session['sub'] = sub
+        del c_sub # Remove Subscriber Class instance
+        logger.debug('** Leaving FUNC::::::: app.route.createHostedOffice')
+        return redirect(url_for('main.subscribers'))
+    else:
+        logger.debug(('** Leaving FUNC::::::: app.route.createHostedOffice :::  Unknown Condition ::  {0}').format(result.status_code))
+        return redirect(url_for('auth.login', error='Unknown error Condition'))
  
 
 
@@ -245,7 +301,7 @@ def delete():
         if result.status_code == 500: #Successful EMA connection but there is an error.
             if result.text.find('Invalid Session'):
                 logger.debug('********Invalid Session')
-                return redirect(url_for('main.login', error='Invalid Session : Please login again.'))
+                return redirect(url_for('auth.login', error='Invalid Session : Please login again.'))
             elif result.text.find('No such object'):
                 logger.debug('******** No Such object')
                 return redirect(url_for('main.searchRangeR'))

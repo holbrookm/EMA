@@ -415,3 +415,24 @@
 2015-08-28 09:33:33,490 DEBUG | __init__ | root | FUNC::::::: app.auth.__init__
 2015-08-28 09:33:33,492 DEBUG | __init__ | root | **Leaving FUNC::::::: app.auth.__init__
 2015-08-28 09:33:33,494 DEBUG | __init__ | root | ** Leaving FUNC::::::: app.__init__.create_app()
+2015-08-28 09:50:44,269 INFO | _internal | werkzeug |  * Detected change in '/Users/holbrookm/Dropbox/PYTHON/Marc/ACTIVE/SoapEMA/live/app/main/views.py', reloading
+2015-08-28 09:50:44,438 INFO | _internal | werkzeug |  * Restarting with stat
+2015-08-28 09:50:45,007 DEBUG | __init__ | root | FUNC::::::: app.__init__.create_app()
+2015-08-28 09:50:45,101 DEBUG | __init__ | root | FUNC::::::: app.auth.__init__
+2015-08-28 09:50:45,101 DEBUG | __init__ | root | **Leaving FUNC::::::: app.auth.__init__
+2015-08-28 09:50:45,102 DEBUG | __init__ | root | ** Leaving FUNC::::::: app.__init__.create_app()
+2015-08-28 09:51:56,833 INFO | _internal | werkzeug |  * Detected change in '/Users/holbrookm/Dropbox/PYTHON/Marc/ACTIVE/SoapEMA/live/app/main/views.py', reloading
+2015-08-28 09:51:56,904 INFO | _internal | werkzeug |  * Restarting with stat
+2015-08-28 09:51:57,189 DEBUG | __init__ | root | FUNC::::::: app.__init__.create_app()
+2015-08-28 09:51:57,246 DEBUG | __init__ | root | FUNC::::::: app.auth.__init__
+2015-08-28 09:51:57,247 DEBUG | __init__ | root | **Leaving FUNC::::::: app.auth.__init__
+2015-08-28 09:51:57,248 DEBUG | __init__ | root | ** Leaving FUNC::::::: app.__init__.create_app()
+2015-08-28 10:54:01,843 INFO | _internal | werkzeug |  * Detected change in '/Users/holbrookm/Dropbox/PYTHON/Marc/ACTIVE/SoapEMA/live/app/auth/views.py', reloading
+2015-08-28 10:54:01,944 INFO | _internal | werkzeug |  * Restarting with stat
+2015-08-28 10:54:02,224 DEBUG | __init__ | root | FUNC::::::: app.__init__.create_app()
+2015-08-28 10:54:02,281 DEBUG | __init__ | root | FUNC::::::: app.auth.__init__
+2015-08-28 10:54:02,284 DEBUG | __init__ | root | **Leaving FUNC::::::: app.auth.__init__
+2015-08-28 10:54:02,285 DEBUG | __init__ | root | ** Leaving FUNC::::::: app.__init__.create_app()
+2015-08-28 12:56:50,061 INFO | _internal | werkzeug |  * Detected change in '/Users/holbrookm/Dropbox/PYTHON/Marc/ACTIVE/SoapEMA/live/app/main/views.py', reloading
+2015-08-28 12:56:50,125 INFO | _internal | werkzeug |  * Restarting with stat
+2015-08-28 12:56:50,397 DEBUG | __init__ | root | FUNC::::::: app.__init__.create_app()

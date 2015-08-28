@@ -20,9 +20,9 @@ class IMSSubscriber(object):
     __metaclass__ = ABCMeta
     origProfileId = 'siptrunk_orig_invite_reg_retail'
     termProfileId = 'siptrunk_term_invite_reg_retail'
-    charge = 'DefaultChargingProfile'
 
-    def __init__(self, number):
+
+    def __init__(self, number = '9999999999'):
         """
         : attribute subscriberId: string
         : attribute subscriberProfId : string
@@ -38,12 +38,11 @@ class IMSSubscriber(object):
         
         self.subscriberId = plus + number + suffix
         self.subscriberBarringInd = FALSE
-        self.chargingProfId = self.charge
+        self.chargingProfId = number
         self.privacyIndicator = FALSE
         self.defaultPrivateId = self.subscriberId
         self.pubData = pubData(number, self.origProfileId, self.termProfileId)
         self.privateUser = privateUser(self.subscriberId)
-        self.msisdn = number # added in to cater for Charging Profile, Msisdn exists in PrivateData
         
     def subscriberCreate(self, session):
         """ This function will delete the subscriber with EMA to the HSS and ENUM.
@@ -183,13 +182,4 @@ class registeredRangeSubscriber(IMSSubscriber):
     def subscriberType(self):
         return 'Registered Range Subscriber'
 
-class hostedOfficeSubscriber(IMSSubscriber):
-    """ This calls should represent a Registered Range Subscriber. """
-
-    origProfileId = 'siptrunk_orig_invite_reg_retail'
-    termProfileId = 'siptrunk_term_invite_reg_retail'
-    charge = 'HostedOfficeChargingProfile'
-
-    def subscriberType(self):
-        return 'Registered Range Subscriber'
 
