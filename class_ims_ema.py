@@ -49,8 +49,10 @@ class IMSSubscriber(object):
         """ This function will delete the subscriber with EMA to the HSS and ENUM.
         """
         logger.debug('FUNC:: Class IMSSubscriber.subscriberCreate(self, session)             ')
-        
-        status = ema.emaCreateImsSubscriber( self, session )
+        if self.charge == 'HostedOfficeChargingProfile':
+            status = ema.emaCreateHOSubscriber( self, session )
+        else:
+            status = ema.emaCreateImsSubscriber( self, session )
         logger.debug('**Leaving FUNC :::: class_ims_ema.subscriberCreate')
         return status
         

@@ -137,6 +137,29 @@ def emaCreateImsSubscriber(sub, session):
     logger.debug('**Leaving FUNC :::: ema_functions.emaCreateImsSubscriber')
     return (r)
 
+def emaCreateHOSubscriber(sub, session):
+    ''' This function will create an IMS subscriber/subscription on HSS and ENUM via EMA.
+        The inputs for this subscription are the session/sequence/transaction ids 
+        and the subscriber information itself.
+    '''
+    logger.debug('FUNC:: emaCreateImsSubscriber      :   ')
+
+    insert_xml = __readinxml__('./create_hostedoffice_subscriber.xml').format(session['sequence_id'], session['transaction_id'],session['session_id'], sub.subscriberId, sub.msisdn, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId, sub.chargingProfId)
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
+
+    logger.debug(insert_xml)
+
+    r= requests.post('http://'+session['ema_host'] +':'+ session['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to create the subscription::: {0}    on the EMA platform.').format(sub.subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' Subscription Created !!!!')
+        logger.debug (r.text)
+    logger.debug('**Leaving FUNC :::: ema_functions.emaCreateImsSubscriber')
+    return (r)
+
 def emaDeleteImsSubscriber(subscriber,session):
     ''' This function will create an IMS subscriber/subscription on HSS and ENUM via EMA.
         The inputs for this subscription are the session/sequence/transaction ids 

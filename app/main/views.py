@@ -85,8 +85,17 @@ def performSearchRangeR():
                 pass
         if result.status_code == 200:
             subdetails = ema.prepareXmlToClass(result.text)
-            session['subType'] = subdetails['pubData']['publicIdState'] # Current Subscriber State in text
-            session['details'] = subdetails  # Current Subscriber SOAP XML structure
+            print subdetails
+            print type(subdetails['pubData'])
+            print subdetails['pubData'].__len__(), isinstance(subdetails['pubData'],list)
+            if isinstance(subdetails['pubData'],list):
+                session['count'] = subdetails['pubData'].__len__()
+                session['subType'] = subdetails['pubData'][0]['publicIdState'] # Current Subscriber State in text
+                session['details'] = subdetails  # Current Subscriber SOAP XML structure
+            else:
+                session['count'] = 0
+                session['subType'] = subdetails['pubData']['publicIdState'] # Current Subscriber State in text
+                session['details'] = subdetails  # Current Subscriber SOAP XML structure
 
             del c_sub # Remove Subscriber Class instance
 
@@ -332,7 +341,7 @@ def subscriberResult():
         return redirect(url_for ('main.subscriberResult'))
     else:
         logger.debug('** Leaving FUNC:::::: app.route.subscriberResult')
-        return render_template('subscriberResult.html', sub = session.get('sub'), details = session.get('details')) # Correct format to use Session Variables
+        return render_template('subscriberResult.html',count = session.get('count'), sub = session.get('sub'), details = session.get('details')) # Correct format to use Session Variables
 
 
 @main.route('/subscribers', methods=['POST','GET',])
