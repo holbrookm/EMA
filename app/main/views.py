@@ -69,7 +69,8 @@ def performSearchRangeR():
         session['sub'] = sub   # subscriber number in text
         c_sub = ims.registeredRangeSubscriber(sub)
         transaction_id = session['transaction_id']
-        result = c_sub.subscriberGet(session['emaSession'])
+        print session
+        result = c_sub.subscriberGet(session)
         logger.debug (result.status_code)
         logger.debug (result.text)
 
@@ -125,7 +126,7 @@ def subscriberCreate():
 def createNR(sub):
     logger.debug(('FUNC:::::: app.route.createNR           {0}').format(request.method))
     c_sub = ims.nonRegisteredSubscriber(sub)
-    result = c_sub.subscriberCreate(session['emaSession'])
+    result = c_sub.subscriberCreate(session)
     
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:# -1 means does not exist, therefore if True it exists.
@@ -154,7 +155,7 @@ def createNR(sub):
 def createRangeNR(sub):
     logger.debug(('FUNC:::::: app.route.createRangeNR           {0}').format(request.method))
     c_sub = ims.nonRegisteredRangeSubscriber(sub)
-    result = c_sub.subscriberCreate(session['emaSession'])
+    result = c_sub.subscriberCreate(session)
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:
             logger.debug(('** Leaving FUNC:::: app.route.createRangeNR:  Invalid Session'))
@@ -183,7 +184,7 @@ def createRangeNR(sub):
 def createR(sub):
     logger.debug(('FUNC:::::: app.route.createR           {0}').format(request.method))
     c_sub = ims.registeredSubscriber(sub)# Create Registered Subscriber Class instance
-    result = c_sub.subscriberCreate(session['emaSession'])
+    result = c_sub.subscriberCreate(session)
    
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:
@@ -209,7 +210,7 @@ def createR(sub):
 def createRangeR(sub):
     logger.debug(('FUNC:::::: app.route.createRangeR           {0}').format(request.method))
     c_sub = ims.registeredRangeSubscriber(sub)
-    result = c_sub.subscriberCreate(session['emaSession'])
+    result = c_sub.subscriberCreate(session)
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:
             logger.debug(('** Leaving FUNC:::: app.route.createRangeR:  Invalid Session'))
@@ -236,7 +237,7 @@ def createRangeR(sub):
 def createPilot(sub):
     logger.debug(('FUNC:::::: app.route.createPilot           {0}').format(request.method))
     c_sub = ims.pilotSubscriber(sub)
-    result = c_sub.subscriberCreate(session['emaSession'])
+    result = c_sub.subscriberCreate(session)
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:
             logger.debug(('** Leaving FUNC:::: app.route.createPilot:  Invalid Session'))
@@ -264,8 +265,10 @@ def createPilot(sub):
 @login_required
 def createHostedOffice(sub):
     logger.debug(('FUNC:::::: app.route.createHostedOffice           {0}').format(request.method))
+    session['ho_pw'] = str(request.form['pw'])
+    print session['ho_pw']
     c_sub = ims.hostedOfficeSubscriber(sub)
-    result = c_sub.subscriberCreate(session['emaSession'])
+    result = c_sub.subscriberCreate(session)
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:
             logger.debug(('** Leaving FUNC:::: app.route.createHostedOffice:  Invalid Session'))
@@ -305,7 +308,7 @@ def delete():
         sub = request.form['submit']
         cSub = ims.registeredSubscriber(sub) # For a delete any Class Type can work
 
-        result = cSub.subscriberDelete(session['emaSession'])
+        result = cSub.subscriberDelete(session)
 
         if result.status_code == 500: #Successful EMA connection but there is an error.
             if result.text.find('Invalid Session'):

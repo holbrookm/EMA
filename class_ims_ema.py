@@ -188,10 +188,10 @@ class registeredRangeSubscriber(IMSSubscriber):
 class hostedOfficeSubscriber(IMSSubscriber):
     """ This calls should represent a Registered Range Subscriber. """
 
-    origProfileId = 'siptrunk_orig_invite_reg_retail'
-    termProfileId = 'siptrunk_term_invite_reg_retail'
+    origProfileId = 'ho_orig_retail'
+    termProfileId = 'ho_term_retail'
     charge = 'HostedOfficeChargingProfile'
 
     def subscriberType(self):
-        return 'Registered Range Subscriber'
+        return 'Hosted Office Subscriber'
 

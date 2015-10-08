@@ -13,6 +13,7 @@
             <cai3:MOAttributes>
                 <createIMSSubscription subscriberId="{3}" xsi:schemaLocation="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/ ema_UserProvisioning_IMS_5.0_.xsd" xmlns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                     <subscriberId>{3}</subscriberId>
+                    <chargingProfId>{11}</chargingProfId>
                     <pubData publicIdValue="{5}">
                         <publicIdValue>{5}</publicIdValue>
                         <publicIdTelValue>{6}</publicIdTelValue>
@@ -159,7 +160,7 @@
                     </pubData>
                     <privateUser privateUserId="{8}">
                         <privateUserId>{8}</privateUserId>
-                        <userPassword>2222</userPassword>
+                        <userPassword>{12}</userPassword>
                         <userMsisdn msisdn="{4}">
                             <msisdn>{4}</msisdn>
                         </userMsisdn>

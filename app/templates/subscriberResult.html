@@ -40,7 +40,7 @@
 		        	<tr><td>Privacy Indicator</td><td>{{details['privacyIndicator']}}</td>
 		        	</tr>
 					{% if count %}
-                        {% for x in range(count) %}  <!-- This line scrolls through the number of dicts of pubData if more than 1 -->
+                        {% for x in range(count) %}  <!-- This line scro -->
                             {% for k,v in details.pubData[x].items() %}
                                 <tr>
                                     <td>{{ k }}</td>

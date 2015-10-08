@@ -7,11 +7,11 @@
 """
 
 
-import os,requests, debug
+import requests, debug
 import logging_config
 from xml.etree import ElementTree as ET
 import xmltodict
-import class_ims_ema as imsSub
+
 
 
 ema_username= 'sogadm'
@@ -98,11 +98,11 @@ def emaGetImsSubscriber(sub, session):
     debug.p ('Func::: emaGetImsSuscriber      : ')
     logger.debug('Func::: emaGetImsSuscriber      : ')
 
-    insert_xml = __readinxml__('./get_ims_sub.xml').format(session['sequence_id'], session['transaction_id'],session['session_id'], sub.subscriberId)
+    insert_xml = __readinxml__('./get_ims_sub.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], sub.subscriberId)
     logger.debug(insert_xml)
     
     headers ={'content-type':'text/xml; charset=utf-8',  'SOAPAction':'CAI3G#Get'}
-    r= requests.post('http://'+session['ema_host'] +':'+ session['ema_port'], data = insert_xml, headers = headers)
+    r= requests.post('http://'+session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
     if r.status_code != 200:
         logger.error((' ERROR: An error has occurred trying to retrieve the subscription::: {0}    from the EMA platform.').format(sub.subscriberId))
         logger.error (r.status_code)
@@ -121,12 +121,12 @@ def emaCreateImsSubscriber(sub, session):
     '''
     logger.debug('FUNC:: emaCreateImsSubscriber      :   ')
 
-    insert_xml = __readinxml__('./create_ims_subscriber2.xml').format(session['sequence_id'], session['transaction_id'],session['session_id'], sub.subscriberId, sub.msisdn, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId, sub.chargingProfId)
+    insert_xml = __readinxml__('./create_ims_subscriber2.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], sub.subscriberId, sub.msisdn, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId, sub.chargingProfId)
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
 
     logger.debug(insert_xml)
 
-    r= requests.post('http://'+session['ema_host'] +':'+ session['ema_port'], data = insert_xml, headers = headers)
+    r= requests.post('http://'+session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
     if r.status_code != 200:
         logger.error ((' ERROR: An error has occurred trying to create the subscription::: {0}    on the EMA platform.').format(sub.subscriberId))
         logger.error (r.status_code)
@@ -144,12 +144,12 @@ def emaCreateHOSubscriber(sub, session):
     '''
     logger.debug('FUNC:: emaCreateImsSubscriber      :   ')
 
-    insert_xml = __readinxml__('./create_hostedoffice_subscriber.xml').format(session['sequence_id'], session['transaction_id'],session['session_id'], sub.subscriberId, sub.msisdn, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId, sub.chargingProfId)
+    insert_xml = __readinxml__('./create_hostedoffice_subscriber.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], sub.subscriberId, sub.msisdn, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId, sub.chargingProfId, session['ho_pw'])
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
 
     logger.debug(insert_xml)
 
-    r= requests.post('http://'+session['ema_host'] +':'+ session['ema_port'], data = insert_xml, headers = headers)
+    r= requests.post('http://'+ session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
     if r.status_code != 200:
         logger.error ((' ERROR: An error has occurred trying to create the subscription::: {0}    on the EMA platform.').format(sub.subscriberId))
         logger.error (r.status_code)
@@ -167,12 +167,12 @@ def emaDeleteImsSubscriber(subscriber,session):
     '''
     logger.debug('FUNC:: emaDeleteImsSubscriber      :   ')
 
-    insert_xml = __readinxml__('./delete_ims_subscriber.xml').format(session['sequence_id'], session['transaction_id'],session['session_id'], subscriber.subscriberId)
+    insert_xml = __readinxml__('./delete_ims_subscriber.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], subscriber.subscriberId)
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Delete'} 
 
     logger.debug(insert_xml)
 
-    r= requests.post('http://'+session['ema_host'] +':'+ session['ema_port'], data = insert_xml, headers = headers)
+    r= requests.post('http://'+session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
     if r.status_code != 200:
         logger.error ((' ERROR: An error has occurred trying to delete the subscription::: {0}    on the EMA platform.').format(subscriber.subscriberId))
         logger.error (r.status_code)
