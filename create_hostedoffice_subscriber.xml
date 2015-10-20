@@ -30,7 +30,7 @@
                     </pubData>
                     <pubData publicIdValue="sip:+{4}_sca_1@ngv.eircom.net">
                         <publicIdValue>sip:+{4}_sca_1@ngv.eircom.net</publicIdValue>
-                        <implicitRegSet>2</implicitRegSet>
+                        <implicitRegSet>5</implicitRegSet>
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
@@ -43,7 +43,7 @@
                     </pubData>
                     <pubData publicIdValue="sip:+{4}_sca_2@ngv.eircom.net">
                         <publicIdValue>sip:+{4}_sca_2@ngv.eircom.net</publicIdValue>
-                        <implicitRegSet>2</implicitRegSet>
+                        <implicitRegSet>6</implicitRegSet>
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
@@ -56,7 +56,7 @@
                     </pubData>
                     <pubData publicIdValue="sip:+{4}_sca_3@ngv.eircom.net">
                         <publicIdValue>sip:+{4}_sca_3@ngv.eircom.net</publicIdValue>
-                        <implicitRegSet>2</implicitRegSet>
+                        <implicitRegSet>7</implicitRegSet>
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
@@ -69,7 +69,7 @@
                     </pubData>
                     <pubData publicIdValue="sip:+{4}_sca_4@ngv.eircom.net">
                         <publicIdValue>sip:+{4}_sca_4@ngv.eircom.net</publicIdValue>
-                        <implicitRegSet>2</implicitRegSet>
+                        <implicitRegSet>8</implicitRegSet>
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
@@ -82,7 +82,7 @@
                     </pubData>
                     <pubData publicIdValue="sip:+{4}_sca_5@ngv.eircom.net">
                         <publicIdValue>sip:+{4}_sca_5@ngv.eircom.net</publicIdValue>
-                        <implicitRegSet>2</implicitRegSet>
+                        <implicitRegSet>9</implicitRegSet>
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
@@ -95,7 +95,7 @@
                     </pubData>
                     <pubData publicIdValue="sip:+{4}_sca_6@ngv.eircom.net">
                         <publicIdValue>sip:+{4}_sca_6@ngv.eircom.net</publicIdValue>
-                        <implicitRegSet>2</implicitRegSet>
+                        <implicitRegSet>10</implicitRegSet>
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
@@ -108,7 +108,7 @@
                     </pubData>
                     <pubData publicIdValue="sip:+{4}_sca_7@ngv.eircom.net">
                         <publicIdValue>sip:+{4}_sca_7@ngv.eircom.net</publicIdValue>
-                        <implicitRegSet>2</implicitRegSet>
+                        <implicitRegSet>11</implicitRegSet>
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
@@ -121,7 +121,7 @@
                     </pubData>
                     <pubData publicIdValue="sip:+{4}_sca_m@ngv.eircom.net">
                         <publicIdValue>sip:+{4}_sca_m@ngv.eircom.net</publicIdValue>
-                        <implicitRegSet>2</implicitRegSet>
+                        <implicitRegSet>3</implicitRegSet>
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
@@ -134,7 +134,7 @@
                     </pubData>
                     <pubData publicIdValue="sip:+{4}_sca_d@ngv.eircom.net">
                         <publicIdValue>sip:+{4}_sca_d@ngv.eircom.net</publicIdValue>
-                        <implicitRegSet>3</implicitRegSet>
+                        <implicitRegSet>2</implicitRegSet>
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
@@ -147,7 +147,7 @@
                     </pubData>
                     <pubData publicIdValue="sip:+{4}_sca_t@ngv.eircom.net">
                         <publicIdValue>sip:+{4}_sca_t@ngv.eircom.net</publicIdValue>
-                        <implicitRegSet>3</implicitRegSet>
+                        <implicitRegSet>4</implicitRegSet>
                         <isDefault>TRUE</isDefault>
                         <phoneContext>{7}</phoneContext>
                         <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>

@@ -1,0 +1,34 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns:ns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/PSI/5.0/">
+  <soapenv:Header>
+    <cai3:SessionId>$SESSION_ID</cai3:SessionId>
+  </soapenv:Header>
+  <soapenv:Body>
+    <cai3:Create>
+      <cai3:MOType>PSISubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/PSI/5.0/</cai3:MOType>
+      <cai3:MOId>
+        <ns:subscriberId>+3531600909!.*!@ngv.eircom.net</ns:subscriberId>
+      </cai3:MOId>
+      <cai3:MOAttributes>
+        <ns:createPSISubscription subscriberId="+3531600909!.*!@ngv.eircom.net">
+          <ns:subscriberId>+3531600909!.*!@ngv.eircom.net</ns:subscriberId>
+          <ns:subscriberBarringInd>FALSE</ns:subscriberBarringInd>
+          <ns:chargingProfId>DefaultChargingProfile</ns:chargingProfId>
+          <ns:pubData publicIdValue="sip:+3531600909!.*!@ngv.eircom.net">
+            <ns:publicIdValue>sip:+3531600909!.*!@ngv.eircom.net</ns:publicIdValue>
+            <ns:publicIdTelValue>tel:+3531600909![0-9]{1}!</ns:publicIdTelValue>
+            <ns:implicitRegSet>0</ns:implicitRegSet>
+            <ns:isDefault>FALSE</ns:isDefault>
+            <ns:sessionBarringInd>FALSE</ns:sessionBarringInd>
+            <ns:configuredServiceProfiles configuredServiceProfileId="siptrunk_term_invite_non_reg_retail">
+              <ns:configuredServiceProfileId>siptrunk_term_invite_non_reg_retail</ns:configuredServiceProfileId>
+            </ns:configuredServiceProfiles>
+           <ns:maxSessions>5000</ns:maxSessions>
+          </ns:pubData>
+          <ns:privateUser privateUserId="+3531600909!.*!@ngv.eircom.net">
+            <ns:privateUserId>+3531600909!.*!@ngv.eircom.net</ns:privateUserId>
+          </ns:privateUser>
+        </ns:createPSISubscription>
+      </cai3:MOAttributes>
+    </cai3:Create>
+  </soapenv:Body>
+</soapenv:Envelope>

@@ -333,6 +333,33 @@ def delete():
 ### MISC
 ####################################
 
+@main.route('/listSubscribers', methods=['POST','GET',])
+@login_required
+def listSubscribers():
+    logger.debug(('FUNC:::::: app.route.listSubscribers                  :: {0}').format(request.method))
+    logger.debug(request.method)
+    if request.method == 'POST':
+        logger.debug('** Leaving FUNC:::::: app.route.listSubscribersResults')
+        return redirect(url_for ('main.listSubscribers'))
+    else:
+        logger.debug('** Leaving FUNC:::::: app.route.listSubscribers')
+        return render_template('listSubscribers.html')
+
+@main.route('/listSubscribersResults', methods=['POST','GET',])
+@login_required
+def listSubscribersResults():
+    logger.debug(('FUNC:::::: app.route.listSubscribersResults                  :: {0}').format(request.method))
+    logger.debug(request.method)
+    if request.method == 'POST':
+        logger.debug('** Leaving FUNC:::::: app.route.listSubscribersResults')
+        
+        result = checkLengthSubscriber(subscriber)************************************************
+        
+        return redirect(url_for ('main.listSubscribersResults'))
+    else:
+        logger.debug('** Leaving FUNC:::::: app.route.listSubscribersResults')
+        return render_template('listSubscribersResults.html')
+
 
 @main.route('/subscriberResult', methods=['POST','GET',])
 @login_required
