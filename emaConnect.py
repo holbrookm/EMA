@@ -56,7 +56,7 @@ def emaLogin():
 def emaLogout(session):
     ''' This function will logout of the EMA platform using the session id supplied.'''
     logger.debug(" FUNC: ema_logut   : ")
-    XML = open('./logout.xml','r')
+    XML = open('./ema_logout.xml','r')
     insert_xml = XML.read().format(session['session_id'])
     logger.debug(insert_xml)
     headers ={'content-type':'text/xml; charset=utf-8',  'SOAPAction':'CAI3G#Logout'}

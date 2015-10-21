@@ -32,19 +32,19 @@ class IMSSubscriber(object):
         : attribute allow_tags : bool
         : attribute attributes : array
         """
-        plus = '+'
+        
         FALSE = 'FALSE'
         TRUE = 'TRUE'
         sip = 'sip:'
         
-        self.subscriberId = plus + number + self.domain
+        self.subscriberId =  number + self.domain
         self.subscriberBarringInd = FALSE
         self.chargingProfId = self.charge
         self.privacyIndicator = FALSE
         self.defaultPrivateId = self.subscriberId
         self.pubData = pubData(number,self.domain, self.origProfileId, self.termProfileId)
         self.privateUser = privateUser(self.subscriberId)
-        self.phoneNumber = plus + number
+        self.phoneNumber =  number
         self.password = m_password.id_generator(8)
         
         # Not Needed for Fixed Line:::::    self.msisdn = number # added in to cater for Charging Profile, Msisdn exists in PrivateData
@@ -57,6 +57,8 @@ class IMSSubscriber(object):
             status = ema.emaCreateHOSubscriber( self, session )
         elif self.subscriberType() == 'Remote Worker':
             status = ema.emaCreateRWSubscriber(self, session)
+        elif self.subscriberType() == 'Pilot Subscriber':
+            status = ema.emaCreateRegisteredPBXPilotNumber(self, session)
         else:
             status = ema.emaCreateImsSubscriber( self, session )
         logger.debug('**Leaving FUNC :::: class_ims_ema.subscriberCreate')
@@ -101,12 +103,12 @@ class pubData(object):
         TRUE = 'TRUE'
         sip = 'sip:'
         tel = 'tel:'
-        self.subscriberId = plus + number + domain
+        self.subscriberId =  number + domain
         
         self.publicIdValue = sip + self.subscriberId
         self.privateUserId = self.subscriberId
         self.publicIdState = 'not_registered'
-        self.publicIdTelValue = tel + plus + number
+        self.publicIdTelValue = tel +  number
         self.subscriberServiceProfileId = self.subscriberId
         self.xcapAllowed = FALSE
         self.implicitRegSet = 1
@@ -180,7 +182,15 @@ class remoteWorker(IMSSubscriber):
 
     def subscriberType(self):
         return 'Remote Worker'        
-        
+
+class pilotSubscriber(IMSSubscriber):
+    """ This calls should represent a Registered Subscriber. """
+
+    origProfileId = 'siptrunk_orig_invite_reg_retail'
+    termProfileId = None
+
+    def subscriberType(self):
+        return 'Pilot Subscriber'         
         
 class nonRegisteredRangeSubscriber(IMSSubscriber):
     """ This calls should represent a non Registered Range Subscriber. """

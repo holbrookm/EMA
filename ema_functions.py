@@ -74,7 +74,7 @@ def emaLogin(username = 'Marc', password='Marc'):
 def ema_logout(session_id):
     ''' This function will logout of the EMA platform using the session id supplied.'''
     logger.debug(" FUNC: ema_logut   : ")
-    XML = open('./logout.xml','r')
+    XML = open('./ema_logout.xml','r')
     insert_xml = XML.read().format(session_id)
     logger.debug(insert_xml)
     headers ={'content-type':'text/xml; charset=utf-8',  'SOAPAction':'CAI3G#Logout'}
@@ -162,6 +162,28 @@ def emaCreateRWSubscriber(sub, session):
     logger.debug('**Leaving FUNC :::: ema_functions.emaCreateRWSubscriber')
     return (r)
 
+def emaCreateRegisteredPBXPilotNumber(sub, session):
+    ''' This function will create an IMS subscriber/subscription on HSS and ENUM via EMA.
+        The inputs for this subscription are the session 
+        and the subscriber information itself.
+    '''
+    logger.debug('FUNC:: emaCreateRegisteredPBXPilotNumber      :   ')
+
+    insert_xml = __readinxml__('./lmi_create_ims_reg_pbx_pilot_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.password)
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
+
+    logger.debug(insert_xml)
+
+    r= requests.post('http://'+session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to create the subscription::: {0}    on the EMA platform.').format(sub.subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' Subscription Created !!!!')
+        logger.debug (r.text)
+    logger.debug('**Leaving FUNC :::: ema_functions.emaCreateRegisteredPBXPilotNumber')
+    return (r)
     
 def emaCreateHOSubscriber(sub, session):
     ''' This function will create an IMS subscriber/subscription on HSS and ENUM via EMA.
