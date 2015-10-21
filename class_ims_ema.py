@@ -10,6 +10,7 @@ import debug
 import logging_config
 import requests
 import ema_functions as ema
+import m_password
 
 from abc import ABCMeta, abstractmethod
 
@@ -21,6 +22,7 @@ class IMSSubscriber(object):
     origProfileId = 'siptrunk_orig_invite_reg_retail'
     termProfileId = 'siptrunk_term_invite_reg_retail'
     charge = 'DefaultChargingProfile'
+    domain = '@ngv.eircom.net'
 
     def __init__(self, number):
         """
@@ -31,19 +33,21 @@ class IMSSubscriber(object):
         : attribute attributes : array
         """
         plus = '+'
-        suffix = '@ngv.eircom.net'
         FALSE = 'FALSE'
         TRUE = 'TRUE'
         sip = 'sip:'
         
-        self.subscriberId = plus + number + suffix
+        self.subscriberId = plus + number + self.domain
         self.subscriberBarringInd = FALSE
         self.chargingProfId = self.charge
         self.privacyIndicator = FALSE
         self.defaultPrivateId = self.subscriberId
-        self.pubData = pubData(number, self.origProfileId, self.termProfileId)
+        self.pubData = pubData(number,self.domain, self.origProfileId, self.termProfileId)
         self.privateUser = privateUser(self.subscriberId)
-        self.msisdn = number # added in to cater for Charging Profile, Msisdn exists in PrivateData
+        self.phoneNumber = plus + number
+        self.password = m_password.id_generator(8)
+        
+        # Not Needed for Fixed Line:::::    self.msisdn = number # added in to cater for Charging Profile, Msisdn exists in PrivateData
         
     def subscriberCreate(self, session):
         """ This function will delete the subscriber with EMA to the HSS and ENUM.
@@ -51,6 +55,8 @@ class IMSSubscriber(object):
         logger.debug('FUNC:: Class IMSSubscriber.subscriberCreate(self, session)             ')
         if self.charge == 'HostedOfficeChargingProfile':
             status = ema.emaCreateHOSubscriber( self, session )
+        elif self.subscriberType() == 'Remote Worker':
+            status = ema.emaCreateRWSubscriber(self, session)
         else:
             status = ema.emaCreateImsSubscriber( self, session )
         logger.debug('**Leaving FUNC :::: class_ims_ema.subscriberCreate')
@@ -82,7 +88,7 @@ class IMSSubscriber(object):
         
 class pubData(object):
 
-    def __init__(self, number, orig, term):
+    def __init__(self, number, domain, orig, term):
         """
         : attribute id : string
         : attribute value : string
@@ -91,12 +97,11 @@ class pubData(object):
         FALSE = 'FALSE'
         TRUE = 'TRUE'
         plus = '+'
-        suffix = '@ngv.eircom.net'
         FALSE = 'FALSE'
         TRUE = 'TRUE'
         sip = 'sip:'
         tel = 'tel:'
-        self.subscriberId = plus + number + suffix
+        self.subscriberId = plus + number + domain
         
         self.publicIdValue = sip + self.subscriberId
         self.privateUserId = self.subscriberId
@@ -167,6 +172,16 @@ class registeredSubscriber(IMSSubscriber):
     def subscriberType(self):
         return 'Registered Subscriber'
 
+class remoteWorker(IMSSubscriber):
+    """ This calls should represent a Registered Subscriber. """
+
+    origProfileId = 'siptrunk_orig_invite_reg_retail'
+    termProfileId = 'siptrunk_term_invite_reg_retail'
+
+    def subscriberType(self):
+        return 'Remote Worker'        
+        
+        
 class nonRegisteredRangeSubscriber(IMSSubscriber):
     """ This calls should represent a non Registered Range Subscriber. """
 

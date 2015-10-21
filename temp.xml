@@ -1,0 +1,40 @@
+ <soapenv:Header>
+        <cai3:SequenceId>426539766480437148</cai3:SequenceId>
+        <cai3:TransactionId>12334455</cai3:TransactionId>
+        <cai3:SessionId>100a1206100a1206000000001445345315378</cai3:SessionId>
+    </soapenv:Header>
+    <soapenv:Body>
+        <cai3:Create>
+            <cai3:MOType>IMSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/</cai3:MOType>
+            <cai3:MOId>
+                <subscriberId>+353766875262@ngv.eircom.net</subscriberId>
+            </cai3:MOId>
+            <cai3:MOAttributes>
+                <createIMSSubscription subscriberId="+353766875262@ngv.eircom.net" xsi:schemaLocation="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/ ema_UserProvisioning_IMS_5.0_.xsd" xmlns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <subscriberId>+353766875262@ngv.eircom.net</subscriberId>
+                    <chargingProfId>DefaultChargingProfile</chargingProfId>
+                    <pubData publicIdValue="sip:+353766875262@ngv.eircom.net">
+                        <publicIdValue>sip:+353766875262@ngv.eircom.net</publicIdValue>
+                        <publicIdTelValue>tel:+353766875262</publicIdTelValue>
+                        <implicitRegSet>1</implicitRegSet>
+                        <isDefault>TRUE</isDefault>
+                        <phoneContext>None</phoneContext>
+                        <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                        <configuredServiceProfiles configuredServiceProfileId="siptrunk_orig_invite_reg_retail">
+                            <configuredServiceProfileId>siptrunk_orig_invite_reg_retail</configuredServiceProfileId>
+                        </configuredServiceProfiles>
+                        <configuredServiceProfiles configuredServiceProfileId="siptrunk_term_invite_reg_retail">
+                            <configuredServiceProfileId>siptrunk_term_invite_reg_retail</configuredServiceProfileId>
+                        </configuredServiceProfiles>
+                    </pubData>
+                    <privateUser privateUserId="+353766875262@ngv.eircom.net">
+                        <privateUserId>+353766875262@ngv.eircom.net</privateUserId>
+                        <userPassword>2222</userPassword>
+                        <userMsisdn msisdn="353766875262">
+                            <msisdn>353766875262</msisdn>
+                        </userMsisdn>
+                    </privateUser>
+                </createIMSSubscription>
+            </cai3:MOAttributes>
+        </cai3:Create>
+    </soapenv:Body>

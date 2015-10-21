@@ -291,7 +291,37 @@ def createHostedOffice(sub):
         return redirect(url_for('auth.login', error='Unknown error Condition'))
  
 
-
+ 
+@main.route('/CreateRemoteWorker/<sub>' , methods=['POST','GET',])
+@login_required
+def createRW(sub):
+    logger.debug(('FUNC:::::: app.route.createRW           {0}').format(request.method))
+    #session['ho_pw'] = str(request.form['pw'])
+    #print session['ho_pw']
+    c_sub = ims.remoteWorker(sub)
+    result = c_sub.subscriberCreate(session)
+    if result.status_code == 500: #Successful EMA connection but there is an error.
+        if result.text.find('Invalid Session') != -1:
+            logger.debug(('** Leaving FUNC:::: app.route.createRW:  Invalid Session'))
+            return redirect(url_for('auth.login', error='Invalid Session'))
+        elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
+            logger.debug(('** Leaving FUNC:::: app.route.createRW:  Subscriber Already Exists'))
+            session['mesg'] = 'ExistingSubscriber'
+            return redirect(url_for('main.subscribers'))
+        else:
+            logger.debug('Unknown Error in createRW func')
+            pass
+    elif result.status_code == 200:
+        session['mesg'] = 'Created'
+        session['sub'] = sub
+        session['sub_pw'] = c_sub.password
+        del c_sub # Remove Subscriber Class instance
+        logger.debug('** Leaving FUNC::::::: app.route.createRW')
+        return redirect(url_for('main.subscribers'))
+    else:
+        logger.debug(('** Leaving FUNC::::::: app.route.createRW :::  Unknown Condition ::  {0}').format(result.status_code))
+        return redirect(url_for('auth.login', error='Unknown error Condition'))
+ 
 
 #########################################################
 ##### DELETE
@@ -353,7 +383,7 @@ def listSubscribersResults():
     if request.method == 'POST':
         logger.debug('** Leaving FUNC:::::: app.route.listSubscribersResults')
         
-        result = checkLengthSubscriber(subscriber)************************************************
+        result = checkLengthSubscriber(subscriber)
         
         return redirect(url_for ('main.listSubscribersResults'))
     else:
@@ -387,7 +417,7 @@ def subscribers(mesg = None):
             return render_template('subscribers.html', sub = session.get('sub'), mesg = 'Your Subscriber is not Provisioned')
         elif session.get('mesg') == 'Created':
             logger.debug('** Leaving FUNC:::::: app.route.subscribers    ::  Subscriber created')
-            return render_template('subscribers.html', newsub = session.get('sub'), createmesg = 'Your Subscriber has been Created')
+            return render_template('subscribers.html', newsub = session.get('sub'), password = session.get('sub_pw'), createmesg = 'Your Subscriber has been Created')
         elif session.get('mesg') == 'ExistingSubscriber':
             logger.debug('** Leaving FUNC:::::: app.route.subscribers    ::  Subscriber Already Exists')
             return render_template('subscribers.html', existingsub = session.get('sub'), mesg = 'Your Subscriber already Exists')

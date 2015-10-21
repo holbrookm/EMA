@@ -1,0 +1,45 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns:ns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/">
+   <soapenv:Header>
+      <cai3:SessionId>{sessionId}</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Create>
+         <cai3:MOType>IMSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/</cai3:MOType>
+         <cai3:MOId>
+            <ns:subscriberId>{phoneNumber}@{domain}</ns:subscriberId>
+         </cai3:MOId>
+         <cai3:MOAttributes>
+            <ns:createIMSSubscription subscriberId="{phoneNumber}@{domain}">
+               <ns:subscriberId>{phoneNumber}@{domain}</ns:subscriberId>
+               <ns:subscriberBarringInd>FALSE</ns:subscriberBarringInd>
+               <ns:chargingProfId>DefaultChargingProfile</ns:chargingProfId>
+               <ns:privacyIndicator>FALSE</ns:privacyIndicator>
+               <ns:defaultPrivateId>{phoneNumber}@{domain}</ns:defaultPrivateId>
+               <ns:pubData publicIdValue="sip:{phoneNumber}@{domain}">
+                  <ns:publicIdValue>sip:{phoneNumber}@{domain}</ns:publicIdValue>
+                  <ns:publicIdTelValue>tel:{phoneNumber}</ns:publicIdTelValue>
+                  <ns:privateUserId>{phoneNumber}@{domain}</ns:privateUserId>
+                  <ns:xcapAllowed>FALSE</ns:xcapAllowed>
+                  <ns:implicitRegSet>1</ns:implicitRegSet>
+                  <ns:isDefault>TRUE</ns:isDefault>
+                  <ns:sessionBarringInd>FALSE</ns:sessionBarringInd>
+                  <ns:configuredServiceProfiles configuredServiceProfileId="{originating profileId}">
+                     <ns:configuredServiceProfileId>{originating profileId}</ns:configuredServiceProfileId>
+                  </ns:configuredServiceProfiles>
+                  <ns:configuredServiceProfiles configuredServiceProfileId="{terminating profileId}">
+                     <ns:configuredServiceProfileId>{terminating profileId}</ns:configuredServiceProfileId>
+                  </ns:configuredServiceProfiles>
+                  <ns:maxSessions>100</ns:maxSessions>
+               </ns:pubData>
+               <ns:privateUser privateUserId="{phoneNumber}@{domain}">
+                  <ns:privateUserId>{phoneNumber}@{domain}</ns:privateUserId>
+                  <ns:userPassword>{password}</ns:userPassword>
+                  <ns:userBarringInd>FALSE</ns:userBarringInd>
+                  <ns:roamingAllowed>FALSE</ns:roamingAllowed>
+                  <ns:allowedAuthMechanism>Digest</ns:allowedAuthMechanism>
+               </ns:privateUser>
+            </ns:createIMSSubscription>
+         </cai3:MOAttributes>
+      </cai3:Create>
+   </soapenv:Body>
+</soapenv:Envelope>
