@@ -1,0 +1,34 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns:ns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/PSI/5.0/">
+  <soapenv:Header>
+    <cai3:SessionId>{0}</cai3:SessionId>
+  </soapenv:Header>
+  <soapenv:Body>
+    <cai3:Create>
+      <cai3:MOType>PSISubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/PSI/5.0/</cai3:MOType>
+      <cai3:MOId>
+        <ns:subscriberId>{1}{2}</ns:subscriberId>
+      </cai3:MOId>
+      <cai3:MOAttributes>
+        <ns:createPSISubscription subscriberId="{1}{2}">
+          <ns:subscriberId>{1}{2}</ns:subscriberId>
+          <ns:subscriberBarringInd>FALSE</ns:subscriberBarringInd>
+          <ns:chargingProfId>{4}</ns:chargingProfId>
+          <ns:pubData publicIdValue="sip:{1}{2}">
+            <ns:publicIdValue>sip:{1}{2}</ns:publicIdValue>
+            <ns:publicIdTelValue>{6}![0-9]{5}!</ns:publicIdTelValue>
+            <ns:implicitRegSet>0</ns:implicitRegSet>
+            <ns:isDefault>FALSE</ns:isDefault>
+            <ns:sessionBarringInd>FALSE</ns:sessionBarringInd>
+            <ns:configuredServiceProfiles configuredServiceProfileId="{3}">
+              <ns:configuredServiceProfileId>{3}</ns:configuredServiceProfileId>
+            </ns:configuredServiceProfiles>
+            <ns:maxSessions>5000</ns:maxSessions>
+          </ns:pubData>
+          <ns:privateUser privateUserId="{1}{2}">
+            <ns:privateUserId>{1}{2}</ns:privateUserId>
+          </ns:privateUser>
+        </ns:createPSISubscription>
+      </cai3:MOAttributes>
+    </cai3:Create>
+  </soapenv:Body>
+</soapenv:Envelope>

@@ -17,6 +17,7 @@ import xmltodict
 
 ema_username= 'sogadm'
 ema_password = 'sogadm'
+#ema_host = '10.147.21.198'
 ema_host = '10.16.6.228'
 ema_port = '8998'
 wsdl = 'generic_CAI3G_sessioncontrol.wsdl'
@@ -162,6 +163,83 @@ def emaCreateRWSubscriber(sub, session):
     logger.debug('**Leaving FUNC :::: ema_functions.emaCreateRWSubscriber')
     return (r)
 
+def emaCreateNonRegisteredRangeSubscriber(sub, session):
+    ''' This function will create an IMS subscriber/subscription on HSS and ENUM via EMA.
+        The inputs for this subscription are the session 
+        and the subscriber information itself.
+    '''
+    logger.debug('FUNC:: emaCreateNonRegisteredRangeSubscriber      :   ')
+    debug.p(session['rangesize'])
+
+    if session['rangesize'] == '10':
+        debug.p('Entering 10')
+        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{1}', sub.pubData.publicIdTelValue)
+        #insert_xml = __readinxml__('./lmi_create_ims_rangeNR10_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
+    elif session['rangesize'] == '100':
+        debug.p('Entering 100')
+        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{2}', sub.pubData.publicIdTelValue)
+    elif session['rangesize'] == '1000':
+        debug.p('Entering 1000')
+        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{3}', sub.pubData.publicIdTelValue)
+    elif session['rangesize'] == '10000':
+        debug.p('Entering 10000')
+        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{4}', sub.pubData.publicIdTelValue)  
+    else:
+        pass # go to error
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
+
+    logger.debug(insert_xml)
+
+    r= requests.post('http://'+session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to create the subscription::: {0}    on the EMA platform.').format(sub.subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' Subscription Created !!!!')
+        logger.debug (r.text)
+    logger.debug('**Leaving FUNC :::: ema_functions.emaCreateNonRegisteredRangeSubscriber')
+    return (r) 
+ 
+def emaCreateRegisteredRangeSubscriber(sub, session):
+    ''' This function will create an IMS subscriber/subscription on HSS and ENUM via EMA.
+        The inputs for this subscription are the session 
+        and the subscriber information itself.
+    '''
+    logger.debug('FUNC:: emaCreateRegisteredRangeSubscriber      :   ')
+    debug.p(session['rangesize'])
+
+    if session['rangesize'] == '10':
+        debug.p('Entering 10')
+        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{1}', sub.pubData.publicIdTelValue)
+        #insert_xml = __readinxml__('./lmi_create_ims_rangeNR10_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
+    elif session['rangesize'] == '100':
+        debug.p('Entering 100')
+        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{2}', sub.pubData.publicIdTelValue)
+    elif session['rangesize'] == '1000':
+        debug.p('Entering 1000')
+        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{3}', sub.pubData.publicIdTelValue)
+    elif session['rangesize'] == '10000':
+        debug.p('Entering 10000')
+        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{4}', sub.pubData.publicIdTelValue)  
+    else:
+        pass # go to error
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
+
+    logger.debug(insert_xml)
+
+    r= requests.post('http://'+session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to create the subscription::: {0}    on the EMA platform.').format(sub.subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' Subscription Created !!!!')
+        logger.debug (r.text)
+    logger.debug('**Leaving FUNC :::: ema_functions.emaCreateRegisteredRangeSubscriber')
+    return (r) 
+ 
+ 
 def emaCreateRegisteredPBXPilotNumber(sub, session):
     ''' This function will create an IMS subscriber/subscription on HSS and ENUM via EMA.
         The inputs for this subscription are the session 

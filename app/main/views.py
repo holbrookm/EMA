@@ -12,7 +12,7 @@ from config import config
 import debug, logging_config
 import class_ims_ema as ims
 import ema_functions as ema
-import session_calls
+#import session_calls
 
 #Blueprint required imports
 from . import main
@@ -150,34 +150,6 @@ def createNR(sub):
         return redirect(url_for('auth.login', error='Unknown error Condition'))
  
 
-@main.route('/CreateRangeNR/<sub>', methods=['POST','GET',])
-@login_required
-def createRangeNR(sub):
-    logger.debug(('FUNC:::::: app.route.createRangeNR           {0}').format(request.method))
-    c_sub = ims.nonRegisteredRangeSubscriber(sub)
-    result = c_sub.subscriberCreate(session)
-    if result.status_code == 500: #Successful EMA connection but there is an error.
-        if result.text.find('Invalid Session') != -1:
-            logger.debug(('** Leaving FUNC:::: app.route.createRangeNR:  Invalid Session'))
-            return redirect(url_for('auth.login', error='Invalid Session'))
-        elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
-            logger.debug(('** Leaving FUNC:::: app.route.createRangeNR:  Subscriber Already Exists'))
-            session['mesg'] = 'ExistingSubscriber'
-            return redirect(url_for('main.subscribers'))
-        else:
-            logger.debug('Unknown Error in createRangeNR func')
-            pass
-    elif result.status_code == 200:
-        session['mesg'] = 'Created'
-        session['sub'] = sub
-        del c_sub # Remove Subscriber Class instance
-        logger.debug('** Leaving FUNC::::::: app.route.createRangeNR')
-        return redirect(url_for('main.subscribers'))
-    else:
-        logger.debug(('** Leaving FUNC::::::: app.route.createRangeNR :::  Unknown Condition ::  {0}').format(result.status_code))
-        return redirect(url_for('auth.login', error='Unknown error Condition'))
- 
-
 
 @main.route('/CreateR/<sub>', methods=['POST','GET',])
 @login_required
@@ -204,33 +176,6 @@ def createR(sub):
     
     logger.debug('** Leaving FUNC::::::: app.route.createR')
     return redirect(url_for('main.subscribers'))
-
-@main.route('/CreateRangeR/<sub>' , methods=['POST','GET',])
-@login_required
-def createRangeR(sub):
-    logger.debug(('FUNC:::::: app.route.createRangeR           {0}').format(request.method))
-    c_sub = ims.registeredRangeSubscriber(sub)
-    result = c_sub.subscriberCreate(session)
-    if result.status_code == 500: #Successful EMA connection but there is an error.
-        if result.text.find('Invalid Session') != -1:
-            logger.debug(('** Leaving FUNC:::: app.route.createRangeR:  Invalid Session'))
-            return redirect(url_for('auth.login', error='Invalid Session'))
-        elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
-            logger.debug(('** Leaving FUNC:::: app.route.createRangeR:  Subscriber Already Exists'))
-            session['mesg'] = 'ExistingSubscriber'
-            return redirect(url_for('main.subscribers'))
-        else:
-            logger.debug('Unknown Error in createRangeR func')
-            pass
-    elif result.status_code == 200:
-        session['mesg'] = 'Created'
-        session['sub'] = sub
-        del c_sub # Remove Subscriber Class instance
-        logger.debug('** Leaving FUNC::::::: app.route.createRangeR')
-        return redirect(url_for('main.subscribers'))
-    else:
-        logger.debug(('** Leaving FUNC::::::: app.route.createRangeR :::  Unknown Condition ::  {0}').format(result.status_code))
-        return redirect(url_for('auth.login', error='Unknown error Condition'))
  
  
 @main.route('/CreateHostedOffice/<sub>' , methods=['POST','GET',])
@@ -297,8 +242,6 @@ def createPilot(sub):
 @login_required
 def createRW(sub):
     logger.debug(('FUNC:::::: app.route.createRW           {0}').format(request.method))
-    #session['ho_pw'] = str(request.form['pw'])
-    #print session['ho_pw']
     c_sub = ims.remoteWorker(sub)
     result = c_sub.subscriberCreate(session)
     if result.status_code == 500: #Successful EMA connection but there is an error.
@@ -324,6 +267,64 @@ def createRW(sub):
         return redirect(url_for('auth.login', error='Unknown error Condition'))
  
 
+@main.route('/CreateRangeNR/<sub>/<range>', methods=['POST','GET',])
+@login_required
+def createRangeNR(sub, range):
+    logger.debug(('FUNC:::::: app.route.createRangeNR           {0}').format(request.method))
+    session['rangesize'] = range
+    c_sub = ims.nonRegisteredRangeSubscriber(sub)
+    c_sub.pubData.publicIdTelValue = c_sub.pubData.publicIdTelValue[:-4]  # Needed to remove !.*! for range xml
+    result = c_sub.subscriberCreate(session)
+    if result.status_code == 500: #Successful EMA connection but there is an error.
+        if result.text.find('Invalid Session') != -1:
+            logger.debug(('** Leaving FUNC:::: app.route.createRangeNR:  Invalid Session'))
+            return redirect(url_for('auth.login', error='Invalid Session'))
+        elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
+            logger.debug(('** Leaving FUNC:::: app.route.createRangeNR:  Subscriber Already Exists'))
+            session['mesg'] = 'ExistingSubscriber'
+            return redirect(url_for('main.subscribers'))
+        else:
+            logger.debug('Unknown Error in createRangeNR func')
+            pass
+    elif result.status_code == 200:
+        session['mesg'] = 'Created'
+        session['sub'] = sub
+        del c_sub # Remove Subscriber Class instance
+        logger.debug('** Leaving FUNC::::::: app.route.createRangeNR')
+        return redirect(url_for('main.subscribers'))
+    else:
+        logger.debug(('** Leaving FUNC::::::: app.route.createRangeNR :::  Unknown Condition ::  {0}').format(result.status_code))
+        return redirect(url_for('auth.login', error='Unknown error Condition'))
+ 
+
+@main.route('/CreateRangeR/<sub>/<range>' , methods=['POST','GET',])
+@login_required
+def createRangeR(sub, range):
+    logger.debug(('FUNC:::::: app.route.createRangeR           {0}').format(request.method))
+    session['rangesize'] = range
+    c_sub = ims.registeredRangeSubscriber(sub)
+    result = c_sub.subscriberCreate(session)
+    if result.status_code == 500: #Successful EMA connection but there is an error.
+        if result.text.find('Invalid Session') != -1:
+            logger.debug(('** Leaving FUNC:::: app.route.createRangeR:  Invalid Session'))
+            return redirect(url_for('auth.login', error='Invalid Session'))
+        elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
+            logger.debug(('** Leaving FUNC:::: app.route.createRangeR:  Subscriber Already Exists'))
+            session['mesg'] = 'ExistingSubscriber'
+            return redirect(url_for('main.subscribers'))
+        else:
+            logger.debug('Unknown Error in createRangeR func')
+            pass
+    elif result.status_code == 200:
+        session['mesg'] = 'Created'
+        session['sub'] = sub
+        del c_sub # Remove Subscriber Class instance
+        logger.debug('** Leaving FUNC::::::: app.route.createRangeR')
+        return redirect(url_for('main.subscribers'))
+    else:
+        logger.debug(('** Leaving FUNC::::::: app.route.createRangeR :::  Unknown Condition ::  {0}').format(result.status_code))
+        return redirect(url_for('auth.login', error='Unknown error Condition'))
+        
 #########################################################
 ##### DELETE
 ####################################################

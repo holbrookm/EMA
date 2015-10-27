@@ -42,71 +42,37 @@
     <div class="col-sm-6">
         <p class="text-left">Do you wish to Create this Subscriber {{sub}} ?</p>  
     </div>
-    <div class="col-sm-4"> 
-    </div>
-</div>
-
-<div class = "row">
-  <div class="col-sm-12"> </p> </div>
-</div>
-
-<div class = 'row'>
-    <div class="col-sm-1">
-    </div>
-    <div class="col-sm-2">
+    <div class="col-sm-4">             
         <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Remote Worker/ Pilot 
+            <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Create 
                 <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu ">
+            <ul class="dropdown-menu">
+                <li><a href="/CreateR/{{sub}}">Registered Subscriber</a></li>
+                <li><a href="/CreateNR/{{sub}}">Non-Registered Subscriber</a></li>
+                <li>
+                    <form class="navbar-form navbar-right" role="form" action="/CreateRangeNR/{{sub}}" method="POST">
+                        <button type="submit" class="btn btn-default">Create Non Registered Range </button>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Enter Range Size: " name = "rangesize">
+                        </div>
+                    </form>
+                </li>
                 <li><a href="/CreatePilot/{{sub}}">Pilot Number for Registered PBX</a></li>
+                <li><a href="/CreateRangeNR/{{sub}}">Non-Registered Range Subscriber</a></li>
                 <li><a href="/CreateRemoteWorker/{{sub}}">Remote Worker Subscriber</a></li>
-            </ul>
-        </div>        
-    </div>
-    <div class="col-sm-3">
-        <div class="dropdown">
-            <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Create Non-Registered Range
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="/CreateRangeNR/{{sub}}/10">Non-Registered Range 10</a></li>
-                <li><a href="/CreateRangeNR/{{sub}}/100">Non-Registered Range 100</a></li>
-                <li><a href="/CreateRangeNR/{{sub}}/1000">Non-Registered Range 1000</a></li>
-                <li><a href="/CreateRangeNR/{{sub}}/10000">Non-Registered Range 10000</a></li>
+
+                <li>
+                    <form class="navbar-form navbar-right" role="form" action="/CreateHostedOffice/{{sub}}" method="POST">
+                        <button type="submit" class="btn btn-default">Create Hosted Office </button>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Enter HO Password" name = "pw">
+                        </div>
+                    </form>
+                </li>
             </ul>
 
         </div>        
-    </div>
-    <div class="col-sm-3">
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Hosted Office
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu ">
-                <form class="navbar-form navbar-right" role="form" action="/CreateHostedOffice/{{sub}}" method="POST">
-                    <button type="submit" class="btn btn-default">Create Hosted Office </button>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter HO Password" name = "pw">
-                    </div>
-                </form>
-            </ul>
-        </div>        
-    </div>
-    <div class="col-sm-2">
-        <div class="dropdown">
-            <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Create Registered Range
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="/CreateRangeR/{{sub}}/10">Registered Range 10</a></li>
-                <li><a href="/CreateRangeR/{{sub}}/100">Registered Range 100</a></li>
-                <li><a href="/CreateRangeR/{{sub}}/1000">Registered Range 1000</a></li>
-                <li><a href="/CreateRangeR/{{sub}}/10000">Registered Range 10000</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-sm-1">
     </div>
 </div>
                       

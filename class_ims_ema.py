@@ -45,7 +45,7 @@ class IMSSubscriber(object):
         self.pubData = pubData(number,self.domain, self.origProfileId, self.termProfileId)
         self.privateUser = privateUser(self.subscriberId)
         self.phoneNumber =  number
-        self.password = m_password.id_generator(8)
+        self.password = m_password.id_generator(16)
         
         # Not Needed for Fixed Line:::::    self.msisdn = number # added in to cater for Charging Profile, Msisdn exists in PrivateData
         
@@ -57,6 +57,10 @@ class IMSSubscriber(object):
             status = ema.emaCreateHOSubscriber( self, session )
         elif self.subscriberType() == 'Remote Worker':
             status = ema.emaCreateRWSubscriber(self, session)
+        elif self.subscriberType() == 'Non Registered Range Subscriber':
+            status = ema.emaCreateNonRegisteredRangeSubscriber(self, session)
+        elif self.subscriberType() == 'Registered Range Subscriber':
+            status = ema.emaCreateRegisteredRangeSubscriber(self, session)
         elif self.subscriberType() == 'Pilot Subscriber':
             status = ema.emaCreateRegisteredPBXPilotNumber(self, session)
         else:
