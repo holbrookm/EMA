@@ -1,0 +1,189 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns:ns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/">
+   <soapenv:Header>
+      <cai3:SessionId>{0}</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Create>
+         <cai3:MOType>IMSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/</cai3:MOType>
+         <cai3:MOId>
+            <ns:subscriberId>{1}{2}</ns:subscriberId>
+         </cai3:MOId>
+         <cai3:MOAttributes>
+            <createIMSSubscription subscriberId="{1}{2}" xsi:schemaLocation="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/ema_UserProvisioning_IMS_5.0_.xsd" xmlns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+               <subscriberId>{1}{2}</subscriberId>
+               <chargingProfId>HostedOfficeChargingProfile</chargingProfId>
+               <pubData publicIdValue="sip:{1}{2}">
+                  <publicIdValue>sip:{1}{2}</publicIdValue>
+                  <publicIdTelValue>tel:{1}</publicIdTelValue>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}_sca_1{2}">
+                  <publicIdValue>sip:{1}_sca_1{2}</publicIdValue>
+                  <implicitRegSet>5</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}_sca_2{2}">
+                  <publicIdValue>sip:{1}_sca_2{2}</publicIdValue>
+                  <implicitRegSet>6</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>  
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}_sca_3{2}">
+                  <publicIdValue>sip:{1}_sca_3{2}</publicIdValue>
+                  <implicitRegSet>7</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}_sca_4{2}">
+                  <publicIdValue>sip:{1}_sca_4{2}</publicIdValue>
+                  <implicitRegSet>8</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>  
+                  <maxSessions>100</maxSessions>                  
+               </pubData>
+               <pubData publicIdValue="sip:{1}_sca_5{2}">
+                  <publicIdValue>sip:{1}_sca_5{2}</publicIdValue>
+                  <implicitRegSet>9</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>                  
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}_sca_6{2}">
+                  <publicIdValue>sip:{1}_sca_6{2}</publicIdValue>
+                  <implicitRegSet>10</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>  
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}_sca_7{2}">
+                  <publicIdValue>sip:{1}_sca_7{2}</publicIdValue>
+                  <implicitRegSet>11</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>  
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}_sca_m{2}">
+                  <publicIdValue>sip:{1}_sca_m{2}</publicIdValue>
+                  <implicitRegSet>3</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>                  
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}_sca_d{2}">
+                  <publicIdValue>sip:{1}_sca_d{2}</publicIdValue>
+                  <implicitRegSet>2</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>  
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}_sca_t{2}">
+                  <publicIdValue>sip:{1}_sca_t{2}</publicIdValue>
+                  <implicitRegSet>4</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <maxNumberOfContacts>5</maxNumberOfContacts>
+                  <phoneContext>{6}</phoneContext>
+                  <wirelineAccessAllowed>ALLOWED_FROM_ANY_LOCATION</wirelineAccessAllowed>
+                  <configuredServiceProfiles configuredServiceProfileId="{3}">
+                     <configuredServiceProfileId>{3}</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="{4}">
+                     <configuredServiceProfileId>{4}</configuredServiceProfileId>
+                  </configuredServiceProfiles>  
+                  <maxSessions>100</maxSessions>
+               </pubData>            
+               <privateUser privateUserId="{1}{2}">
+                  <privateUserId>{1}{2}</privateUserId>
+                  <userPassword>{5}</userPassword>
+               </privateUser>
+            </createIMSSubscription>
+         </cai3:MOAttributes>
+      </cai3:Create>
+   </soapenv:Body>
+</soapenv:Envelope>

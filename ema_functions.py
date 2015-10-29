@@ -270,7 +270,10 @@ def emaCreateHOSubscriber(sub, session):
     '''
     logger.debug('FUNC:: emaCreateImsSubscriber      :   ')
 
-    insert_xml = __readinxml__('./create_hostedoffice_subscriber.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], sub.subscriberId, sub.msisdn, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId, sub.chargingProfId, session['ho_pw'])
+   
+    insert_xml = __readinxml__('./create_hostedoffice_subscriber_lmi.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, session['sub_pw'],sub.pubData.phoneContext)    
+    #insert_xml = __readinxml__('./create_hostedoffice_subscriber.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], sub.subscriberId, sub.msisdn, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId, sub.chargingProfId, session['ho_pw'])
+    
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
 
     logger.debug(insert_xml)

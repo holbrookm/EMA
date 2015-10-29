@@ -47,6 +47,7 @@ class IMSSubscriber(object):
         self.phoneNumber =  number
         self.password = m_password.id_generator(16)
         
+        
         # Not Needed for Fixed Line:::::    self.msisdn = number # added in to cater for Charging Profile, Msisdn exists in PrivateData
         
     def subscriberCreate(self, session):
@@ -54,6 +55,7 @@ class IMSSubscriber(object):
         """
         logger.debug('FUNC:: Class IMSSubscriber.subscriberCreate(self, session)             ')
         if self.charge == 'HostedOfficeChargingProfile':
+            self.password = None
             status = ema.emaCreateHOSubscriber( self, session )
         elif self.subscriberType() == 'Remote Worker':
             status = ema.emaCreateRWSubscriber(self, session)
@@ -220,7 +222,7 @@ class hostedOfficeSubscriber(IMSSubscriber):
     origProfileId = 'ho_orig_retail'
     termProfileId = 'ho_term_retail'
     charge = 'HostedOfficeChargingProfile'
-
+        
     def subscriberType(self):
         return 'Hosted Office Subscriber'
-
+    

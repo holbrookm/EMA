@@ -1,3 +1,14 @@
+#!/usr/bin/python
+""" This script will access the EMA via http commands with SOAP XML content.
+    #Marc Holbrook
+    # 0851742253
+    # <mholbrook@eircom.ie>
+"""
+from flask import render_template, session, redirect, url_for, request, flash
+from flask.ext.login import login_user, logout_user, login_required
+from .forms import LoginForm
+
+from .. import db
 
 from flask import render_template, session, redirect, url_for, request, flash
 from flask.ext.login import login_user, logout_user, login_required
@@ -11,7 +22,7 @@ from . import auth
 from logging_config import logger
 import class_ims_ema as ims
 import ema_functions as ema
-import session_calls
+
 import debug
 
 @auth.route('/')

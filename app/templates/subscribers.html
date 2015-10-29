@@ -137,14 +137,16 @@
 
 <div class = "row">
     <div class="col-sm-12">
-        <p class="text-center"> Subscriber     {{newsub}}</p>  
-        <p class="text-center"> Please note the password           {{password}}</p>                 
+        <p class="text-center"> Subscriber     {{newsub}}</p>            
         <p class="text-center"> {{createmesg}}</p>                   
     </div>
 </div>
 
     {% endif %}
-
+    
+    {% if password: %} 
+    <p class="text-center"> Please note the password           {{password}}</p>      
+    {% endif %}
 
     {% if existingsub: %} 
      <!-- Display if the last action was a successful Create -->

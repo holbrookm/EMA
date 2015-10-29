@@ -40,7 +40,6 @@ def index():
         if user is not None and user.verify_password(request.form['password']):
             login_user(user)
             session['emaSession'] = ema.emaLogin()
-            session['transaction_id'] = '2222222'
             return redirect(url_for(('main.subscribers')))
         flash('Invalid Username and Password')
     
@@ -182,8 +181,7 @@ def createR(sub):
 @login_required
 def createHostedOffice(sub):
     logger.debug(('FUNC:::::: app.route.createHostedOffice           {0}').format(request.method))
-    session['ho_pw'] = str(request.form['pw'])
-    print session['ho_pw']
+    session['sub_pw'] = str(request.form['pw'])
     c_sub = ims.hostedOfficeSubscriber(sub)
     result = c_sub.subscriberCreate(session)
     if result.status_code == 500: #Successful EMA connection but there is an error.
@@ -228,7 +226,7 @@ def createPilot(sub):
     elif result.status_code == 200:
         session['mesg'] = 'Created'
         session['sub'] = sub
-        session['sub_pw'] = c_sub.password
+        session['sub_pw'] = None
         del c_sub # Remove Subscriber Class instance
         logger.debug('** Leaving FUNC::::::: app.route.createPilot')
         return redirect(url_for('main.subscribers'))
@@ -272,6 +270,7 @@ def createRW(sub):
 def createRangeNR(sub, range):
     logger.debug(('FUNC:::::: app.route.createRangeNR           {0}').format(request.method))
     session['rangesize'] = range
+    session['sub_pw'] = None
     c_sub = ims.nonRegisteredRangeSubscriber(sub)
     c_sub.pubData.publicIdTelValue = c_sub.pubData.publicIdTelValue[:-4]  # Needed to remove !.*! for range xml
     result = c_sub.subscriberCreate(session)
@@ -318,6 +317,7 @@ def createRangeR(sub, range):
     elif result.status_code == 200:
         session['mesg'] = 'Created'
         session['sub'] = sub
+        session['sub_pw'] = c_sub.password
         del c_sub # Remove Subscriber Class instance
         logger.debug('** Leaving FUNC::::::: app.route.createRangeR')
         return redirect(url_for('main.subscribers'))

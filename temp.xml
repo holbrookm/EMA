@@ -1,0 +1,160 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns:ns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/">
+   <soapenv:Header>
+      <cai3:SessionId>100a1206100a1206000000001445956630854</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Create>
+         <cai3:MOType>IMSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/</cai3:MOType>
+         <cai3:MOId>
+            <ns:subscriberId>+3531600!.*!@ngv.eircom.net</ns:subscriberId>
+         </cai3:MOId>
+         <cai3:MOAttributes>
+            <createIMSSubscription subscriberId="+3531600!.*!@ngv.eircom.net" xsi:schemaLocation="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/ema_UserProvisioning_IMS_5.0_.xsd" xmlns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+               <subscriberId>+3531600!.*!@ngv.eircom.net</subscriberId>
+               <subscriberBarringInd>FALSE</subscriberBarringInd>
+               <defaultPrivateId>+3531600!.*!@ngv.eircom.net</defaultPrivateId>
+               <chargingProfId>HostedOfficeChargingProfile</chargingProfId>
+               <privacyIndicator>FALSE</privacyIndicator>
+               <pubData publicIdValue="sip:+3531600!.*!@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!@ngv.eircom.net</publicIdValue>
+                  <privateUserId>+3531600!.*!@ngv.eircom.net</privateUserId>
+                  <publicIdTelValue>tel:+3531600!.*!</publicIdTelValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <pubData publicIdValue="sip:+3531600!.*!_sca_1@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!_sca_1@ngv.eircom.net</publicIdValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>5</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <pubData publicIdValue="sip:+3531600!.*!_sca_2@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!_sca_2@ngv.eircom.net</publicIdValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>6</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <pubData publicIdValue="sip:+3531600!.*!_sca_3@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!_sca_3@ngv.eircom.net</publicIdValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>7</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <pubData publicIdValue="sip:+3531600!.*!_sca_4@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!_sca_4@ngv.eircom.net</publicIdValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>8</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <pubData publicIdValue="sip:+3531600!.*!_sca_5@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!_sca_5@ngv.eircom.net</publicIdValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>9</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <pubData publicIdValue="sip:+3531600!.*!_sca_6@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!_sca_6@ngv.eircom.net</publicIdValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>10</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <pubData publicIdValue="sip:+3531600!.*!_sca_7@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!_sca_7@ngv.eircom.net</publicIdValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>11</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <pubData publicIdValue="sip:+3531600!.*!_sca_m@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!_sca_m@ngv.eircom.net</publicIdValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>3</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <pubData publicIdValue="sip:+3531600!.*!_sca_d@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!_sca_d@ngv.eircom.net</publicIdValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>2</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <pubData publicIdValue="sip:+3531600!.*!_sca_t@ngv.eircom.net">
+                  <publicIdValue>sip:+3531600!.*!_sca_t@ngv.eircom.net</publicIdValue>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>4</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_orig_retail">
+                     <configuredServiceProfileId>ho_orig_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <configuredServiceProfiles configuredServiceProfileId="ho_term_retail">
+                     <configuredServiceProfileId>ho_term_retail</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+               </pubData>
+               <privateUser privateUserId="+3531600!.*!@ngv.eircom.net">
+                  <privateUserId>+3531600!.*!@ngv.eircom.net</privateUserId>
+                  <userPassword>1234567</userPassword>
+               </privateUser>
+            </createIMSSubscription>
+         </cai3:MOAttributes>
+      </cai3:Create>
+   </soapenv:Body>
+</soapenv:Envelope>
