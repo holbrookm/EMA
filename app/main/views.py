@@ -25,9 +25,18 @@ logger = logging_config.logger
 ################################
 
 @main.route('/',  methods=['POST','GET',])
+@main.route('/login',  methods=['POST','GET',])
+@main.route('/index',  methods=['POST','GET',])
 def index():
     """ Index Page.
     """
+    # check for existing session in browser cookies
+    try:
+        ema.ema_logout(session['emaSession']['session_id'])
+        session.clear()
+        logout_user()
+    except:
+        pass
     logger.debug('FUNC::::::: app.main.route.index')
     form = LoginForm()
     
@@ -80,7 +89,6 @@ def performSearchRangeR():
             return redirect(url_for('main.subscribers'))
         session['sub'] = sub   # subscriber number in text
         c_sub = ims.registeredRangeSubscriber(sub)
-        transaction_id = session['transaction_id']
         debug.p(session)
         result = c_sub.subscriberGet(session)
         logger.debug (result.status_code)
@@ -98,9 +106,6 @@ def performSearchRangeR():
                 pass
         if result.status_code == 200:
             subdetails = ema.prepareXmlToClass(result.text)
-            print subdetails
-            print type(subdetails['pubData'])
-            print subdetails['pubData'].__len__(), isinstance(subdetails['pubData'],list)
             if isinstance(subdetails['pubData'],list):
                 session['count'] = subdetails['pubData'].__len__()
                 session['subType'] = subdetails['pubData'][0]['publicIdState'] # Current Subscriber State in text
@@ -263,8 +268,8 @@ def createRW(sub):
             logger.debug(('** Leaving FUNC:::: app.route.createRW:  Subscriber Already Exists'))
             session['mesg'] = 'ExistingSubscriber'
             return redirect(url_for('main.subscribers'))
-        elif result.text.find('Public Id must be SIP URI or TEL URL') != -1: # -1 means does not exist, therefore if True it exists.
-            logger.debug('Unknown Error in createRW func')
+        elif result.text.find('Public Id must be SIP URI or TEL URL') != -1 or result.text.find('<ema:respCode>35012</ema:respCode>') != -1: # -1 means does not exist, therefore if True it exists.
+            logger.debug('Subscription Not Created due to + missing or related error')
             flash ('Error')
             flash ('The Subscription Number did not start with a +')
             flash ('Please try again.....')
@@ -305,7 +310,7 @@ def createRangeNR(sub, range):
             logger.debug(('** Leaving FUNC:::: app.route.createRangeNR:  Subscriber Already Exists'))
             session['mesg'] = 'ExistingSubscriber'
             return redirect(url_for('main.subscribers'))
-        elif result.text.find('Public Id must be SIP URI or TEL URL') != -1: # -1 means does not exist, therefore if True it exists.
+        elif result.text.find('Public Id must be SIP URI or TEL URL') != -1 or result.text.find('<ema:respCode>35011</ema:respCode>') != -1: # -1 means does not exist, therefore if True it exists.
             logger.debug('Unknown Error in app.route.createRangeNR')
             flash ('Error')
             flash ('The Subscription Number did not start with a +')
@@ -344,7 +349,7 @@ def createRangeR(sub, range):
             session['mesg'] = 'ExistingSubscriber'
             return redirect(url_for('main.subscribers'))
             
-        elif result.text.find('Public Id must be SIP URI or TEL URL') != -1: # -1 means does not exist, therefore if True it exists.
+        elif result.text.find('Public Id must be SIP URI or TEL URL') != -1 or result.text.find('<ema:respCode>35011</ema:respCode>') != -1: # -1 means does not exist, therefore if True it exists.
             logger.debug('Unknown Error in app.route.createRangeR')
             flash ('Error')
             flash ('The Subscription Number did not start with a +')
