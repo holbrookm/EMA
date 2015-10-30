@@ -47,6 +47,17 @@ def index():
     return render_template('/login.html', form = form)   # I believe that this is the first function/view called
 
 
+@main.route('/logout')
+@login_required
+def logout():
+    logger.debug('FUNC:::::: app.route.logout')
+    ema.ema_logout(session['emaSession']['session_id'])
+    session.clear()
+    logout_user()
+    logger.debug('** Leaving FUNC:::::: app.route.logout')
+    flash ('Logged Out')
+    return redirect(url_for(('main.index')))
+    
 #############################
 #### SEARCH #########
 #############################
@@ -61,14 +72,16 @@ def searchRangeR():
 @main.route('/performSearchRangeR', methods=['POST', ])
 @login_required
 def performSearchRangeR():
-    logger.debug(('FUNC:::::: app.route.performSearchRangeR           {0}').format(request.method))
-    
+    session.permanent = True
+    logger.debug(('FUNC:::::: app.route.performSearchRangeR           {0}').format(request.method))  
     if request.method == 'POST':
         sub = str(request.form['sub'])
+        if sub == "": 
+            return redirect(url_for('main.subscribers'))
         session['sub'] = sub   # subscriber number in text
         c_sub = ims.registeredRangeSubscriber(sub)
         transaction_id = session['transaction_id']
-        print session
+        debug.p(session)
         result = c_sub.subscriberGet(session)
         logger.debug (result.status_code)
         logger.debug (result.text)
@@ -103,10 +116,10 @@ def performSearchRangeR():
             return redirect(url_for('main.subscriberResult'))
             
     else:
-        return render_template('/login.html')
+        return redirect(url_for('auth.login', error='Unknown error Condition'))
         logger.error('Unexpected error occurred in app.route.performSearchRangeR ')
     logger.debug('** Leaving FUNC::::::: app.route.performSearchRangeR: End of Func error')
-    return render_template('/login.html')
+    return redirect(url_for('auth.login', error='Unknown error Condition'))
 
 
 #############################
@@ -250,9 +263,18 @@ def createRW(sub):
             logger.debug(('** Leaving FUNC:::: app.route.createRW:  Subscriber Already Exists'))
             session['mesg'] = 'ExistingSubscriber'
             return redirect(url_for('main.subscribers'))
+        elif result.text.find('Public Id must be SIP URI or TEL URL') != -1: # -1 means does not exist, therefore if True it exists.
+            logger.debug('Unknown Error in createRW func')
+            flash ('Error')
+            flash ('The Subscription Number did not start with a +')
+            flash ('Please try again.....')
+            session['mesg'] = 'No Plus'
+            return redirect(url_for('main.subscribers'))
         else:
             logger.debug('Unknown Error in createRW func')
-            pass
+            flash('Unknown Error in createRW func')
+            return redirect(url_for('main.subscribers'))
+            
     elif result.status_code == 200:
         session['mesg'] = 'Created'
         session['sub'] = sub
@@ -262,6 +284,7 @@ def createRW(sub):
         return redirect(url_for('main.subscribers'))
     else:
         logger.debug(('** Leaving FUNC::::::: app.route.createRW :::  Unknown Condition ::  {0}').format(result.status_code))
+        flash ('Unknown error Condition  Create RW')
         return redirect(url_for('auth.login', error='Unknown error Condition'))
  
 
@@ -282,9 +305,18 @@ def createRangeNR(sub, range):
             logger.debug(('** Leaving FUNC:::: app.route.createRangeNR:  Subscriber Already Exists'))
             session['mesg'] = 'ExistingSubscriber'
             return redirect(url_for('main.subscribers'))
+        elif result.text.find('Public Id must be SIP URI or TEL URL') != -1: # -1 means does not exist, therefore if True it exists.
+            logger.debug('Unknown Error in app.route.createRangeNR')
+            flash ('Error')
+            flash ('The Subscription Number did not start with a +')
+            flash ('Please try again.....')
+            session['mesg'] = 'No Plus'
+            return redirect(url_for('main.subscribers'))
+            
         else:
             logger.debug('Unknown Error in createRangeNR func')
-            pass
+            flash ('Unknown Error')
+            return redirect(url_for('main.subscribers'))
     elif result.status_code == 200:
         session['mesg'] = 'Created'
         session['sub'] = sub
@@ -311,8 +343,16 @@ def createRangeR(sub, range):
             logger.debug(('** Leaving FUNC:::: app.route.createRangeR:  Subscriber Already Exists'))
             session['mesg'] = 'ExistingSubscriber'
             return redirect(url_for('main.subscribers'))
+            
+        elif result.text.find('Public Id must be SIP URI or TEL URL') != -1: # -1 means does not exist, therefore if True it exists.
+            logger.debug('Unknown Error in app.route.createRangeR')
+            flash ('Error')
+            flash ('The Subscription Number did not start with a +')
+            flash ('Please try again.....')
+            session['mesg'] = 'No Plus'
+            return redirect(url_for('main.subscribers'))
         else:
-            logger.debug('Unknown Error in createRangeR func')
+            logger.debug('Unknown Error in app.route.createRangeR')
             pass
     elif result.status_code == 200:
         session['mesg'] = 'Created'
@@ -321,6 +361,7 @@ def createRangeR(sub, range):
         del c_sub # Remove Subscriber Class instance
         logger.debug('** Leaving FUNC::::::: app.route.createRangeR')
         return redirect(url_for('main.subscribers'))
+        
     else:
         logger.debug(('** Leaving FUNC::::::: app.route.createRangeR :::  Unknown Condition ::  {0}').format(result.status_code))
         return redirect(url_for('auth.login', error='Unknown error Condition'))
@@ -423,6 +464,10 @@ def subscribers(mesg = None):
         elif session.get('mesg') == 'ExistingSubscriber':
             logger.debug('** Leaving FUNC:::::: app.route.subscribers    ::  Subscriber Already Exists')
             return render_template('subscribers.html', existingsub = session.get('sub'), mesg = 'Your Subscriber already Exists')
+        elif session.get('mesg') == 'No Plus':
+            logger.debug('** Leaving FUNC:::::: app.route.subscribers    ::  No Plus')
+            return render_template('subscribers.html', mesg = 'Please remember to add begin this subscriber type with a +')    
+            
         else:
             logger.debug('** Leaving FUNC:::::: app.route.subscribers')
             return render_template('subscribers.html', mesg = mesg)

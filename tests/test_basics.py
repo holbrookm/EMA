@@ -7,11 +7,11 @@ class BasicsTestCase(unittest2.TestCase):
         self.app = create_app('testing')
         self.app_context = self.app.app_context()
         self.app_context.push()
-        db.create_all()
+        #db.create_all()  #When this is active, the DB is wiped
 
     def tearDown(self):
         db.session.remove()
-        db.drop_all()
+        #db.drop_all() #When this is active, the DB is wiped
         self.app_context.pop()
 
     def test_app_exists(self):

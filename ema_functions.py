@@ -106,9 +106,9 @@ def emaGetImsSubscriber(sub, session):
     headers ={'content-type':'text/xml; charset=utf-8',  'SOAPAction':'CAI3G#Get'}
     r= requests.post('http://'+session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
     if r.status_code != 200:
-        logger.error((' ERROR: An error has occurred trying to retrieve the subscription::: {0}    from the EMA platform.').format(sub.subscriberId))
-        logger.error (r.status_code)
-        logger.error (r.text)
+        logger.info((' INFO: An error has occurred trying to retrieve the subscription::: {0}    from the EMA platform.').format(sub.subscriberId))
+        logger.info (r.status_code)
+        logger.info (r.text)
     else:
         logger.debug (' Subscription found!!!!')
         logger.debug (r.text)
@@ -123,7 +123,7 @@ def emaCreateImsSubscriber(sub, session):
     '''
     logger.debug('FUNC:: emaCreateImsSubscriber      :   ')
 
-    insert_xml = __readinxml__('./create_ims_subscriber2.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], sub.subscriberId, sub.msisdn, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId, sub.chargingProfId)
+    insert_xml = __readinxml__('./lmi_create_ims_rw_sub_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
 
     logger.debug(insert_xml)

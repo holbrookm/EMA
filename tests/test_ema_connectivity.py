@@ -18,7 +18,7 @@ class EMAConnectivityTestCase(unittest2.TestCase):
         emaSession = ema_functions.emaLogin()
         session = {}
         session['emaSession'] = emaSession
-        sub1 = class_ims_ema.nonRegisteredSubscriber('353760000001')
+        sub1 = class_ims_ema.remoteWorker('+353760000001')
         test1 = sub1.subscriberCreate(session)
         test2 = sub1.subscriberGet(session)
         test3 = sub1.subscriberDelete(session)

@@ -7,6 +7,7 @@
 """
 
 import os
+from datetime import timedelta
 from app import create_app, db
 from app.models import User, Role
 from flask.ext.script import Manager, Shell
@@ -17,7 +18,7 @@ app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
 migrate = Migrate(app, db) # Creating a Database Migration repository; use the python gui.py db init command
 
-
+app.permanent_session_lifetime = timedelta(seconds = 600)  #  This entry forces a fresh session after 1 hour of inactivity.
 
 ###############################
 #Manager Functions
