@@ -1,0 +1,13 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns:ns="http://schemas.ericsson.com/ema/UserProvisioning/SLF/1.1/">
+   <soapenv:Header>
+      <cai3:SessionId>{0}</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Create>
+         <cai3:MOType>SLFSubscription@http://schemas.ericsson.com/ema/UserProvisioning/SLF/1.1/</cai3:MOType>
+         <cai3:MOId>
+            <ns:subscriberId>{1}</ns:subscriberId>
+         </cai3:MOId>
+      </cai3:Create>
+   </soapenv:Body>
+</soapenv:Envelope>

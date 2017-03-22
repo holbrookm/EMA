@@ -4,6 +4,10 @@
     #Marc Holbrook
     # 0851742253
     # <mholbrook@eircom.ie>
+    
+    NOTE: Input subscriber number must include + : as in +3537766554433
+    Modified : 15-2-17 : Added Modify Password function
+    
 """
 
 import debug
@@ -86,6 +90,17 @@ class IMSSubscriber(object):
         
         status = ema.emaGetImsSubscriber( self, session )
         logger.debug('**Leaving FUNC :::: class_ims_ema.subscriberGet')
+        return status   
+    
+    def subscriberModifyPassword(self, session, pw = None):
+        """ This function will search for the subscriber with EMA in the HSS and ENUM.
+            Added 15-2-17!
+        """
+        logger.debug('FUNC:: Class IMSSubscriber.subscriberModifyPassword(self, session)             ')
+        if pw:
+            self.password = pw
+        status = ema.emaModifyPassword(self, session)
+        logger.debug('**Leaving FUNC :::: class_ims_ema.subscriberModifyPassword')
         return status   
     
     @abstractmethod

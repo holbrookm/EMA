@@ -19,7 +19,7 @@ DEBUG1=5
 
 
 FILE_LEVEL=DEBUG
-CONSOLE_LEVEL=DEBUG
+CONSOLE_LEVEL=CRITICAL
 
 #FORMAT = "%(levelname)s l: %(lineno)d: %(message)s"
 #FORMAT = "%(levelname)s | %(module)s |  %(message)s"

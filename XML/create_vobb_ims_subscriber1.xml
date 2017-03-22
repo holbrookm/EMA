@@ -1,0 +1,147 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/">
+   <soapenv:Header>
+      <cai3:SessionId>{0}</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Create>
+         <cai3:MOType>IMSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/</cai3:MOType>
+         <cai3:MOId>
+            <subscriberId>{2}</subscriberId>
+         </cai3:MOId>
+         <cai3:MOAttributes>
+            <createIMSSubscription subscriberId="{2}">
+               <subscriberId>{2}</subscriberId>
+               <subscriberBarringInd>FALSE</subscriberBarringInd>
+               <chargingProfId>VoBB_eirRetail_ChargingProfile</chargingProfId>
+               <privacyIndicator>FALSE</privacyIndicator>
+               <defaultPrivateId>{2}</defaultPrivateId>
+               <pubData publicIdValue="{3}">
+                  <publicIdValue>{3}</publicIdValue>
+                  <publicIdTelValue>tel:{1}</publicIdTelValue>
+                  <privateUserId>{2}</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <sessionBarringInd>FALSE</sessionBarringInd>
+                 <maxNumberOfContacts>10</maxNumberOfContacts>
+                 <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                 </configuredServiceProfiles>
+                 <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}-d1@{4}">
+                  <publicIdValue>sip:{1}-d1@{4}</publicIdValue>
+                  <privateUserId>{2}</privateUserId>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}-d2@{4}">
+                  <publicIdValue>sip:{1}-d2@{4}</publicIdValue>
+                  <privateUserId>{2}</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}-d3@{4}">
+                  <publicIdValue>sip:{1}-d3@{4}</publicIdValue>
+                  <privateUserId>{2}</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}-d4@{4}">
+                  <publicIdValue>sip:{1}-d4@{4}</publicIdValue>
+                  <privateUserId>{2}</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}-d5@{4}">
+                  <publicIdValue>sip:{1}-d5@{4}</publicIdValue>
+                  <privateUserId>{2}</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}-d6@{4}">
+                  <publicIdValue>sip:{1}-d6@{4}</publicIdValue>
+                  <privateUserId>{2}</privateUserId>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}-d7@{4}">
+                  <publicIdValue>sip:{1}-d7@{4}</publicIdValue>
+                  <privateUserId>{2}</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:{1}-d8@{4}">
+                  <publicIdValue>sip:{1}-d8@{4}</publicIdValue>
+                  <privateUserId>{2}</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <privateUser privateUserId="{2}">
+                  <privateUserId>{2}</privateUserId>
+                  <userPassword>{5}</userPassword>
+                  <userBarringInd>FALSE</userBarringInd>
+                  <roamingAllowed>FALSE</roamingAllowed>
+                  <allowedAuthMechanism>Digest</allowedAuthMechanism>
+               </privateUser>
+            </createIMSSubscription>
+         </cai3:MOAttributes>
+      </cai3:Create>
+   </soapenv:Body>
+</soapenv:Envelope>

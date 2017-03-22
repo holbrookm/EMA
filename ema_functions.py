@@ -4,6 +4,10 @@
     #Marc Holbrook
     # 0851742253
     # <mholbrook@eircom.ie>
+
+    Modified 15-9-16: Added Get DNS Function
+    Modified 15/2/17: Added Modify Password Function
+
 """
 
 
@@ -17,8 +21,8 @@ import xmltodict
 
 ema_username= 'sogadm'
 ema_password = 'sogadm'
-#ema_host = '10.147.21.198'
-ema_host = '10.16.6.228'
+#ema_host = '10.147.21.198'  # Live Node
+ema_host = '10.16.6.228'   # Test Plant
 ema_port = '8998'
 wsdl = 'generic_CAI3G_sessioncontrol.wsdl'
 
@@ -48,7 +52,7 @@ def prepareXmlToClass(s):
 def emaLogin(username = 'Marc', password='Marc'):
     ''' This function will login into the EMA platform using the user name and password supplied.'''
     logger.debug(" FUNC: ema_function.emaLogin(Username, Password)       : ")
-    insert_xml = __readinxml__('./login.xml')
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/login.xml')
     sequence_id = ''
     session_id = ''
     return_code = None
@@ -75,7 +79,7 @@ def emaLogin(username = 'Marc', password='Marc'):
 def ema_logout(session_id):
     ''' This function will logout of the EMA platform using the session id supplied.'''
     logger.debug(" FUNC: ema_logut   : ")
-    XML = open('./ema_logout.xml','r')
+    XML = open('/home/ema-gui/emalive/XML/ema_logout.xml','r')
     insert_xml = XML.read().format(session_id)
     logger.debug(insert_xml)
     headers ={'content-type':'text/xml; charset=utf-8',  'SOAPAction':'CAI3G#Logout'}
@@ -97,10 +101,10 @@ def emaGetImsSubscriber(sub, session):
         The sequenceId, transaction_id and sessionId must alos be supplied.
         This function returns an XML string of Subscriber Information or Error Information.
     '''
-    debug.p ('Func::: emaGetImsSuscriber      : ')
-    logger.debug('Func::: emaGetImsSuscriber      : ')
+    debug.p ('Func::: emaGetImsSuscriber (sub, session)     : ')
+    logger.debug('Func::: emaGetImsSuscriber (sub, session)     : ')
 
-    insert_xml = __readinxml__('./get_ims_sub.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], sub.subscriberId)
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/get_ims_sub.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], sub.subscriberId)
     logger.debug(insert_xml)
     
     headers ={'content-type':'text/xml; charset=utf-8',  'SOAPAction':'CAI3G#Get'}
@@ -121,9 +125,9 @@ def emaCreateImsSubscriber(sub, session):
         The inputs for this subscription are the session/sequence/transaction ids 
         and the subscriber information itself.
     '''
-    logger.debug('FUNC:: emaCreateImsSubscriber      :   ')
+    logger.debug('FUNC:: emaCreateImsSubscriber (sub, session)     :   ')
 
-    insert_xml = __readinxml__('./lmi_create_ims_rw_sub_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/lmi_create_ims_rw_sub_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
 
     logger.debug(insert_xml)
@@ -145,9 +149,9 @@ def emaCreateRWSubscriber(sub, session):
         The inputs for this subscription are the session 
         and the subscriber information itself.
     '''
-    logger.debug('FUNC:: emaCreateRWSubscriber      :   ')
+    logger.debug(('FUNC:: emaCreateRWSubscriber  {0}, {1}    :   ').format(sub, session))
 
-    insert_xml = __readinxml__('./lmi_create_ims_rw_sub_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/lmi_create_ims_rw_sub_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
 
     logger.debug(insert_xml)
@@ -168,22 +172,22 @@ def emaCreateNonRegisteredRangeSubscriber(sub, session):
         The inputs for this subscription are the session 
         and the subscriber information itself.
     '''
-    logger.debug('FUNC:: emaCreateNonRegisteredRangeSubscriber      :   ')
+    logger.debug(('FUNC:: emaCreateNonRegisteredRangeSubscriber  {0}, {1}    :   ').format(sub, session))
     debug.p(session['rangesize'])
 
     if session['rangesize'] == '10':
         debug.p('Entering 10')
-        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{1}', sub.pubData.publicIdTelValue)
-        #insert_xml = __readinxml__('./lmi_create_ims_rangeNR10_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
+        insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{1}', sub.pubData.publicIdTelValue)
+        #insert_xml = __readinxml__('/home/ema-gui/emalive/XML/lmi_create_ims_rangeNR10_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
     elif session['rangesize'] == '100':
         debug.p('Entering 100')
-        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{2}', sub.pubData.publicIdTelValue)
+        insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{2}', sub.pubData.publicIdTelValue)
     elif session['rangesize'] == '1000':
         debug.p('Entering 1000')
-        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{3}', sub.pubData.publicIdTelValue)
+        insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{3}', sub.pubData.publicIdTelValue)
     elif session['rangesize'] == '10000':
         debug.p('Entering 10000')
-        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{4}', sub.pubData.publicIdTelValue)  
+        insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{4}', sub.pubData.publicIdTelValue)  
     else:
         pass # go to error
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
@@ -206,22 +210,22 @@ def emaCreateRegisteredRangeSubscriber(sub, session):
         The inputs for this subscription are the session 
         and the subscriber information itself.
     '''
-    logger.debug('FUNC:: emaCreateRegisteredRangeSubscriber      :   ')
+    logger.debug(('FUNC:: emaCreateRegisteredRangeSubscriber  {0}, {1}    :   ').format(sub, session))
     debug.p(session['rangesize'])
 
     if session['rangesize'] == '10':
         debug.p('Entering 10')
-        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{1}', sub.pubData.publicIdTelValue)
-        #insert_xml = __readinxml__('./lmi_create_ims_rangeNR10_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
+        insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{1}', sub.pubData.publicIdTelValue)
+        #insert_xml = __readinxml__('/home/ema-gui/emalive/XML/lmi_create_ims_rangeNR10_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, sub.chargingProfId, sub.password)
     elif session['rangesize'] == '100':
         debug.p('Entering 100')
-        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{2}', sub.pubData.publicIdTelValue)
+        insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{2}', sub.pubData.publicIdTelValue)
     elif session['rangesize'] == '1000':
         debug.p('Entering 1000')
-        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{3}', sub.pubData.publicIdTelValue)
+        insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{3}', sub.pubData.publicIdTelValue)
     elif session['rangesize'] == '10000':
         debug.p('Entering 10000')
-        insert_xml = __readinxml__('./create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{4}', sub.pubData.publicIdTelValue)  
+        insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_psi_ims_rangeNR_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.termProfileId, sub.chargingProfId, '{4}', sub.pubData.publicIdTelValue)  
     else:
         pass # go to error
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
@@ -245,9 +249,9 @@ def emaCreateRegisteredPBXPilotNumber(sub, session):
         The inputs for this subscription are the session 
         and the subscriber information itself.
     '''
-    logger.debug('FUNC:: emaCreateRegisteredPBXPilotNumber      :   ')
+    logger.debug(('FUNC:: emaCreateRegisteredPBXPilotNumber  {0}, {1}    :   ').format(sub, session))
 
-    insert_xml = __readinxml__('./lmi_create_ims_reg_pbx_pilot_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.password)
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/lmi_create_ims_reg_pbx_pilot_marc.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.password)
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
 
     logger.debug(insert_xml)
@@ -268,11 +272,11 @@ def emaCreateHOSubscriber(sub, session):
         The inputs for this subscription are the session/sequence/transaction ids 
         and the subscriber information itself.
     '''
-    logger.debug('FUNC:: emaCreateImsSubscriber      :   ')
+    logger.debug(('FUNC:: emaCreateHOSubscriber    {0}, {1}  :   ').format(sub, session))
 
    
-    insert_xml = __readinxml__('./create_hostedoffice_subscriber_lmi.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, session['sub_pw'],sub.pubData.phoneContext)    
-    #insert_xml = __readinxml__('./create_hostedoffice_subscriber.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], sub.subscriberId, sub.msisdn, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId, sub.chargingProfId, session['ho_pw'])
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_hostedoffice_subscriber_lmi.xml').format(session['emaSession']['session_id'], sub.phoneNumber, sub.domain, sub.origProfileId, sub.termProfileId, session['sub_pw'],sub.pubData.phoneContext)    
+    #insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_hostedoffice_subscriber.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], sub.subscriberId, sub.msisdn, sub.pubData.publicIdValue, sub.pubData.publicIdTelValue, sub.pubData.phoneContext, sub.pubData.privateUserId, sub.origProfileId, sub.termProfileId, sub.chargingProfId, session['ho_pw'])
     
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'} 
 
@@ -294,9 +298,9 @@ def emaDeleteImsSubscriber(subscriber,session):
         The inputs for this subscription are the session/sequence/transaction ids 
         and the subscriber (class instance)information itself.
     '''
-    logger.debug('FUNC:: emaDeleteImsSubscriber      :   ')
+    logger.debug(('FUNC:: emaDeleteImsSubscriber   {0}, {1}   :   ').format(subscriber, session))
 
-    insert_xml = __readinxml__('./delete_ims_subscriber.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], subscriber.subscriberId)
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/delete_ims_subscriber.xml').format(session['emaSession']['sequence_id'], session['emaSession']['transaction_id'],session['emaSession']['session_id'], subscriber.subscriberId)
     headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Delete'} 
 
     logger.debug(insert_xml)
@@ -312,7 +316,189 @@ def emaDeleteImsSubscriber(subscriber,session):
     logger.debug('**Leaving FUNC :::: ema_functions.emaDeleteImsSubscriber')
     return (r)
 
+
+def emaCreateVobbSubscriber(session, msisdn, subscriberId, publicId, domain, password):
+    ''' This function should create a VOBB retail subscription via EMA and return the results.
+
+    '''
+    logger.debug(('FUNC:: ema_functions.emaCreateVobbSubscriber  {0}  :   ').format(subscriberId))
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_vobb_ims_subscriber1.xml').format(session['emaSession']['session_id'], msisdn, subscriberId, publicId, domain, password)
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'}
+
+    logger.debug(insert_xml)
+    r = requests.post('http://'+ session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to retrieve the DNS Entry ::: {0}    on the EMA platform.').format(subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' Subscriber created !!!!')
+        logger.debug (r.text)
+    
+    logger.debug(' **Leaving FUNC :::: ema_functions.emaCreateVobbSubscriber')
+    return (r)
+
+def emaDeleteVobbSubscriber(session, msisdn, domain):
+    ''' This function should create a VOBB retail subscription via EMA and return the results.
+
+    '''
+    logger.debug(('FUNC:: ema_functions.emaDeleteVobbSubscriber  {0}  :   ').format(msisdn))
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/delete_vobb_ims_subscriber.xml').format(session['emaSession']['session_id'], msisdn, domain)
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Delete'}
+
+    logger.debug(insert_xml)
+    r = requests.post('http://'+ session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to retrieve the DNS Entry ::: {0}    on the EMA platform.').format(msisdn))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' Subscriber Deleted !!!!')
+        logger.debug (r.text)
+
+    logger.debug(' **Leaving FUNC :::: ema_functions.emaDeleteVobbSubscriber')
+    return (r)
+
+def emaModifyPassword(sub, session):
+    ''' This function should create a VOBB retail subscription via EMA and return the results.
+        Added 15-2-17.
+    '''
+    logger.debug(('FUNC:: ema_functions.emaModifyPassword  {0}  :   ').format(sub.subscriberId))
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/modify_password.xml').format(session['emaSession']['session_id'], sub.subscriberId, sub.password)
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Set'}
+
+    logger.debug(insert_xml)
+    r = requests.post('http://'+ session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to modify the password for ::: {0}    on the EMA platform.').format(sub.subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' Password Modified !!!!')
+        logger.debug (r.text)
+
+    logger.debug(' **Leaving FUNC :::: ema_functions.emaModifyPassword')
+    return (r)
+
+def emaGetVobbSubscriber(session, subscriberId):
+    ''' This function should create a VOBB retail subscription via EMA and return the results.
+
+    '''
+    logger.debug(('FUNC:: ema_functions.emaGetVobbSubscriber  {0}  :   ').format(subscriberId))
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/get_vobb_ims_subscriber.xml').format(session['emaSession']['session_id'], subscriberId)
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Get'}
+
+    logger.debug(insert_xml)
+    r = requests.post('http://'+ session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to retrieve the DNS Entry ::: {0}    on the EMA platform.').format(subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' Subscriber Retrieved!!!!')
+        logger.debug (r.text)
+
+    logger.debug(' **Leaving FUNC :::: ema_functions.emaDeleteVobbSubscriber')
+    return (r)
+
+
+
+def emaGetDnsEntry( session, msisdn, subscriberId):
+    ''' This function should accept input variable and session id and query EMA for a DNS entry from ssDNS.
+        The response should be a valid or incorrect DNS response from EMA.
+    '''
+    logger.debug(('FUNC:: ema_functions.emaGetDnsEntry  {0}, {1}   :   ').format(subscriberId, session))
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/get_dns.xml').format(session['emaSession']['session_id'], msisdn, subscriberId)
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Get'}
+
+    logger.debug(insert_xml)
+
+    r = requests.post('http://'+ session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to retrieve the DNS Entry ::: {0}    on the EMA platform.').format(subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' DNS Retrieved !!!!')
+        logger.debug (r.text)
+    
+    logger.debug(' **Leaving FUNC :::: ema_functions.emaGetDnsEntry')
+    return (r)
+
+
+def emaCreateSLF(session,subscriberId):
+    ''' WARNING: Only use this for negative testing.
+        This function should create an SLF entry via EMA and return the results.
+
+    '''
+    logger.debug(('FUNC:: ema_functions.emaCreateSLF  {0}  :   ').format(subscriberId))
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/create_SLF.xml').format(session['emaSession']['session_id'],subscriberId)
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Create'}
+
+    logger.debug(insert_xml)
+    r = requests.post('http://'+ session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to retrieve the DNS Entry ::: {0}    on the EMA platform.').format(subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' SLF Entry created !!!!')
+        logger.debug (r.text)
+
+    logger.debug(' **Leaving FUNC :::: ema_functions.emaCreateSLF')
+    return (r)
+
+def emaDeleteSLF(session, subscriberId):
+    ''' WARNING: USE ONLY FOR NEGATIVE TESTING
+        This function should delete an SLF entry via EMA and return the results.
+
+    '''
+    logger.debug(('FUNC:: ema_functions.emaDeleteSLF  {0}  :   ').format(subscriberId))
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/delete_vobb_ims_subscriber.xml').format(session['emaSession']['session_id'], subscriberId)
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Delete'}
+
+    logger.debug(insert_xml)
+    r = requests.post('http://'+ session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to retrieve the DNS Entry ::: {0}    on the EMA platform.').format(subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' Subscriber Deleted !!!!')
+        logger.debug (r.text)
+
+    logger.debug(' **Leaving FUNC :::: ema_functions.emaDeleteSLF')
+    return (r)
+
+
+def emaGetSLF(session, subscriberId, publicId):
+    ''' This function should create a VOBB retail subscription via EMA and return the results.
+
+    '''
+    logger.debug(('FUNC:: ema_functions.emaGetSLF  {0}  :   ').format(subscriberId, publicId))
+    insert_xml = __readinxml__('/home/ema-gui/emalive/XML/get_vobb_ims_subscriber.xml').format(session['emaSession']['session_id'], subscriberId, publicId)
+    headers ={'content-type':'text/xml; charset=utf-8', 'SOAPAction':'CAI3G#Get'}
+
+    logger.debug(insert_xml)
+    r = requests.post('http://'+ session['emaSession']['ema_host'] +':'+ session['emaSession']['ema_port'], data = insert_xml, headers = headers)
+    if r.status_code != 200:
+        logger.error ((' ERROR: An error has occurred trying to retrieve the DNS Entry ::: {0}    on the EMA platform.').format(subscriberId))
+        logger.error (r.status_code)
+        logger.error (r.text)
+    else:
+        logger.debug (' Subscriber Retrieved!!!!')
+        logger.debug (r.text)
+
+    logger.debug(' **Leaving FUNC :::: ema_functions.emaGetSLF')
+    return (r)
+
+
+
+
+
 if __name__ == "__main__":
     main()
+
+
 
 

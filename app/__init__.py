@@ -32,8 +32,8 @@ def create_app(config_name):
     config[config_name].init_app(app)
     
     login_manager.init_app(app) 
-    db.init_app(app)
-    bootstrap.init_app(app)
+    db.init_app(app)        # Initialises the DB used for usernames/passwords.
+    bootstrap.init_app(app) #Initialises the bootstrap module for the HTML 
     
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)

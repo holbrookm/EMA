@@ -1,0 +1,75 @@
+{% extends 'bwbase.html' %}
+{% block title %} 'Broadworks :- Fraud Prevention View' {% endblock %}
+
+{%block headers%}
+{% endblock %}
+
+{% block body %}
+
+
+
+
+
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+<div>
+    <div>          
+         <!-- Display if the last action was a successful Create -->
+        <h3>
+            <div class = "row">
+                <div class="col-sm-12">
+                    <p class="text-center"> Broadworks has found the following for :::::::::: {{ncos_sub}}</p>   
+                </div>
+            </div>
+        </h3>
+    </div>
+
+         
+    <table class="table table-hover table-striped">
+                <thead>
+                {% for heading in userdict['BroadsoftDocument']['command']['userTable']['colHeading']  %}
+		            <td>
+                        <th>{{heading}}</th>
+		            </td>
+		        </thead>
+                {% endfor %}
+                
+		        <tbody>
+                {% for line in  userdict['BroadsoftDocument']['command']['userTable']['row']  %}
+                <!-- Returns a list of dicts -->
+                    <tr>
+                    {% for value in line %}
+                        <!-- Returns a dict -->
+                        {% for entry in line.values() %} <!-- Returns a list -->
+                            {% for x in entry %} <!-- Returns each variable -->
+                                <td>
+                                    {{x}}
+                                </td>     
+                            {% endfor %}                              
+                        {%endfor%}
+                    {%endfor%}
+                    </tr>
+                {%endfor%}
+		        </tbody>
+            </table>
+            
+        <p class="text-center"> [][][] :::::::::: {{userdict['BroadsoftDocument']['command']['userTable']['row']}}</p>        
+        <!-- </bootstrap> -->
+</div>
+
+
+        
+        <!-- </bootstrap>  -->
+<script language="JavaScript" type="text/javascript" src="/static/js/lib/jquery-1.10.2.js"> </script>
+<script language="JavaScript" type="text/javascript" src="/static/js/lib/jquery-ui-1.10.4.custom.min.js"> </script>
+
+
+
+<!-- 
+<script  language="JavaScript" type="text/javascript" >
+$(function() {
+$( "#dialog" ).dialog();
+});
+</script>
+ -->
+{% endblock %}

@@ -1,0 +1,12 @@
+{
+    "fields" : {
+      "portedStatus" : "Ported In",
+      "npType" : "GNP",
+      "ownedByRef" : "/accounts/global/lists/operators/entries/2595",
+      "number" : "{0}"
+    },
+    "lastModified" : null,
+    "created" : null,
+    "id" : "{0}",
+    "version" : "1.0"
+}

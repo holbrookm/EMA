@@ -1,0 +1,437 @@
+2016-10-06 11:40:44,073 DEBUG | ema_functions | root |  FUNC: ema_function.emaLogin(Username, Password)       : 
+2016-10-06 11:40:44,074 DEBUG | ema_functions | root | Method : ema_functions.__readinxml__
+2016-10-06 11:40:44,074 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.__readinxml__
+2016-10-06 11:40:44,074 DEBUG | ema_functions | root | <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cai3:Login>
+         <cai3:userId>sogadm</cai3:userId>
+         <cai3:pwd>sogadm</cai3:pwd>
+      </cai3:Login>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:40:44,088 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:40:44,103 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:40:44,106 DEBUG | ema_functions | root | Sequence Id 1 :   112837323022630668    ::::: Session Id 1 :   100a1206100a1206000000001475750444386
+2016-10-06 11:40:44,106 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.emaLogin
+2016-10-06 11:40:44,106 DEBUG | ema_functions | root | FUNC:: ema_functions.emaGetSLF  +353768888888@voice.eir.ie  :   
+2016-10-06 11:40:44,106 DEBUG | ema_functions | root | Method : ema_functions.__readinxml__
+2016-10-06 11:40:44,106 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.__readinxml__
+2016-10-06 11:40:44,106 DEBUG | ema_functions | root | <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns:ns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/">
+   <soapenv:Header>
+      <cai3:SessionId>100a1206100a1206000000001475750444386</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Get>
+         <cai3:MOType>IMSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/</cai3:MOType>
+         <cai3:MOId>
+            <ns:subscriberId>+353768888888@voice.eir.ie</ns:subscriberId>
+         </cai3:MOId>
+      </cai3:Get>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:40:44,108 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:40:44,166 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:40:44,168 DEBUG | ema_functions | root |  Subscriber Retrieved!!!!
+2016-10-06 11:40:44,168 DEBUG | ema_functions | root | <?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header><SessionId xmlns="http://schemas.ericsson.com/cai3g1.2/">100a1206100a1206000000001475750444386</SessionId></S:Header><S:Body><GetResponse xmlns="http://schemas.ericsson.com/cai3g1.2/"><MOAttributes><getResponseIMSSubscription xmlns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" subscriberId="+353768888888@voice.eir.ie">
+<subscriberId>+353768888888@voice.eir.ie</subscriberId>
+<subscriberBarringInd>FALSE</subscriberBarringInd>
+<chargingProfId>DefaultChargingProfile</chargingProfId>
+<privacyIndicator>FALSE</privacyIndicator>
+</getResponseIMSSubscription></MOAttributes></GetResponse></S:Body></S:Envelope>
+2016-10-06 11:40:44,168 DEBUG | ema_functions | root |  **Leaving FUNC :::: ema_functions.emaGetSLF
+2016-10-06 11:40:44,169 DEBUG | ema_functions | root |  FUNC: ema_logut   : 
+2016-10-06 11:40:44,169 DEBUG | ema_functions | root | <soapenv:Envelope
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+  <soapenv:Header>
+    <cai3:SessionId>{'ema_host': '10.16.6.228', 'sequence_id': '112837323022630668', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750444386'}</cai3:SessionId>
+  </soapenv:Header>
+  <soapenv:Body>
+    <cai3:Logout>
+      <cai3:sessionId>{'ema_host': '10.16.6.228', 'sequence_id': '112837323022630668', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750444386'}</cai3:sessionId>
+    </cai3:Logout>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:40:44,171 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:40:44,181 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:40:44,182 DEBUG | ema_functions | root |  Logout successfull!!!!
+2016-10-06 11:40:44,183 DEBUG | ema_functions | root | <?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header><SessionId xmlns="http://schemas.ericsson.com/cai3g1.2/">{'ema_host': '10.16.6.228', 'sequence_id': '112837323022630668', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750444386'}</SessionId></S:Header><S:Body><LogoutResponse xmlns="http://schemas.ericsson.com/cai3g1.2/" /></S:Body></S:Envelope>
+2016-10-06 11:40:44,183 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.ema_logout
+2016-10-06 11:41:21,190 DEBUG | ema_functions | root |  FUNC: ema_function.emaLogin(Username, Password)       : 
+2016-10-06 11:41:21,190 DEBUG | ema_functions | root | Method : ema_functions.__readinxml__
+2016-10-06 11:41:21,191 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.__readinxml__
+2016-10-06 11:41:21,191 DEBUG | ema_functions | root | <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cai3:Login>
+         <cai3:userId>sogadm</cai3:userId>
+         <cai3:pwd>sogadm</cai3:pwd>
+      </cai3:Login>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:41:21,213 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:41:21,228 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:41:21,232 DEBUG | ema_functions | root | Sequence Id 1 :   89081278443356719    ::::: Session Id 1 :   100a1206100a1206000000001475750481388
+2016-10-06 11:41:21,232 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.emaLogin
+2016-10-06 11:41:21,232 DEBUG | ema_functions | root | FUNC:: ema_functions.emaCreateVobbSubscriber  +353768888888@voice.eir.ie  :   
+2016-10-06 11:41:21,232 DEBUG | ema_functions | root | Method : ema_functions.__readinxml__
+2016-10-06 11:41:21,232 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.__readinxml__
+2016-10-06 11:41:21,232 DEBUG | ema_functions | root | <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/">
+   <soapenv:Header>
+      <cai3:SessionId>100a1206100a1206000000001475750481388</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Create>
+         <cai3:MOType>IMSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/</cai3:MOType>
+         <cai3:MOId>
+            <subscriberId>+353768888888@voice.eir.ie</subscriberId>
+         </cai3:MOId>
+         <cai3:MOAttributes>
+            <createIMSSubscription subscriberId="+353768888888@voice.eir.ie">
+               <subscriberId>+353768888888@voice.eir.ie</subscriberId>
+               <subscriberBarringInd>FALSE</subscriberBarringInd>
+               <chargingProfId>VoBB_eirRetail_ChargingProfile</chargingProfId>
+               <privacyIndicator>FALSE</privacyIndicator>
+               <defaultPrivateId>+353768888888@voice.eir.ie</defaultPrivateId>
+               <pubData publicIdValue="sip:+353768888888@voice.eir.ie">
+                  <publicIdValue>sip:+353768888888@voice.eir.ie</publicIdValue>
+                  <publicIdTelValue>tel:+353768888888</publicIdTelValue>
+                  <privateUserId>+353768888888@voice.eir.ie</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>TRUE</isDefault>
+                  <sessionBarringInd>FALSE</sessionBarringInd>
+                 <maxNumberOfContacts>10</maxNumberOfContacts>
+                 <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                 </configuredServiceProfiles>
+                 <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:+353768888888-d1@voice.eir.ie">
+                  <publicIdValue>sip:+353768888888-d1@voice.eir.ie</publicIdValue>
+                  <privateUserId>+353768888888@voice.eir.ie</privateUserId>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:+353768888888-d2@voice.eir.ie">
+                  <publicIdValue>sip:+353768888888-d2@voice.eir.ie</publicIdValue>
+                  <privateUserId>+353768888888@voice.eir.ie</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:+353768888888-d3@voice.eir.ie">
+                  <publicIdValue>sip:+353768888888-d3@voice.eir.ie</publicIdValue>
+                  <privateUserId>+353768888888@voice.eir.ie</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:+353768888888-d4@voice.eir.ie">
+                  <publicIdValue>sip:+353768888888-d4@voice.eir.ie</publicIdValue>
+                  <privateUserId>+353768888888@voice.eir.ie</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:+353768888888-d5@voice.eir.ie">
+                  <publicIdValue>sip:+353768888888-d5@voice.eir.ie</publicIdValue>
+                  <privateUserId>+353768888888@voice.eir.ie</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:+353768888888-d6@voice.eir.ie">
+                  <publicIdValue>sip:+353768888888-d6@voice.eir.ie</publicIdValue>
+                  <privateUserId>+353768888888@voice.eir.ie</privateUserId>
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:+353768888888-d7@voice.eir.ie">
+                  <publicIdValue>sip:+353768888888-d7@voice.eir.ie</publicIdValue>
+                  <privateUserId>+353768888888@voice.eir.ie</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <pubData publicIdValue="sip:+353768888888-d8@voice.eir.ie">
+                  <publicIdValue>sip:+353768888888-d8@voice.eir.ie</publicIdValue>
+                  <privateUserId>+353768888888@voice.eir.ie</privateUserId>                 
+                  <xcapAllowed>FALSE</xcapAllowed>
+                  <implicitRegSet>1</implicitRegSet>
+                  <isDefault>FALSE</isDefault>
+                  <sessionBarringInd>TRUE</sessionBarringInd>
+                  <maxNumberOfContacts>10</maxNumberOfContacts>
+                  <configuredServiceProfiles configuredServiceProfileId="VoBB_eirRetail_ServiceProfile">
+                     <configuredServiceProfileId>VoBB_eirRetail_ServiceProfile</configuredServiceProfileId>
+                  </configuredServiceProfiles>
+                  <maxSessions>100</maxSessions>
+               </pubData>
+               <privateUser privateUserId="+353768888888@voice.eir.ie">
+                  <privateUserId>+353768888888@voice.eir.ie</privateUserId>
+                  <userPassword>qwerty</userPassword>
+                  <userBarringInd>FALSE</userBarringInd>
+                  <roamingAllowed>FALSE</roamingAllowed>
+                  <allowedAuthMechanism>Digest</allowedAuthMechanism>
+               </privateUser>
+            </createIMSSubscription>
+         </cai3:MOAttributes>
+      </cai3:Create>
+   </soapenv:Body>
+</soapenv:Envelope>
+2016-10-06 11:41:21,235 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:41:21,286 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 500 None
+2016-10-06 11:41:21,288 ERROR | ema_functions | root |  ERROR: An error has occurred trying to retrieve the DNS Entry ::: +353768888888@voice.eir.ie    on the EMA platform.
+2016-10-06 11:41:21,288 ERROR | ema_functions | root | 500
+2016-10-06 11:41:21,288 ERROR | ema_functions | root | <?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header><SessionId xmlns="http://schemas.ericsson.com/cai3g1.2/">100a1206100a1206000000001475750481388</SessionId></S:Header><S:Body><S:Fault><faultcode>S:Server</faultcode><faultstring>error,please check detail</faultstring><detail><Cai3gFault xmlns="http://schemas.ericsson.com/cai3g1.2/"><faultcode>4006</faultcode><faultreason><reasonText>External Error</reasonText></faultreason><faultrole>NEF</faultrole><details><ema:UserProvisioningFault xmlns:ema="http://schemas.ericsson.com/ema/UserProvisioning/">
+<ema:respCode>35012</ema:respCode>
+<ema:respDescription>ResponseCode="68" Reason="SLF-PublicId with SLF-PublicId = sip:+353768888888@voice.eir.ie already exists". Could not create publicid entry of SLF. ==> Provision SLF failed.  Failed to create subscription.</ema:respDescription>
+</ema:UserProvisioningFault></details></Cai3gFault></detail></S:Fault></S:Body></S:Envelope>
+2016-10-06 11:41:21,288 DEBUG | ema_functions | root |  **Leaving FUNC :::: ema_functions.emaCreateVobbSubscriber
+2016-10-06 11:41:21,288 DEBUG | ema_functions | root |  FUNC: ema_logut   : 
+2016-10-06 11:41:21,289 DEBUG | ema_functions | root | <soapenv:Envelope
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+  <soapenv:Header>
+    <cai3:SessionId>{'ema_host': '10.16.6.228', 'sequence_id': '89081278443356719', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750481388'}</cai3:SessionId>
+  </soapenv:Header>
+  <soapenv:Body>
+    <cai3:Logout>
+      <cai3:sessionId>{'ema_host': '10.16.6.228', 'sequence_id': '89081278443356719', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750481388'}</cai3:sessionId>
+    </cai3:Logout>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:41:21,290 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:41:21,300 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:41:21,301 DEBUG | ema_functions | root |  Logout successfull!!!!
+2016-10-06 11:41:21,302 DEBUG | ema_functions | root | <?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header><SessionId xmlns="http://schemas.ericsson.com/cai3g1.2/">{'ema_host': '10.16.6.228', 'sequence_id': '89081278443356719', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750481388'}</SessionId></S:Header><S:Body><LogoutResponse xmlns="http://schemas.ericsson.com/cai3g1.2/" /></S:Body></S:Envelope>
+2016-10-06 11:41:21,302 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.ema_logout
+2016-10-06 11:41:43,042 DEBUG | ema_functions | root |  FUNC: ema_function.emaLogin(Username, Password)       : 
+2016-10-06 11:41:43,042 DEBUG | ema_functions | root | Method : ema_functions.__readinxml__
+2016-10-06 11:41:43,042 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.__readinxml__
+2016-10-06 11:41:43,042 DEBUG | ema_functions | root | <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cai3:Login>
+         <cai3:userId>sogadm</cai3:userId>
+         <cai3:pwd>sogadm</cai3:pwd>
+      </cai3:Login>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:41:43,064 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:41:43,080 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:41:43,085 DEBUG | ema_functions | root | Sequence Id 1 :   1047259860162810568    ::::: Session Id 1 :   100a1206100a1206000000001475750503389
+2016-10-06 11:41:43,085 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.emaLogin
+2016-10-06 11:41:43,085 DEBUG | ema_functions | root | FUNC:: ema_functions.emaGetSLF  +353768888888@voice.eir.ie  :   
+2016-10-06 11:41:43,086 DEBUG | ema_functions | root | Method : ema_functions.__readinxml__
+2016-10-06 11:41:43,086 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.__readinxml__
+2016-10-06 11:41:43,086 DEBUG | ema_functions | root | <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns:ns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/">
+   <soapenv:Header>
+      <cai3:SessionId>100a1206100a1206000000001475750503389</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Get>
+         <cai3:MOType>IMSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/</cai3:MOType>
+         <cai3:MOId>
+            <ns:subscriberId>+353768888888@voice.eir.ie</ns:subscriberId>
+         </cai3:MOId>
+      </cai3:Get>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:41:43,090 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:41:43,143 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:41:43,146 DEBUG | ema_functions | root |  Subscriber Retrieved!!!!
+2016-10-06 11:41:43,146 DEBUG | ema_functions | root | <?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header><SessionId xmlns="http://schemas.ericsson.com/cai3g1.2/">100a1206100a1206000000001475750503389</SessionId></S:Header><S:Body><GetResponse xmlns="http://schemas.ericsson.com/cai3g1.2/"><MOAttributes><getResponseIMSSubscription xmlns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" subscriberId="+353768888888@voice.eir.ie">
+<subscriberId>+353768888888@voice.eir.ie</subscriberId>
+<subscriberBarringInd>FALSE</subscriberBarringInd>
+<chargingProfId>DefaultChargingProfile</chargingProfId>
+<privacyIndicator>FALSE</privacyIndicator>
+</getResponseIMSSubscription></MOAttributes></GetResponse></S:Body></S:Envelope>
+2016-10-06 11:41:43,146 DEBUG | ema_functions | root |  **Leaving FUNC :::: ema_functions.emaGetSLF
+2016-10-06 11:41:43,147 DEBUG | ema_functions | root |  FUNC: ema_logut   : 
+2016-10-06 11:41:43,147 DEBUG | ema_functions | root | <soapenv:Envelope
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+  <soapenv:Header>
+    <cai3:SessionId>{'ema_host': '10.16.6.228', 'sequence_id': '1047259860162810568', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750503389'}</cai3:SessionId>
+  </soapenv:Header>
+  <soapenv:Body>
+    <cai3:Logout>
+      <cai3:sessionId>{'ema_host': '10.16.6.228', 'sequence_id': '1047259860162810568', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750503389'}</cai3:sessionId>
+    </cai3:Logout>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:41:43,149 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:41:43,158 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:41:43,161 DEBUG | ema_functions | root |  Logout successfull!!!!
+2016-10-06 11:41:43,161 DEBUG | ema_functions | root | <?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header><SessionId xmlns="http://schemas.ericsson.com/cai3g1.2/">{'ema_host': '10.16.6.228', 'sequence_id': '1047259860162810568', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750503389'}</SessionId></S:Header><S:Body><LogoutResponse xmlns="http://schemas.ericsson.com/cai3g1.2/" /></S:Body></S:Envelope>
+2016-10-06 11:41:43,161 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.ema_logout
+2016-10-06 11:42:19,407 DEBUG | ema_functions | root |  FUNC: ema_function.emaLogin(Username, Password)       : 
+2016-10-06 11:42:19,407 DEBUG | ema_functions | root | Method : ema_functions.__readinxml__
+2016-10-06 11:42:19,407 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.__readinxml__
+2016-10-06 11:42:19,407 DEBUG | ema_functions | root | <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cai3:Login>
+         <cai3:userId>sogadm</cai3:userId>
+         <cai3:pwd>sogadm</cai3:pwd>
+      </cai3:Login>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:42:19,438 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:42:19,454 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:42:19,462 DEBUG | ema_functions | root | Sequence Id 1 :   2439723666202193020    ::::: Session Id 1 :   100a1206100a1206000000001475750539390
+2016-10-06 11:42:19,462 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.emaLogin
+2016-10-06 11:42:19,463 DEBUG | ema_functions | root | FUNC:: ema_functions.emaGetVobbSubscriber  +353768888888@voice.eir.ie  :   
+2016-10-06 11:42:19,464 DEBUG | ema_functions | root | Method : ema_functions.__readinxml__
+2016-10-06 11:42:19,464 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.__readinxml__
+2016-10-06 11:42:19,465 DEBUG | ema_functions | root | <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns:ns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/">
+   <soapenv:Header>
+      <cai3:SessionId>100a1206100a1206000000001475750539390</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Get>
+         <cai3:MOType>IMSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/</cai3:MOType>
+         <cai3:MOId>
+            <ns:subscriberId>+353768888888@voice.eir.ie</ns:subscriberId>
+         </cai3:MOId>
+      </cai3:Get>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:42:19,470 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:44:28,778 DEBUG | ema_functions | root |  FUNC: ema_logut   : 
+2016-10-06 11:44:28,778 DEBUG | ema_functions | root | <soapenv:Envelope
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+  <soapenv:Header>
+    <cai3:SessionId>{'ema_host': '10.16.6.228', 'sequence_id': '2439723666202193020', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750539390'}</cai3:SessionId>
+  </soapenv:Header>
+  <soapenv:Body>
+    <cai3:Logout>
+      <cai3:sessionId>{'ema_host': '10.16.6.228', 'sequence_id': '2439723666202193020', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750539390'}</cai3:sessionId>
+    </cai3:Logout>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:44:28,780 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:44:28,793 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:44:28,794 DEBUG | ema_functions | root |  Logout successfull!!!!
+2016-10-06 11:44:28,794 DEBUG | ema_functions | root | <?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header><SessionId xmlns="http://schemas.ericsson.com/cai3g1.2/">{'ema_host': '10.16.6.228', 'sequence_id': '2439723666202193020', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750539390'}</SessionId></S:Header><S:Body><LogoutResponse xmlns="http://schemas.ericsson.com/cai3g1.2/" /></S:Body></S:Envelope>
+2016-10-06 11:44:28,794 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.ema_logout
+2016-10-06 11:45:03,924 DEBUG | ema_functions | root |  FUNC: ema_function.emaLogin(Username, Password)       : 
+2016-10-06 11:45:03,925 DEBUG | ema_functions | root | Method : ema_functions.__readinxml__
+2016-10-06 11:45:03,925 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.__readinxml__
+2016-10-06 11:45:03,925 DEBUG | ema_functions | root | <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cai3:Login>
+         <cai3:userId>sogadm</cai3:userId>
+         <cai3:pwd>sogadm</cai3:pwd>
+      </cai3:Login>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:45:03,939 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:45:03,955 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:45:03,958 DEBUG | ema_functions | root | Sequence Id 1 :   774236933347751949    ::::: Session Id 1 :   100a1206100a1206000000001475750704392
+2016-10-06 11:45:03,958 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.emaLogin
+2016-10-06 11:45:03,959 DEBUG | ema_functions | root | FUNC:: ema_functions.emaGetDnsEntry  +353768888888@ics.meteor.ie, {'sub_pw': 'yyeeetteoe', 'emaSession': {'ema_host': '10.16.6.228', 'sequence_id': '774236933347751949', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750704392'}}   :   
+2016-10-06 11:45:03,959 DEBUG | ema_functions | root | Method : ema_functions.__readinxml__
+2016-10-06 11:45:03,959 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.__readinxml__
+2016-10-06 11:45:03,959 DEBUG | ema_functions | root | <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+   <soapenv:Header>
+      <cai3:SessionId>100a1206100a1206000000001475750704392</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Get>
+         <cai3:MOType>DNSSubscription@http://schemas.ericsson.com/ema/UserProvisioning/IPWorks/5.0/</cai3:MOType>
+         <cai3:MOId>
+            <cai3:msisdn>tel:+353768888888</cai3:msisdn>
+         </cai3:MOId>
+         <cai3:MOAttributes xmlns="http://schemas.ericsson.com/cai3g1.2/">
+            <cai3:getDNSSubscription msisdn="tel:+353768888888">
+               <cai3:subscriberId>+353768888888@ics.meteor.ie</cai3:subscriberId>
+            </cai3:getDNSSubscription>
+         </cai3:MOAttributes>
+      </cai3:Get>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:45:03,961 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:45:04,047 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 500 None
+2016-10-06 11:45:04,048 ERROR | ema_functions | root |  ERROR: An error has occurred trying to retrieve the DNS Entry ::: +353768888888@ics.meteor.ie    on the EMA platform.
+2016-10-06 11:45:04,048 ERROR | ema_functions | root | 500
+2016-10-06 11:45:04,048 ERROR | ema_functions | root | <?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header><SessionId xmlns="http://schemas.ericsson.com/cai3g1.2/">100a1206100a1206000000001475750704392</SessionId></S:Header><S:Body><S:Fault><faultcode>S:Server</faultcode><faultstring>error,please check detail</faultstring><detail><Cai3gFault xmlns="http://schemas.ericsson.com/cai3g1.2/"><faultcode>4006</faultcode><faultreason><reasonText>External Error</reasonText></faultreason><faultrole>NEF</faultrole><details><ema:UserProvisioningFault xmlns:ema="http://schemas.ericsson.com/ema/UserProvisioning/">
+<ema:respCode>35254</ema:respCode>
+<ema:respDescription>No such data in dns server. Get DNS Subscription failed!</ema:respDescription>
+</ema:UserProvisioningFault></details></Cai3gFault></detail></S:Fault></S:Body></S:Envelope>
+2016-10-06 11:45:04,049 DEBUG | ema_functions | root |  **Leaving FUNC :::: ema_functions.emaGetDnsEntry
+2016-10-06 11:45:04,049 DEBUG | ema_functions | root |  FUNC: ema_logut   : 
+2016-10-06 11:45:04,049 DEBUG | ema_functions | root | <soapenv:Envelope
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/">
+  <soapenv:Header>
+    <cai3:SessionId>{'ema_host': '10.16.6.228', 'sequence_id': '774236933347751949', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750704392'}</cai3:SessionId>
+  </soapenv:Header>
+  <soapenv:Body>
+    <cai3:Logout>
+      <cai3:sessionId>{'ema_host': '10.16.6.228', 'sequence_id': '774236933347751949', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750704392'}</cai3:sessionId>
+    </cai3:Logout>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+2016-10-06 11:45:04,050 INFO | connectionpool | requests.packages.urllib3.connectionpool | Starting new HTTP connection (1): 10.16.6.228
+2016-10-06 11:45:04,059 DEBUG | connectionpool | requests.packages.urllib3.connectionpool | "POST / HTTP/1.1" 200 None
+2016-10-06 11:45:04,060 DEBUG | ema_functions | root |  Logout successfull!!!!
+2016-10-06 11:45:04,060 DEBUG | ema_functions | root | <?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header><SessionId xmlns="http://schemas.ericsson.com/cai3g1.2/">{'ema_host': '10.16.6.228', 'sequence_id': '774236933347751949', 'ema_port': '8998', 'transaction_id': '12334455', 'session_id': '100a1206100a1206000000001475750704392'}</SessionId></S:Header><S:Body><LogoutResponse xmlns="http://schemas.ericsson.com/cai3g1.2/" /></S:Body></S:Envelope>
+2016-10-06 11:45:04,060 DEBUG | ema_functions | root | **Leaving FUNC :::: ema_functions.ema_logout

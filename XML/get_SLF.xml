@@ -1,0 +1,18 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cai3="http://schemas.ericsson.com/cai3g1.2/" xmlns:ns="http://schemas.ericsson.com/ema/UserProvisioning/IMS/5.0/" xmlns:xsi="xsi">
+   <soapenv:Header>
+      <cai3:SessionId>{0}</cai3:SessionId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cai3:Get>
+         <cai3:MOType>SLFSubscription@http://schemas.ericsson.com/ema/UserProvisioning/SLF/1.1/</cai3:MOType>
+         <cai3:MOId>
+            <subscriberId>{1}</subscriberId>
+         </cai3:MOId>   
+         <cai3:MOAttributes>
+            <getSLFSubscription subscriberId="{1}" xmlns="http://schemas.ericsson.com/ema/UserProvisioning/SLF/1.1/">
+               <publicIdEntry publicId="{2}"/>
+            </getSLFSubscription>
+         </cai3:MOAttributes>
+      </cai3:Get>
+   </soapenv:Body>
+</soapenv:Envelope>

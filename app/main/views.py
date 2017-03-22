@@ -1,11 +1,21 @@
 #!/usr/bin/python
+""" This is the Flask Web dev that front ends the EMA functions.
+    Broadworks functions were added March 17.
+    #
+    # 0851742253
+    # <mholbrook@eircom.ie>
+    Modified 13/3/17: Marc Holbrook: Added Broadworks type checks for Fraud Mgmt.
+                                    May be housed elsewhere later.
+    
+"""
+
 import sys, os
 from flask import Flask, request, render_template, url_for, redirect, flash, session, g
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.login import login_user, logout_user, login_required
-from .forms import LoginForm
+from .forms import LoginForm, BWForm # I think the dot represents this folder/project...
 
 from config import config
 
@@ -13,6 +23,28 @@ import debug, logging_config
 import class_ims_ema as ims
 import ema_functions as ema
 #import session_calls
+
+
+
+# BW related imports here 
+import string
+import ocip_functions as ocip
+import mysockets
+reload(sys)
+sys.setdefaultencoding("utf-8")
+import csv
+from time import sleep
+import scriptio as sio
+import xmltodict
+
+try:
+    import xml.etree.cElementTree as ET
+except ImportError:
+    import xml.etree.ElementTree as ET
+
+# End of BW related imports
+
+
 
 #Blueprint required imports
 from . import main
@@ -66,6 +98,8 @@ def logout():
     logger.debug('** Leaving FUNC:::::: app.route.logout')
     flash ('Logged Out')
     return redirect(url_for(('main.index')))
+
+
     
 #############################
 #### SEARCH #########
@@ -209,10 +243,19 @@ def createHostedOffice(sub):
         elif result.text.find('already exists') != -1: # -1 means does not exist, therefore if True it exists.
             logger.debug(('** Leaving FUNC:::: app.route.createHostedOffice:  Subscriber Already Exists'))
             session['mesg'] = 'ExistingSubscriber'
+            flash (session['mesg'])
+            return redirect(url_for('main.subscribers'))
+        elif  result.text.find('userPassword is illegal') != -1: # -1 means does not exist, therefore if True it exists.
+            logger.debug(('** Leaving FUNC:::: app.route.createHostedOffice: Incorrect Password format or Blank. '))
+            session['mesg'] = 'The Password submitted was illegal or blank.'
+            flash (session['mesg'])
             return redirect(url_for('main.subscribers'))
         else:
             logger.debug('Unknown Error in createHostedOffice func')
-            pass
+            session['mesg'] = ('Unknown error creating Subscriber: {0}'.format(result.text))
+            flash('Unknown error creating Subscriber. Check Log files')
+            return redirect(url_for('main.subscribers'))
+    
     elif result.status_code == 200:
         session['mesg'] = 'Created'
         session['sub'] = sub
@@ -221,6 +264,7 @@ def createHostedOffice(sub):
         return redirect(url_for('main.subscribers'))
     else:
         logger.debug(('** Leaving FUNC::::::: app.route.createHostedOffice :::  Unknown Condition ::  {0}').format(result.status_code))
+        logger.debug(('** Leaving FUNC::::::: app.route.createHostedOffice :::  Unknown Condition ::  {0}').format(result.text))
         return redirect(url_for('auth.login', error='Unknown error Condition'))
  
 
@@ -339,6 +383,7 @@ def createRangeR(sub, range):
     logger.debug(('FUNC:::::: app.route.createRangeR           {0}').format(request.method))
     session['rangesize'] = range
     c_sub = ims.registeredRangeSubscriber(sub)
+    c_sub.pubData.publicIdTelValue = c_sub.pubData.publicIdTelValue[:-4]  # Needed to remove !.*! for range xml
     result = c_sub.subscriberCreate(session)
     if result.status_code == 500: #Successful EMA connection but there is an error.
         if result.text.find('Invalid Session') != -1:
@@ -378,8 +423,6 @@ def createRangeR(sub, range):
 @main.route('/delete', methods=['POST','GET',])
 @login_required
 def delete():
-    #
-    #
     logger.debug(('FUNC::::::: app.route.delete         {0}').format(request.method))
     if request.method == 'POST':
         logger.debug(request.form['submit'])
@@ -389,18 +432,28 @@ def delete():
         result = cSub.subscriberDelete(session)
 
         if result.status_code == 500: #Successful EMA connection but there is an error.
-            if result.text.find('Invalid Session'):
-                logger.debug('********Invalid Session')
+            if result.text.find('Invalid Session') !=(-1):
+                logger.debug(('** Leaving FUNC::::::: app.route.delete::: Invalid Session::  {0}').format(result.status_code))
+                logger.debug(('** Leaving FUNC::::::: app.route.delete:::  Invalid Session::  {0}').format(result.text))
                 return redirect(url_for('auth.login', error='Invalid Session : Please login again.'))
-            elif result.text.find('No such object'):
-                logger.debug('******** No Such object')
+
+            elif result.text.find('No such object') !=(-1):
+                logger.debug(('** Leaving FUNC::::::: app.route.delete:::  No Such Object::  {0}').format(result.status_code))
+                logger.debug(('** Leaving FUNC::::::: app.route.delete:::  No Such Object::  {0}').format(result.text))
+                flash('Subscription does not exist!!')
                 return redirect(url_for('main.searchRangeR'))
             else:
-                pass
+                logger.debug(('** Leaving FUNC::::::: app.route.delete:::  Unknown Condition ::  {0}').format(result.status_code))
+                logger.debug(('** Leaving FUNC::::::: app.route.delete:::  Unknown Condition ::  {0}').format(result.text))
+                session['mesg'] = ('Unknown Error:  {0}'.format(result.text))
+                flash('Unknown Error has occurred, subscription not deleted. Contact Adminsitrator')
+                return redirect(url_for('main.subscribers'))
+                
         elif result.status_code == 200:
             logger.debug('** Leaving FUNC::::::: app.route.delete')
             session['mesg'] = 'Deleted'
             return redirect(url_for('main.subscribers'))
+
     else: #GET Method
         logger.debug('** Leaving FUNC::::::: app.route.delete')
         return render_template('searchRangeR.html', deletemesg = "True")
@@ -410,7 +463,106 @@ def delete():
 ####################################
 ### MISC
 ####################################
+    
+@main.route('/fraud', methods=['POST','GET',])
+@login_required
+def bw_ncos_check_apply():
+    logger.debug(('FUNC:::::: app.route.fraud            ::: {0}').format(request.method))
+    '''
+    form = BWForm()
+    
+    if form.validate_on_submit():
+        session['bwsub'] = request.form['bw_sub']
+    '''
+    session.permanent = True
+    
+    if request.method == 'POST':
+        session['ncos_sub'] = str(request.form['ncos_sub'])
+        sub = session['ncos_sub']
+        if sub == "": 
+            return redirect(url_for('main.subscribers'))
+        
+        logger.debug(('EXIT:::::: app.route.fraud    :: {1}        ::: {0}').format(request.method, session['ncos_sub']))
+        return redirect(url_for(('main.bw_answer')))
+    else:
+        logger.debug(('EXIT:::::: app.route.fraud            ::: {0}').format(request.method))
+        return render_template('ncosinput.html', ncos_sub = session.get('ncos_sub'))
 
+    
+@main.route('/bwanswer', methods=['POST','GET',])
+@login_required        
+def bw_answer():
+    '''
+        This function takes a sub number, retrieve the relevant information from BW.
+        That will be the SUB, GROUP, ENTERPRISE.
+    '''
+    # Connect to BW
+    if request.method == 'POST':
+        logger.debug(('FUNC:::::: app.route.bwanswer ::: {1}           ::: {0}').format(request.method, str(request.form['ncos_sub'])))
+        session.permanent = True
+        session['ncos_sub'] = str(request.form['ncos_sub'])
+        
+        conn = mysockets.BWconnect()
+        if (conn.isLiveNetwork()):
+            logger.info('##LIVE ## Connecting to Live Broadworks Platform')
+        
+        if (conn.bwlogin()):
+            xml = ocip.UserGetListInSystemRequest(conn.sessionid, session.get('ncos_sub')) # Create input XML
+            result = conn.sendreceive(xml)    #Retrieve subscription information using UserGetListinSystem command
+            
+            tree = ET.fromstring(result)
+            
+            #Parse details and print in csv file
+            #Method1
+            rowlist = []
+            datalist =[]
+            #Using XML data, parse and extract the relevant information
+            for elem in tree.getiterator():
+                if(elem.tag == 'colHeading'):
+                    rowlist.append(elem.text)
+                elif (elem.tag == 'row'):
+                    datalist.append(rowlist)
+                    rowlist = []
+                elif (elem.tag == 'col'):
+                    rowlist.append(elem.text)
+                else:
+                    pass
+            datalist.append(rowlist)
+            
+            #Method 2
+            #Convert the XML data to Dicts and retrieve the relevant information from the dicts
+            #Create a dict with headings, and then each entry can have the full subs details
+            # Subs details are found in dict['BroadsoftDocument']['command']['userTable']['row']
+            #Headinsg details are found in dict['BroadsoftDocument']['command']['userTable']['colHeading']
+            d1 = xmltodict.parse(result)
+            d2 = d1['BroadsoftDocument']['command']['userTable']['row']
+            print (d1['BroadsoftDocument']['command']['userTable']['colHeading'])
+            
+            if isinstance(d2, list):
+                for row in d2:
+                    print (row.keys())
+                    print (row.items())
+            if isinstance(d2, dict):
+                print (d2.keys())
+                print (d2.items())
+         
+            #Prepare to show results screen
+            if (datalist.__len__()):
+                session['UserList'] =   datalist  
+                session['userdict'] = d1
+                conn.bwlogout()
+                logger.debug(('EXIT:::::: app.route.bwanswer  ::: {1}            ::: {0}').format(request.method, session['ncos_sub']))
+                return render_template('bwanswer.html', userlist = session.get('UserList'), userdict = session.get('userdict'))
+            else:
+                conn.bwlogout()
+                logger.debug(('EXIT:::::: app.route.bwanswer  ::: {1}            ::: {0}').format(request.method, session['ncos_sub']))
+                return render_template('ncosinput.html', ncos_sub = '')
+                    
+    else:#GET Request
+         logger.debug(('FUNC:::::: app.route.bwanswer ::: {1}           ::: {0}').format(request.method))
+        logger.debug(('EXIT:::::: app.route.bwanswer : NOT LOGGED IN           ::: {0}').format(request.method))
+        return render_template('ncosinput.html', ncos_sub = '')
+        
 @main.route('/listSubscribers', methods=['POST','GET',])
 @login_required
 def listSubscribers():

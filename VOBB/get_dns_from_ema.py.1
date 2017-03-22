@@ -1,0 +1,37 @@
+#!/usr/bin/python
+
+""" This script will access the RNF ssDNS via ssh.
+    This will test Ivica's xml for vobb.
+    # 0851742253
+    # <mholbrook@eircom.ie>
+
+ WEB PAGE INFO : 10.144.134.36:8080/ipworks/webapp/login
+"""
+
+import subprocess
+import sys
+import pysftp
+import paramiko
+import requests
+from __future__ import print_function
+import sys
+from requests.auth import HTTPBasicAuth
+import ema_functions as ema
+import class_ims_ema as ims
+
+
+
+sys.path.insert(0, '/home/ema-gui/emalive')
+
+
+username= 'sogadm'
+ema_password = 'sogadm'
+#ema_host = '10.147.21.198'  # Live Node
+ema_host = '10.16.6.228'   # Test Plant
+ema_port = '8998'
+
+session = {}
+session['emaSession'] = ema.emaLogin()
+session['sub_pw'] = 'yyeeetteoe'
+
+print session
